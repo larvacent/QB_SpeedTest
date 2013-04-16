@@ -1,5 +1,0 @@
-add a textview
-
-this is a textview
-
-Hello!QuickBird!
