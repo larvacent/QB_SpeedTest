@@ -18,3 +18,129 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+-dontoptimize
+-dontwarn
+
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class com.android.vending.licensing.ILicensingService
+-keep public class com.google.ads.AdRequest
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+
+-keep public class com.umeng.fb.* {}
+-keep public class com.umeng.common.* {}
+-keep public class com.umeng.fb.ui.ThreadView {
+}
+
+
+-keep public class com.quickbird.speedtest.R$*{
+    public static final int *;
+}
+-keep public class com.umeng.fb.ui.SendFeedback {
+	private *;
+	public *;
+}
+-keep public class com.quickbird.speedtest.gui.activity.* {
+	private *;
+	public *;
+}
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+
+-keep public class com.quickbird.speedtest.gui.activity.R*{
+    public static final int *;
+}
+
+
+-keep public class com.umeng.fb.ui.SendFeedback {
+}
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+-keep public class com.tencent.mm.sdk.* {
+	private *;
+	public *;
+}
+
+-dontwarn com.tencent.mm.sdk.platformtools.AnimationHelperImpl
+-dontwarn com.tencent.mm.sdk.platformtools.SmoothScrollToPosition
+-dontwarn android.view.animation.Animation
+-dontwarn android.widget.ListView
+
+-dontwarn com.weibo.sdk.android.WeiboDialog
+-dontwarn android.net.http.SslError
+-dontwarn android.webkit.WebViewClient
+
+-keep public class android.net.http.SslError{
+     *;
+}
+-keep public class android.webkit.WebViewClient{
+    *;
+}
+-keep public class android.webkit.WebChromeClient{
+    *;
+}
+-keep public interface android.webkit.WebChromeClient$CustomViewCallback {
+    *;
+}
+-keep public interface android.webkit.ValueCallback {
+    *;
+}
+-keep class * implements android.webkit.WebChromeClient {
+    *;
+}
+
+-keep class com.tencent.mm.sdk.openapi.WXMediaMessage {*;}
+
+-keep class com.tencent.mm.sdk.openapi.** implements com.tencent.mm.sdk.openapi.WXMediaMessage$IMediaObject {*;}
