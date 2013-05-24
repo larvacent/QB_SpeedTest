@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="speedvalue_array">
+        <item>@drawable/speed_number_0</item>
+        <item>@drawable/speed_number_1</item>
+        <item>@drawable/speed_number_2</item>
+        <item>@drawable/speed_number_3</item>
+        <item>@drawable/speed_number_4</item>
+        <item>@drawable/speed_number_5</item>
+        <item>@drawable/speed_number_6</item>
+        <item>@drawable/speed_number_7</item>
+        <item>@drawable/speed_number_8</item>
+        <item>@drawable/speed_number_9</item>
+        <item>@drawable/speed_number_dot</item>
+    </array>
+    <array name="smallmetal_array">
+        <item>@drawable/small_medal_sauce</item>
+        <item>@drawable/small_medal_iron</item>
+        <item>@drawable/small_medal_bronze</item>
+        <item>@drawable/small_medal_silver</item>
+        <item>@drawable/small_medal_gold</item>
+    </array>
+    <array name="speedmetal_array">
+        <item>@drawable/medal_sauce</item>
+        <item>@drawable/medal_iron</item>
+        <item>@drawable/medal_bronze</item>
+        <item>@drawable/medal_silver</item>
+        <item>@drawable/medal_gold</item>
+    </array>
+    <array name="speedgrade_array">
+        <item>@drawable/level_sauce_medal</item>
+        <item>@drawable/level_iron_medal</item>
+        <item>@drawable/level_bronze_medal</item>
+        <item>@drawable/level_silver_medal</item>
+        <item>@drawable/level_gold_medal</item>
+    </array>
+    <array name="network_pic_array">
+        <item>@drawable/ic_wifi</item>
+        <item>@drawable/ic_gprs</item>
+        <item>@drawable/ic_cmcc</item>
+        <item>@drawable/ic_unicom</item>
+        <item>@drawable/ic_telecom</item>
+        <item>@drawable/ic_network_gprs</item>
+    </array>
+    <array name="icon_array">
+        <item>@drawable/btn_tab_history</item>
+        <item>@drawable/btn_tab_test</item>
+        <item>@drawable/btn_tab_more</item>
+    </array>
+    <array name="icon_focus_array">
+        <item>@drawable/btn_tab_history_effect</item>
+        <item>@drawable/btn_tab_test_effect</item>
+        <item>@drawable/btn_tab_more_effect</item>
+    </array>
+
+</resources>

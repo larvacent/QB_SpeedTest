@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bar_upside" />
+
+    <LinearLayout
+        style="@style/linearlayout_normal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/networkset_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/more_btn_top" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dp"
+                android:text="@string/more_network_set"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <ImageView
+                style="@style/imagebutton_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="26dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow" />
+        </RelativeLayout>
+
+        <ImageView
+            style="@style/imagebutton_normal"
+            android:layout_width="fill_parent"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_more" />
+
+        <RelativeLayout
+            android:id="@+id/trafficgift_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/more_btn_mid"
+            android:visibility="gone" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:text="@string/more_traffic_gift"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <ImageView
+                style="@style/imagebutton_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow" />
+        </RelativeLayout>
+
+        <ImageView
+            style="@style/imagebutton_normal"
+            android:layout_width="fill_parent"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_more"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/account_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/more_btn_bottom" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dp"
+                android:text="@string/more_account_tie"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <ImageView
+                style="@style/imagebutton_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="26dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linearlayout_normal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/version_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/more_btn_top" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dp"
+                android:text="@string/more_update_check"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <ImageView
+                style="@style/imagebutton_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="26dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow" />
+        </RelativeLayout>
+
+        <ImageView
+            style="@style/imagebutton_normal"
+            android:layout_width="fill_parent"
+            android:layout_gravity="bottom"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_more" />
+
+        <RelativeLayout
+            android:id="@+id/feedback_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/more_btn_mid" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:text="@string/more_feedback"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <ImageView
+                style="@style/imagebutton_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow" />
+        </RelativeLayout>
+
+        <ImageView
+            style="@style/imagebutton_normal"
+            android:layout_width="fill_parent"
+            android:layout_gravity="bottom"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_more" />
+
+        <RelativeLayout
+            android:id="@+id/about_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/more_btn_bottom" >
+
+            <TextView
+                style="@style/textview"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dp"
+                android:text="@string/more_company_about"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <ImageView
+                style="@style/imagebutton_normal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="26dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

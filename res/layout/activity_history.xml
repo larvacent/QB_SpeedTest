@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_gravity="center_horizontal"
+            android:drawableBottom="@drawable/btn_ads"
+            android:drawablePadding="0dp"
+            android:gravity="center_horizontal"
+            android:paddingTop="20dp"
+            android:text="@string/testspeed_5"
+            android:visibility="gone" />
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:layout_width="fill_parent"
+            android:contentDescription="@string/app_name"
+            android:paddingTop="36dp"
+            android:src="@drawable/bar_upside" />
+
+        <RelativeLayout
+            android:id="@+id/network_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/history_num"
+                style="@style/textview_normal"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="10dp"
+                android:text="@string/history_num" />
+
+            <ImageView
+                android:id="@+id/delete_all"
+                style="@style/imageview_normal"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/button_delete" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        style="@style/linearlayout_normal"
+        android:layout_marginTop="10dp"
+        android:baselineAligned="false" >
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_title_network"
+            android:gravity="center"
+            android:text="@string/history_networktype"
+            android:textSize="11sp" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_title_date"
+            android:gravity="center"
+            android:text="@string/history_date"
+            android:textSize="11sp" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_title_ping"
+            android:gravity="center"
+            android:text="@string/history_latency"
+            android:textSize="11sp" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_title_history"
+            android:gravity="center"
+            android:text="@string/history_speed"
+            android:textSize="11sp" />
+
+        <TextView
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_title_medal"
+            android:gravity="center"
+            android:text="@string/history_medal"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="3dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/split_bar" />
+
+    <ListView
+        android:id="@+id/speedValues_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/transparent_background"
+        android:dividerHeight="6dp"
+        android:scrollingCache="true" >
+    </ListView>
+
+</LinearLayout>

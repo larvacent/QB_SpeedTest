@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:contentDescription="@string/app_name"
+        android:paddingTop="35dp"
+        android:src="@drawable/bar_upside" />
+
+    <FrameLayout
+        android:id="@+id/capture_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/certification_paper" >
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:contentDescription="@string/app_name"
+            android:padding="12dp"
+            android:src="@drawable/speedometer_result" />
+
+        <LinearLayout
+            style="@style/linearlayout_normal"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                style="@style/imagebutton_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/title" />
+
+            <TextView
+                android:id="@+id/speed_result"
+                style="@style/textview_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:text="@string/speedresult_speed"
+                android:textSize="13sp" />
+
+            <ImageView
+                style="@style/imageview_normal"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/split_bar_result" />
+
+            <TextView
+                android:id="@+id/people_nums"
+                style="@style/textview_normal"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:lines="1"
+                android:paddingLeft="25dp"
+                android:text="@string/speedresult_medal"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/rank"
+                style="@style/textview_normal"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:lines="1"
+                android:paddingLeft="5dp"
+                android:text="@string/speedresult_beat"
+                android:textSize="13sp" />
+            
+            <TextView
+                android:id="@+id/waiting_rank"
+                style="@style/textview_normal"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:lines="1"
+                android:paddingLeft="25dp"
+                android:text="@string/speedresult_medal"
+                android:visibility="gone"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/speed_level"
+                style="@style/imagebutton_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/level_bronze_medal" />
+
+            <ImageView
+                android:id="@+id/medal"
+                style="@style/imagebutton_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/medal_sauce" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        style="@style/linearlayout_normal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/return_btn"
+            style="@style/imagebutton_normal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_speedtest_bg"
+            android:text="@string/speedresult_return"
+            android:textColor="@drawable/button_font_style"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/share_btn"
+            style="@style/imagebutton_normal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/button_speedtest_bg"
+            android:text="@string/speedresult_share"
+            android:textColor="@drawable/button_font_style"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shareto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center" >
+
+    <LinearLayout
+        android:layout_width="286dip"
+        android:layout_height="wrap_content"
+        android:background="@color/text_wihte"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/shareto_title"
+            android:layout_width="284dip"
+            android:layout_height="42dip"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/title_delete_popup"
+            android:gravity="center"
+            android:text="@string/umeng_share_shareto_top"
+            android:textColor="@color/solid_white"
+            android:textSize="19sp" >
+        </TextView>
+
+        <RelativeLayout
+            android:id="@+id/btnToSina"
+            android:layout_width="282dip"
+            android:layout_height="54dip"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/umeng_share_shareitem"
+            android:fadingEdge="horizontal" >
+
+            <ImageView
+                android:id="@+id/sina_logo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dip"
+                android:background="@drawable/ic_share_weibo"
+                android:contentDescription="@string/app_name" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tvsina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="42dip"
+                android:layout_toRightOf="@id/sina_logo"
+                android:text="@string/umeng_share_shareto_sina"
+                android:textColor="#3e3e3e"
+                android:textSize="20sp"
+                android:textStyle="bold" >
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnToTenc"
+            android:layout_width="282dip"
+            android:layout_height="54dip"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/umeng_share_shareitem"
+            android:clickable="true" >
+
+            <ImageView
+                android:layout_width="278dip"
+                android:layout_height="1dip"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/line"
+                android:contentDescription="@string/app_name" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/tweibo_logo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dip"
+                android:background="@drawable/ic_share_t"
+                android:contentDescription="@string/app_name" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tvtenc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="42dip"
+                android:layout_toRightOf="@id/tweibo_logo"
+                android:text="@string/umeng_share_shareto_tenc"
+                android:textColor="#3e3e3e"
+                android:textSize="20sp"
+                android:textStyle="bold" >
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnToWeiXin"
+            android:layout_width="282dip"
+            android:layout_height="54dip"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/umeng_share_shareitem"
+            android:clickable="true" >
+
+            <ImageView
+                android:id="@+id/ToWeiXinLine"
+                android:layout_width="278dip"
+                android:layout_height="1dip"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/line"
+                android:contentDescription="@string/app_name" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/weixin_logo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dip"
+                android:background="@drawable/ic_share_weixin"
+                android:contentDescription="@string/app_name" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tvweixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="42dip"
+                android:layout_toRightOf="@id/weixin_logo"
+                android:text="@string/umeng_share_shareto_weixin"
+                android:textColor="#3e3e3e"
+                android:textSize="20sp"
+                android:textStyle="bold" >
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnToWinXinSession"
+            android:layout_width="282dip"
+            android:layout_height="54dip"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/umeng_share_shareitem"
+            android:clickable="true" >
+
+            <ImageView
+                android:layout_width="278dip"
+                android:layout_height="1dip"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/line"
+                android:contentDescription="@string/app_name" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/session_logo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="19dip"
+                android:background="@drawable/ic_share_pengyouquan"
+                android:contentDescription="@string/app_name" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tvweixinSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="42dip"
+                android:layout_toRightOf="@id/session_logo"
+                android:text="@string/umeng_share_shareto_weixinsession"
+                android:textColor="#3e3e3e"
+                android:textSize="20sp"
+                android:textStyle="bold" >
+            </TextView>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:contentDescription="@string/app_name"
+        android:paddingTop="35dp"
+        android:src="@drawable/bar_upside" />
+
+    <ImageView
+        style="@style/imageview"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_no_results" />
+
+    <TextView
+        style="@style/textview_normal"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/history_no_result1"
+        android:textSize="16sp" />
+
+    <TextView
+        style="@style/textview_normal"
+        android:layout_width="260dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:text="@string/history_no_result2"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/speed_test_btn"
+        style="@style/imagebutton_normal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_speedtest_bg"
+        android:text="@string/history_start_test"
+        android:textColor="@drawable/button_font_style"
+        android:textSize="17sp" />
+
+</LinearLayout>

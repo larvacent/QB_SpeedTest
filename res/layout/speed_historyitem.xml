@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/linearlayout_normal"
+    android:layout_height="45dp"
+    android:background="@drawable/hitory_item_bg" >
+
+    <LinearLayout
+        style="@style/linearlayout_normal"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:id="@+id/network"
+            style="@style/imageview_wrapcontent"
+            android:layout_weight="1"
+            android:layout_width="35dp"
+            android:contentDescription="@string/app_name"
+            android:gravity="center_horizontal"
+            android:src="@drawable/ic_wifi" />
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_within" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="3天前"
+            android:minWidth="40dp"
+            android:textColor="@color/text_black" />
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_within" />
+
+        <TextView
+            android:id="@+id/ping"
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="353ms"
+            android:minWidth="40dp"
+            android:textColor="@color/text_black" />
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_within" />
+
+        <TextView
+            android:id="@+id/speed"
+            style="@style/textview_normal"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="4KB/s"
+             android:minWidth="40dp"
+            android:textColor="@color/text_black" />
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/split_bar_within" />
+
+        <ImageView
+            android:id="@+id/medal"
+            style="@style/imageview_wrapcontent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+             android:layout_width="35dp"
+            android:contentDescription="@string/app_name"
+            android:gravity="center_horizontal"
+            android:src="@drawable/small_medal_bronze" />
+    </LinearLayout>
+
+</LinearLayout>

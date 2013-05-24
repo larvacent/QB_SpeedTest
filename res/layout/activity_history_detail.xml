@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp" >
+
+                <TextView
+                    style="@style/textview_normal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:text="@string/detail_score"
+                    android:textColor="@color/text_gray_light"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/delete_value"
+                    style="@style/imageview_normal"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="30dp"
+                    android:contentDescription="@string/app_name"
+                    android:paddingBottom="8dp"
+                    android:src="@drawable/button_delete" />
+            </RelativeLayout>
+
+            <LinearLayout
+                style="@style/linearlayout_normal"
+                android:orientation="vertical" >
+
+                <FrameLayout
+                    android:id="@+id/networkset_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/btn_top_normal"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        style="@style/textview"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="7dp"
+                        android:text="@string/detail_result"
+                        android:textColor="@color/text_black"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        style="@style/imagebutton_normal"
+                        android:layout_width="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/split_bar_more" />
+                </FrameLayout>
+
+                <RelativeLayout
+                    style="@style/linearlayout_normal"
+                    android:layout_height="110dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/btn_middle_normal"
+                    android:visibility="visible" >
+
+                    <TextView
+                        android:id="@+id/network"
+                        style="@style/textview"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/detail_network"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/network_detail"
+                        style="@style/textview"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/network"
+                        android:text="@string/testspeed_network_state2"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        style="@style/textview"
+                        android:layout_below="@id/network"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/detail_date"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/date_detail"
+                        style="@style/textview"
+                        android:layout_below="@id/network_detail"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/date"
+                        android:text="5天前"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/ping"
+                        style="@style/textview"
+                        android:layout_below="@id/date"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/detail_ping"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/ping_detail"
+                        style="@style/textview"
+                        android:layout_below="@id/date_detail"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/ping"
+                        android:text="5ms"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/speed"
+                        style="@style/textview"
+                        android:layout_below="@id/ping"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/detail_speed"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/speed_detail"
+                        style="@style/textview"
+                        android:layout_below="@id/ping_detail"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/speed"
+                        android:text="252KB/s"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        style="@style/imagebutton_normal"
+                        android:layout_width="fill_parent"
+                        android:layout_alignParentBottom="true"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/split_bar_more" />
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/btn_middle_normal"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        style="@style/textview"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="7dp"
+                        android:text="@string/detail_location"
+                        android:textColor="@color/text_black"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        style="@style/imagebutton_normal"
+                        android:layout_width="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/split_bar_more" />
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/more_btn_mid" >
+
+                    <TextView
+                        android:id="@+id/location_detail"
+                        style="@style/textview"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:text="北京市海淀区鼎好大厦"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <ImageView
+                    style="@style/imagebutton_normal"
+                    android:layout_width="fill_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/split_bar_more" />
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/btn_middle_normal"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        style="@style/textview"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="7dp"
+                        android:text="@string/detail_rank"
+                        android:textColor="@color/text_black"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        style="@style/imagebutton_normal"
+                        android:layout_width="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/split_bar_more" />
+                </FrameLayout>
+
+                <RelativeLayout
+                    style="@style/linearlayout_normal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/btn_bottom_normal" >
+
+                    <TextView
+                        android:id="@+id/rank_detail"
+                        style="@style/textview"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="7dp"
+                        android:text="排名1245位"
+                        android:textColor="@color/text_gray_level"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/medal_detail"
+                        style="@style/imageview_normal"
+                        android:layout_below="@id/rank_detail"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:contentDescription="@string/app_name"
+                        android:paddingBottom="15dp"
+                        android:src="@drawable/medal_gold" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

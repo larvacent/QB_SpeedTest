@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/main_background"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/tab_bar" >
+
+            <LinearLayout
+                style="@style/linearlayout_normal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/tab_bg1"
+                    style="@style/imageview_normal"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/tab_effect"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/tab_bg2"
+                    style="@style/imageview_normal"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/tab_effect"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tab_bg3"
+                    style="@style/imageview_normal"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/tab_effect"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearlayout_normal"
+                android:baselineAligned="false"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/tab_history"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/history_icon"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_tab_history" />
+
+                    <TextView
+                        android:id="@+id/history_txt"
+                        style="@style/textview"
+                        android:text="@string/tab_history"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab_testspeed"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/testspeed_icon"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_tab_test" />
+
+                    <TextView
+                        android:id="@+id/testspeed_txt"
+                        style="@style/textview"
+                        android:text="@string/tab_testspeed"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab_settings"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/settings_icon"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_tab_more" />
+
+                    <TextView
+                        android:id="@+id/settings_txt"
+                        style="@style/textview"
+                        android:text="@string/tab_more"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                style="@style/imageview_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/highlight" />
+        </FrameLayout>
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:background="@color/light_white" />
+    </LinearLayout>
+
+</TabHost>

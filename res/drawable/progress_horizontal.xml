@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@android:id/background">
+        <nine-patch
+            android:dither="true"
+            android:src="@drawable/progress_bar" />
+
+        <clip>
+            <shape>
+                <corners android:radius="20dip" />
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <nine-patch
+                android:dither="true"
+                android:src="@drawable/progress_bar_progress" />
+        </clip>
+    </item>
+
+</layer-list>

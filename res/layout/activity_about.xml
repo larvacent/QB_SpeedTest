@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bar_upside" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp" >
+
+                <ImageView
+                    android:id="@+id/speedtest_icon"
+                    style="@style/imageview_normal"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/speedtest_title"
+                    style="@style/textview_normal"
+                    android:layout_below="@id/speedtest_icon"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/text_black"
+                    android:textSize="22sp" />
+
+                <TextView
+                    style="@style/textview_normal"
+                    android:layout_below="@id/speedtest_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/app_version_name"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <TextView
+                style="@style/textview_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="@string/company_name"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <TextView
+                style="@style/textview_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="@string/company_website"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <TextView
+                style="@style/textview_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="@string/website"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <TextView
+                style="@style/textview_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="@string/company_recommand"
+                android:textColor="@color/text_black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/speedtest_command"
+                style="@style/textview_normal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:drawableTop="@drawable/icon_launcher"
+                android:text="上网快鸟"
+                android:drawablePadding="5dp"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
