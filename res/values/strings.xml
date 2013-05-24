@@ -21,6 +21,7 @@
 
     <!-- tab_文字 -->
     <string name="testspeed_title">网络测速</string>
+    <string name="tab_website">网站测速</string>
     <string name="tab_history">历史</string>
     <string name="tab_testspeed">测速</string>
     <string name="tab_more">更多</string>
