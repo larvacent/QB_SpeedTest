@@ -97,7 +97,7 @@
                     <TextView
                         android:id="@+id/history_txt"
                         style="@style/textview"
-                        android:text="@string/tab_website"
+                        android:text="@string/tab_web"
                         android:textSize="12sp" />
                 </LinearLayout>
 

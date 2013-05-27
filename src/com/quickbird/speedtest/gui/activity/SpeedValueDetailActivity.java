@@ -43,8 +43,7 @@ public class SpeedValueDetailActivity extends BaseActivity {
         deleteValue = (ImageView) findViewById(R.id.delete_value);
         deleteValue.setOnClickListener(this);
         speedValue = new SpeedValue();
-        speedMetalPic = getResources().obtainTypedArray(
-                R.array.speedmetal_array);
+        speedMetalPic = getResources().obtainTypedArray( R.array.speedmetal_array);
         try {
             Bundle resultBundle = new Bundle();
             Intent getResult = getIntent();
