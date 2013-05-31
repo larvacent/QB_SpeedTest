@@ -34,7 +34,7 @@ public class DownloadTestTask extends SpeedTestTask {
     }
 
     protected class DownloadSpeedTask extends SpeedTestTask.SpeedTask {
-        private int mTestLength = 15000;
+        private int mTestLength = 20000;
 
         public DownloadSpeedTask(int paramTestParametersTransfer, TestParametersTransfer arg3) {
             super(paramTestParametersTransfer, arg3);

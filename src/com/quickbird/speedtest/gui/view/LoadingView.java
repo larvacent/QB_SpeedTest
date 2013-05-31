@@ -7,7 +7,6 @@ public class LoadingView extends View{
 
     public LoadingView(Context context) {
         super(context);
-//        init();
     }
 
 }

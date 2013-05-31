@@ -141,6 +141,11 @@
             android:name=".gui.activity.WebSiteTestActivity"
             android:screenOrientation="portrait" >
         </activity>
+        
+        <activity
+            android:name=".gui.activity.GridActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- OAuth Version 1.0 使用 WebView 辅助授权必须 -->
 
         <activity

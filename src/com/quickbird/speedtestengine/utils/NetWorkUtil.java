@@ -1,5 +1,8 @@
 package com.quickbird.speedtestengine.utils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -211,5 +214,30 @@ public class NetWorkUtil {
             Log.e("WifiPreference IpAddress", ex.toString());
         }
         return null;
+    }
+    
+    public static String ping(String url) {
+        int count = 0;
+        String str = "";
+        try {
+            Process process = Runtime.getRuntime().exec(
+                    "/system/bin/ping -c 8 " + url);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    process.getInputStream()));
+            int i;
+            char[] buffer = new char[4096];
+            StringBuffer output = new StringBuffer();
+            while ((i = reader.read(buffer)) > 0)
+                output.append(buffer, 0, i);
+            reader.close();
+
+            // body.append(output.toString()+"\n");
+            str = output.toString();
+            // Log.d(TAG, str);
+        } catch (IOException e) {
+            // body.append("Error\n");
+            e.printStackTrace();
+        }
+        return str;
     }
 }

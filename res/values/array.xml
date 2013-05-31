@@ -44,14 +44,92 @@
         <item>@drawable/ic_network_gprs</item>
     </array>
     <array name="icon_array">
-        <item>@drawable/btn_tab_history</item>
+        <item>@drawable/btn_tab_site_test</item>
         <item>@drawable/btn_tab_test</item>
         <item>@drawable/btn_tab_more</item>
     </array>
     <array name="icon_focus_array">
-        <item>@drawable/btn_tab_history_effect</item>
+        <item>@drawable/btn_tab_site_test_effect</item>
         <item>@drawable/btn_tab_test_effect</item>
         <item>@drawable/btn_tab_more_effect</item>
     </array>
+    <array name="website_classify_array">
+        <item>@drawable/btn_common_normal</item>
+        <item>@drawable/btn_social_normal</item>
+        <item>@drawable/btn_shopping_normal</item>
+        <item>@drawable/btn_video_normal</item>
+    </array>
+    <array name="website_classify_focus_array">
+        <item>@drawable/btn_common_pressed</item>
+        <item>@drawable/btn_social_pressed</item>
+        <item>@drawable/btn_shopping_pressed</item>
+        <item>@drawable/btn_video_pressed</item>
+    </array>
+    <array name="website_group_2">
+        <item>@drawable/hiapk</item>
+        <item>@drawable/hiapk</item>
+        <item>@drawable/hiapk</item>
+        <item>@drawable/hiapk</item>
+        <item>@drawable/hiapk</item>
+        <item>@drawable/hiapk</item>
+    </array>
+    <array name="website_group_3">
+        <item>@drawable/ic_share_t</item>
+        <item>@drawable/ic_share_t</item>
+        <item>@drawable/ic_share_t</item>
+        <item>@drawable/ic_share_t</item>
+        <item>@drawable/ic_share_t</item>
+        <item>@drawable/ic_share_t</item>
+    </array>
+    <array name="website_group_4">
+        <item>@drawable/ic_share_weibo</item>
+        <item>@drawable/ic_share_weibo</item>
+        <item>@drawable/ic_share_weibo</item>
+        <item>@drawable/ic_share_weibo</item>
+        <item>@drawable/ic_share_weibo</item>
+        <item>@drawable/ic_share_weibo</item>
+    </array>
+
+    <string-array name="website_txt_1">
+        <item>网易新闻</item>
+        <item>百度新闻</item>
+        <item>凤凰新闻</item>
+        <item>搜狐新闻</item>
+        <item>腾讯新闻</item>
+        <item>新浪新闻</item>
+    </string-array>
+    <string-array name="website_txt_2">
+        <item>新浪微博</item>
+        <item>腾讯微博</item>
+        <item>QQ空间</item>
+        <item>人人网</item>
+        <item>开心网</item>
+        <item>豆瓣</item>
+    </string-array>
+    <string-array name="website_txt_3">
+        <item>优酷网</item>
+        <item>土豆网</item>
+        <item>搜狐视频</item>
+        <item>网易视频</item>
+        <item>腾讯视频</item>
+        <item>新浪视频</item>
+    </string-array>
+    <string-array name="website_txt_4">
+        <item>淘宝</item>
+        <item>京东商城</item>
+        <item>百度购物</item>
+        <item>美丽说</item>
+        <item>聚美优品</item>
+        <item>亚马逊</item>
+    </string-array>
+    
+    <string-array name="website_address_1">
+        <item>www.baidu.com</item>
+        <item>www.weibo.com</item>
+        <item>www.163.com</item>
+        <item>www.youku.com</item>
+        <item>腾讯新闻</item>
+        <item>新浪新闻</item>
+    </string-array>
 
 </resources>

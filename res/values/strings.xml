@@ -23,7 +23,7 @@
     <string name="testspeed_title">网络测速</string>
     <string name="tab_web">测网站</string>
     <string name="tab_history">历史</string>
-    <string name="tab_testspeed">测速</string>
+    <string name="tab_testspeed">测网速</string>
     <string name="tab_more">更多</string>
 
     <!-- 测速文字 -->
@@ -137,5 +137,11 @@
     <string name="setting_wifi">无线网络</string>
     <string name="setting_gprs">移动网络</string>
     <string name="setting_data">数据接入方式</string>
+
+    <!-- 网站测速 -->
+    <string name="website_custom_str">常用</string>
+    <string name="website_social_str">社交</string>
+    <string name="website_shopping_str">购物</string>
+    <string name="website_video_str">视频</string>
 
 </resources>

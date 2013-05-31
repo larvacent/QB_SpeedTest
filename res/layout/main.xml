@@ -60,6 +60,27 @@
                 android:orientation="horizontal" >
 
                 <LinearLayout
+                    android:id="@+id/tab_website"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/website_icon"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_tab_site_test" />
+
+                    <TextView
+                        android:id="@+id/website_txt"
+                        style="@style/textview"
+                        android:text="@string/tab_web"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tab_testspeed"
                     style="@style/linearlayout_normal"
                     android:layout_height="50dp"
@@ -77,27 +98,6 @@
                         android:id="@+id/testspeed_txt"
                         style="@style/textview"
                         android:text="@string/tab_testspeed"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tab_history"
-                    style="@style/linearlayout_normal"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:id="@+id/history_icon"
-                        style="@style/imageview_normal"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/btn_tab_history" />
-
-                    <TextView
-                        android:id="@+id/history_txt"
-                        style="@style/textview"
-                        android:text="@string/tab_web"
                         android:textSize="12sp" />
                 </LinearLayout>
 
