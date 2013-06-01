@@ -21,7 +21,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +38,6 @@ public class WebSiteAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private ArrayList<WebSite> mWebSiteList;
-	private Animation ani;
 
 	private class ViewHolder {
 		private ImageView speedTag;
@@ -71,73 +70,81 @@ public class WebSiteAdapter extends BaseAdapter {
 		ViewHolder holder;
 		WebSite webSite = mWebSiteList.get(position);
 		if (null == convertView) {
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.website_gridview_item, null);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.website_gridview_item, null);
 			holder = new ViewHolder();
-			holder.speedTag = (ImageView) convertView
-					.findViewById(R.id.website_item_tag);
-			holder.icon = (ImageView) convertView
-					.findViewById(R.id.website_item_icon);
-			holder.name = (TextView) convertView
-					.findViewById(R.id.website_item_name);
-			holder.check = (ImageView) convertView
-					.findViewById(R.id.website_item_check);
-			holder.mask = (ImageView) convertView
-					.findViewById(R.id.website_item_mask);
-			holder.load = (ImageView) convertView
-					.findViewById(R.id.website_item_load);
+			holder.speedTag = (ImageView) convertView.findViewById(R.id.website_item_tag);
+			holder.icon = (ImageView) convertView.findViewById(R.id.website_item_icon);
+			holder.name = (TextView) convertView.findViewById(R.id.website_item_name);
+			holder.check = (ImageView) convertView.findViewById(R.id.website_item_check);
+			holder.mask = (ImageView) convertView.findViewById(R.id.website_item_mask);
+			holder.load = (ImageView) convertView.findViewById(R.id.website_item_load);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.icon.setImageResource(webSite.getIcon());
 		holder.name.setText(webSite.getName());
-		if (webSite.isChecked())
-			holder.check.setImageResource(R.drawable.ic_selected_green);
+		if (webSite.getStatus() == WiteSiteTestStatus.Wait) {
+			if (webSite.isChecked())
+				holder.check.setImageResource(R.drawable.ic_selected_green);
 
-		if (!webSite.isChecked())
-			holder.check.setImageResource(R.drawable.ic_deselected);
-		
-		if (webSite.getStatus() == WiteSiteTestStatus.Wait)
-		{
+			if (!webSite.isChecked())
+				holder.check.setImageResource(R.drawable.ic_deselected);
+			holder.speedTag.setVisibility(View.INVISIBLE);
 			holder.mask.setVisibility(View.GONE);
 			holder.load.setVisibility(View.GONE);
-			return convertView; 
+			return convertView;
 		}
-		
 		if(webSite.getStatus() == WiteSiteTestStatus.Test)
 		{
-			
-		}
-
-		switch (webSite.getDegree()) {
-		case -1:
+			holder.check.setVisibility(View.GONE);
 			holder.speedTag.setVisibility(View.INVISIBLE);
-			break;
-		case 0:
+			holder.mask.setVisibility(View.VISIBLE);
+			holder.load.setVisibility(View.VISIBLE);
+			holder.load.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.data_loading_rotate));
+			return convertView; 
+		}
+		if (webSite.getStatus() == WiteSiteTestStatus.Finish) {
 			holder.speedTag.setVisibility(View.VISIBLE);
+			holder.mask.setVisibility(View.GONE);
+			holder.load.setVisibility(View.GONE);
+			holder.load.clearAnimation();
+			switch (webSite.getDegree()) {
+			case -1:
+				holder.speedTag.setVisibility(View.INVISIBLE);
+				break;
+			case 0:
+				holder.speedTag.setImageResource(R.drawable.ic_mark_fail);
+				break;
+			case 1:
+				holder.speedTag.setImageResource(R.drawable.ic_mark_hyperslow);
+				break;
+			case 2:
+				holder.speedTag.setImageResource(R.drawable.ic_mark_slow);
+				break;
+			case 3:
+				holder.speedTag.setVisibility(View.VISIBLE);
+				holder.speedTag.setImageResource(R.drawable.ic_mark_fast);
+				break;
+			case 4:
+				holder.speedTag.setImageResource(R.drawable.ic_mark_furious);
+				break;
+			default:
+				break;
+			}
+			return convertView;
+		}
+		if(webSite.getStatus() == WiteSiteTestStatus.Error)
+		{
+			holder.speedTag.setVisibility(View.VISIBLE);
+			holder.mask.setVisibility(View.GONE);
+			holder.load.setVisibility(View.GONE);
+			holder.load.clearAnimation();
 			holder.speedTag.setImageResource(R.drawable.ic_mark_fail);
-			break;
-		case 1:
-			holder.speedTag.setVisibility(View.VISIBLE);
-			holder.speedTag.setImageResource(R.drawable.ic_mark_hyperslow);
-			break;
-		case 2:
-			holder.speedTag.setVisibility(View.VISIBLE);
-			holder.speedTag.setImageResource(R.drawable.ic_mark_slow);
-			break;
-		case 3:
-			holder.speedTag.setVisibility(View.VISIBLE);
-			holder.speedTag.setImageResource(R.drawable.ic_mark_fast);
-			break;
-		case 4:
-			holder.speedTag.setVisibility(View.VISIBLE);
-			holder.speedTag.setImageResource(R.drawable.ic_mark_furious);
-			break;
-		default:
-			break;
+			return convertView;
 		}
 		return convertView;
+
 	}
 
 }
