@@ -83,6 +83,13 @@ public class WebSiteTestActivity extends BaseActivity {
 	private String[] webSites2 = { "新浪微博", "腾讯微博", "QQ空间", "人人网", "开心网", "豆瓣", };
 	private String[] webSites3 = { "淘宝", "京东商城", "百度购物", "美丽说", "聚美优品", "亚马逊", };
 	private String[] webSites4 = { "优酷网", "土豆网", "搜狐视频", "腾讯视频", "新浪视频", };
+	
+	private String[] shareStr = {
+			"【浏览网站快不快，测试一下就出来】您手机上网经常访问的网站快不快？用网站测速一目了然！",
+			"【浏览网站快不快，测试一下就出来】刷微博，上人人，哪个社交网站更给力？用网站测速一目了然！",
+			"【浏览网站快不快，测试一下就出来】网络购物，不快不行，您要上的购物网站快吗？",
+			"【浏览网站快不快，测试一下就出来】看视频，上公开课，哪个视频网站更给力？用网站测速一目了然！"
+	};
 
 	private String[] websitesAddress1 = { "http://www.baidu.com",
 			"http://weibo.cn/pub/", "http://3g.163.com/touch/",
@@ -113,7 +120,6 @@ public class WebSiteTestActivity extends BaseActivity {
 	private ArrayList<WebSite> testWebSite;
 	private int testId =  0;   // 正在测速中的页卡编号
 	private int testIndex = 0; // 正在测速中的页卡编号
-	
 
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -152,6 +158,7 @@ public class WebSiteTestActivity extends BaseActivity {
 						} else {
 							testId = 0;
 							webSiteTestBtn.setVisibility(View.VISIBLE);
+							buttonShare.setVisibility(View.VISIBLE);
 						}
 					}
 					
@@ -159,6 +166,7 @@ public class WebSiteTestActivity extends BaseActivity {
 					public void onBeginTest() {
 						testWebSite.get(testId).setStatus(WiteSiteTestStatus.Test);
 						webSiteAdapters.get(testIndex).notifyDataSetChanged();
+						webSiteTestBtn.setVisibility(View.GONE);
 					}
 				});
 				try {
@@ -228,8 +236,8 @@ public class WebSiteTestActivity extends BaseActivity {
 			if (webSiteLists.get(testIndex).get(i).isChecked())
 				testWebSite.add(webSiteLists.get(testIndex).get(i));
 		}
-		handler.sendEmptyMessage(WEBSITE_TEST);
-		webSiteTestBtn.setVisibility(View.GONE);
+		if (testWebSite.size() > 0)
+			handler.sendEmptyMessage(WEBSITE_TEST);
 	}
 
 	private void InitWebSite() {
@@ -356,6 +364,7 @@ public class WebSiteTestActivity extends BaseActivity {
 		buttonShare = (ImageButton) findViewById(R.id.button_share_website);
 		buttonShare.setOnClickListener(this);
 		buttonShareLayout.setOnClickListener(this);
+		buttonShare.setVisibility(View.GONE);
 
 		websiteClassifyArray = getResources().obtainTypedArray(R.array.website_classify_array);
 		websiteClassifyFocusArray = getResources().obtainTypedArray(R.array.website_classify_focus_array);
@@ -481,13 +490,13 @@ public class WebSiteTestActivity extends BaseActivity {
 			// title标题，在印象笔记、邮箱、信息、微信（包括好友和朋友圈）、人人网和QQ空间使用，否则可以不提供
 			i.putExtra("title", context.getString(R.string.share));
 			// titleUrl是标题的网络链接，仅在人人网和QQ空间使用，否则可以不提供
-			i.putExtra("titleUrl", "http://sharesdk.cn");
+			i.putExtra("titleUrl", "www.quickbird.com");
 			// text是分享文本，所有平台都需要这个字段
-			i.putExtra("text", context.getString(R.string.share_content_wifi));
+			i.putExtra("text", shareStr[currIndex]);
 			// imagePath是本地的图片路径，所有平台都支持这个字段，不提供，则表示不分享图片
 			i.putExtra("imagePath", Constants.PIC_PRE_PATH_NAME);
 			// url仅在微信（包括好友和朋友圈）中使用，否则可以不提供
-			i.putExtra("url", "http://sharesdk.cn");
+			i.putExtra("url", "www.quickbird.com");
 			// thumbPath是缩略图的本地路径，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
 			i.putExtra("thumbPath", Constants.PIC_PRE_PATH_NAME);
 			// appPath是待分享应用程序的本地路劲，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
@@ -497,7 +506,7 @@ public class WebSiteTestActivity extends BaseActivity {
 			// site是分享此内容的网站名称，仅在QQ空间使用，否则可以不提供
 			i.putExtra("site", context.getString(R.string.app_name));
 			// siteUrl是分享此内容的网站地址，仅在QQ空间使用，否则可以不提供
-			i.putExtra("siteUrl", "http://sharesdk.cn");
+			i.putExtra("siteUrl", "www.quickbird.com");
 			
 			// 是否直接分享
 			i.putExtra("silent", silent);

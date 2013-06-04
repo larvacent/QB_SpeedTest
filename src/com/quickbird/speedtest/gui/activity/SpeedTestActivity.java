@@ -42,6 +42,7 @@ import com.quickbird.speedtestengine.TestParametersTransfer;
 import com.quickbird.speedtestengine.TestTaskCallbacks;
 import com.quickbird.speedtestengine.tasks.DownloadTestTask;
 import com.quickbird.speedtestengine.tasks.LatencyTestTask;
+import com.quickbird.speedtestengine.tasks.LatencyTestTaskbak;
 import com.quickbird.speedtestengine.tasks.TestTask;
 import com.quickbird.speedtestengine.utils.DebugUtil;
 import com.quickbird.speedtestengine.utils.NetWorkUtil;
@@ -330,7 +331,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
             super.handleMessage(msg);
             switch (msg.what) {
             case FIND_FASTEST_SERVER_TASK_START:
-                mCurrentTestTask = new LatencyTestTask(new TestTaskCallbacks() {
+                mCurrentTestTask = new LatencyTestTaskbak(new TestTaskCallbacks() {
 
                     @Override
                     public void onTestUpdate( TestParameters[] paramArrayOfTestParameters) {
