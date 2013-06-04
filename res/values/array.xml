@@ -65,30 +65,6 @@
         <item>@drawable/btn_shopping_pressed</item>
         <item>@drawable/btn_video_pressed</item>
     </array>
-    <array name="website_group_2">
-        <item>@drawable/hiapk</item>
-        <item>@drawable/hiapk</item>
-        <item>@drawable/hiapk</item>
-        <item>@drawable/hiapk</item>
-        <item>@drawable/hiapk</item>
-        <item>@drawable/hiapk</item>
-    </array>
-    <array name="website_group_3">
-        <item>@drawable/ic_share_t</item>
-        <item>@drawable/ic_share_t</item>
-        <item>@drawable/ic_share_t</item>
-        <item>@drawable/ic_share_t</item>
-        <item>@drawable/ic_share_t</item>
-        <item>@drawable/ic_share_t</item>
-    </array>
-    <array name="website_group_4">
-        <item>@drawable/ic_share_weibo</item>
-        <item>@drawable/ic_share_weibo</item>
-        <item>@drawable/ic_share_weibo</item>
-        <item>@drawable/ic_share_weibo</item>
-        <item>@drawable/ic_share_weibo</item>
-        <item>@drawable/ic_share_weibo</item>
-    </array>
 
     <string-array name="website_txt_1">
         <item>网易新闻</item>
@@ -122,7 +98,6 @@
         <item>聚美优品</item>
         <item>亚马逊</item>
     </string-array>
-    
     <string-array name="website_address_1">
         <item>www.baidu.com</item>
         <item>www.weibo.com</item>

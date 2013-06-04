@@ -74,8 +74,7 @@ public class SpeedHistoryActivity extends BaseActivity {
         deleteAll.setOnClickListener(this);
         
         speedValuesListview = (ListView) findViewById(R.id.speedValues_listview);
-        speedListAdapter = new SpeedListAdapter(mContext, speedValues,
-                netWorkPic, medalPic);
+        speedListAdapter = new SpeedListAdapter(mContext, speedValues, netWorkPic, medalPic);
         speedValuesListview.setAdapter(speedListAdapter);
         speedListAdapter.notifyDataSetChanged();
     }

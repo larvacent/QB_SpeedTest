@@ -8,19 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.quickbird.speedtest.R;
-import com.quickbird.speedtest.gui.view.CustomDialog;
-import com.quickbird.speedtestengine.utils.DebugUtil;
-import com.quickbird.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.NotificationType;
 import com.umeng.fb.UMFeedbackService;
@@ -31,9 +25,9 @@ import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
 
 public class MoreActivity extends BaseActivity {
-    private Context mContext = this;
-    private RelativeLayout networksetLayout, trafficgiftLayout, accountLayout,
-            versionLayout, feedbackLayout, aboutLayout;
+	private Context mContext = this;
+	private RelativeLayout networksetLayout, historyLayout, accountLayout,
+			versionLayout, feedbackLayout, aboutLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +36,14 @@ public class MoreActivity extends BaseActivity {
         setContentView(R.layout.activity_more);
 
         networksetLayout = (RelativeLayout) findViewById(R.id.networkset_layout);
-        trafficgiftLayout = (RelativeLayout) findViewById(R.id.trafficgift_layout);
+        historyLayout = (RelativeLayout) findViewById(R.id.history_layout);
         accountLayout = (RelativeLayout) findViewById(R.id.account_layout);
         versionLayout = (RelativeLayout) findViewById(R.id.version_layout);
         feedbackLayout = (RelativeLayout) findViewById(R.id.feedback_layout);
         aboutLayout = (RelativeLayout) findViewById(R.id.about_layout);
 
         networksetLayout.setOnClickListener(this);
-        trafficgiftLayout.setOnClickListener(this);
+        historyLayout.setOnClickListener(this);
         accountLayout.setOnClickListener(this);
         versionLayout.setOnClickListener(this);
         feedbackLayout.setOnClickListener(this);
@@ -74,8 +68,8 @@ public class MoreActivity extends BaseActivity {
         case R.id.networkset_layout:
             startActivity(new Intent(MoreActivity.this, NetWorkActivity.class));
             break;
-        case R.id.trafficgift_layout:
-            ToastUtil.showToast(MoreActivity.this, "暂无此功能，敬请期待！");
+        case R.id.history_layout:
+        	startActivity(new Intent(MoreActivity.this, SpeedHistoryActivity.class));
             break;
         case R.id.version_layout:
             // 如果想程序启动时自动检查是否需要更新， 把下面两行代码加在Activity 的onCreate()函数里。

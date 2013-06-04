@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -23,26 +24,32 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.quickbird.controls.Constants;
 import com.quickbird.enums.SpeedTestError;
 import com.quickbird.enums.WiteSiteTestStatus;
 import com.quickbird.speedtest.R;
 import com.quickbird.speedtest.business.WebSite;
 import com.quickbird.speedtest.gui.adapter.MyPagerAdapter;
 import com.quickbird.speedtest.gui.adapter.WebSiteAdapter;
+import com.quickbird.speedtest.onkeyshare.ShareAllGird;
 import com.quickbird.speedtestengine.TestParameters;
 import com.quickbird.speedtestengine.TestParametersLatency;
 import com.quickbird.speedtestengine.TestTaskCallbacks;
 import com.quickbird.speedtestengine.tasks.LatencyTestTask;
 import com.quickbird.speedtestengine.tasks.TestTask;
+import com.quickbird.utils.ScreenShotUtil;
 
 public class WebSiteTestActivity extends BaseActivity {
 
 	private Button webSiteTestBtn;
+	private ImageButton buttonShare;
 	private LinearLayout websiteTab1, websiteTab2, websiteTab3, websiteTab4;// 页卡
+	private LinearLayout buttonShareLayout;
 	private ImageView imageView[] = new ImageView[4];
 	private TextView textView[] = new TextView[4];
 	private TypedArray websiteClassifyArray, websiteClassifyFocusArray;
@@ -55,8 +62,7 @@ public class WebSiteTestActivity extends BaseActivity {
 	private ViewPager mPager;// 页卡内容
 	private Context context;
 
-	private ArrayList<WebSite> webSiteList1, webSiteList2, webSiteList3,
-			webSiteList4;
+	private ArrayList<WebSite> webSiteList1, webSiteList2, webSiteList3, webSiteList4;
 	private ArrayList<ArrayList<WebSite>> webSiteLists;
 	private ArrayList<WebSiteAdapter> webSiteAdapters;
 	private TestTask mCurrentTestTask = null;
@@ -107,6 +113,7 @@ public class WebSiteTestActivity extends BaseActivity {
 	private ArrayList<WebSite> testWebSite;
 	private int testId =  0;   // 正在测速中的页卡编号
 	private int testIndex = 0; // 正在测速中的页卡编号
+	
 
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -123,17 +130,22 @@ public class WebSiteTestActivity extends BaseActivity {
 					@Override
 					public void onTestFailed(SpeedTestError paramSpeedTestError,
 							TestParameters paramTestParameters) {
-						webSiteLists.get(testIndex).get(testId).setStatus(WiteSiteTestStatus.Error);
+						testWebSite.get(testId).setStatus(WiteSiteTestStatus.Error);
 						webSiteAdapters.get(testIndex).notifyDataSetChanged();
-						webSiteTestBtn.setVisibility(View.VISIBLE);
+						if (testId++ < testWebSite.size() - 1) {
+							handler.sendEmptyMessage(WEBSITE_TEST);
+						} else {
+							testId = 0;
+							webSiteTestBtn.setVisibility(View.VISIBLE);
+						}
 					}
 
 					@Override
 					public void onTestComplete(TestParameters paramTestParameters) {
 						TestParametersLatency localTestParametersLatency = (TestParametersLatency) paramTestParameters;
-						webSiteLists.get(testIndex).get(testId).setPing(localTestParametersLatency.getPing());
-						webSiteLists.get(testIndex).get(testId).setDegree(getDegree(localTestParametersLatency.getPing()));
-						webSiteLists.get(testIndex).get(testId).setStatus(WiteSiteTestStatus.Finish);
+						testWebSite.get(testId).setPing(localTestParametersLatency.getPing());
+						testWebSite.get(testId).setDegree(getDegree(localTestParametersLatency.getPing()));
+						testWebSite.get(testId).setStatus(WiteSiteTestStatus.Finish);
 						webSiteAdapters.get(testIndex).notifyDataSetChanged();
 						if (testId++ < testWebSite.size() - 1) {
 							handler.sendEmptyMessage(WEBSITE_TEST);
@@ -145,7 +157,7 @@ public class WebSiteTestActivity extends BaseActivity {
 					
 					@Override
 					public void onBeginTest() {
-						webSiteLists.get(testIndex).get(testId).setStatus(WiteSiteTestStatus.Test);
+						testWebSite.get(testId).setStatus(WiteSiteTestStatus.Test);
 						webSiteAdapters.get(testIndex).notifyDataSetChanged();
 					}
 				});
@@ -160,9 +172,9 @@ public class WebSiteTestActivity extends BaseActivity {
 	};
 	
 	private int getDegree(int ping) {
-		if (ping > 2000)
+		if (ping > 500)
 			return 1;
-		if (ping > 800)
+		if (ping > 300)
 			return 2;
 		if (ping > 200)
 			return 3;
@@ -193,8 +205,19 @@ public class WebSiteTestActivity extends BaseActivity {
 		case R.id.website_test:
 			startTest();
 			break;
+		case R.id.button_share_layout:
+		case R.id.button_share_website:
+			getCaptureBitmap();
+			showGrid(false);
+			break;
 		}
 	}
+	
+	private  void getCaptureBitmap() {
+		LinearLayout captureLayout = (LinearLayout) findViewById(R.id.capture_layout);
+        ScreenShotUtil.captureView(captureLayout);
+    }
+	
 
 	private void startTest() {
 		testWebSite = new ArrayList<WebSite>();
@@ -226,7 +249,6 @@ public class WebSiteTestActivity extends BaseActivity {
 			site.setStatus(WiteSiteTestStatus.Wait);
 			webSiteList1.add(site);
 		}
-
 		for (int index = 0; index < webSiteIcons2.length; index++) {
 			WebSite site = new WebSite();
 			site.setId(index);
@@ -261,7 +283,6 @@ public class WebSiteTestActivity extends BaseActivity {
 		webSiteLists.add(webSiteList2);
 		webSiteLists.add(webSiteList3);
 		webSiteLists.add(webSiteList4);
-
 		webSiteAdapters.add(new WebSiteAdapter(context, webSiteList1));
 		webSiteAdapters.add(new WebSiteAdapter(context, webSiteList2));
 		webSiteAdapters.add(new WebSiteAdapter(context, webSiteList3));
@@ -330,11 +351,14 @@ public class WebSiteTestActivity extends BaseActivity {
 		websiteTab2.setOnClickListener(new MyOnClickListener(1));
 		websiteTab3.setOnClickListener(new MyOnClickListener(2));
 		websiteTab4.setOnClickListener(new MyOnClickListener(3));
+		
+		buttonShareLayout = (LinearLayout) findViewById(R.id.button_share_layout);
+		buttonShare = (ImageButton) findViewById(R.id.button_share_website);
+		buttonShare.setOnClickListener(this);
+		buttonShareLayout.setOnClickListener(this);
 
-		websiteClassifyArray = getResources().obtainTypedArray(
-				R.array.website_classify_array);
-		websiteClassifyFocusArray = getResources().obtainTypedArray(
-				R.array.website_classify_focus_array);
+		websiteClassifyArray = getResources().obtainTypedArray(R.array.website_classify_array);
+		websiteClassifyFocusArray = getResources().obtainTypedArray(R.array.website_classify_focus_array);
 	}
 
 	/**
@@ -403,14 +427,10 @@ public class WebSiteTestActivity extends BaseActivity {
 				}
 				break;
 			}
-			imageView[currIndex].setImageDrawable(websiteClassifyArray
-					.getDrawable(currIndex));
-			imageView[arg0].setImageDrawable(websiteClassifyFocusArray
-					.getDrawable(arg0));
-			textView[currIndex].setTextColor(getResources().getColor(
-					R.color.text_black));
-			textView[arg0].setTextColor(getResources().getColor(
-					R.color.text_red));
+			imageView[currIndex].setImageDrawable(websiteClassifyArray.getDrawable(currIndex));
+			imageView[arg0].setImageDrawable(websiteClassifyFocusArray.getDrawable(arg0));
+			textView[currIndex].setTextColor(getResources().getColor(R.color.text_black));
+			textView[arg0].setTextColor(getResources().getColor(R.color.text_red));
 
 			currIndex = arg0;
 			animation.setFillAfter(true);// True:图片停在动画结束位置
@@ -446,5 +466,42 @@ public class WebSiteTestActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	
+	// 使用快捷分享完成图文分享
+		private void showGrid(boolean silent) {
+			Intent i = new Intent(context, ShareAllGird.class);
+			// 分享时Notification的图标
+			i.putExtra("notif_icon", R.drawable.ic_launcher);
+			// 分享时Notification的标题
+			i.putExtra("notif_title", context.getString(R.string.app_name));
+			
+			// address是接收人地址，仅在信息和邮件使用，否则可以不提供
+			i.putExtra("address", "support@quickbird.com");
+			// title标题，在印象笔记、邮箱、信息、微信（包括好友和朋友圈）、人人网和QQ空间使用，否则可以不提供
+			i.putExtra("title", context.getString(R.string.share));
+			// titleUrl是标题的网络链接，仅在人人网和QQ空间使用，否则可以不提供
+			i.putExtra("titleUrl", "http://sharesdk.cn");
+			// text是分享文本，所有平台都需要这个字段
+			i.putExtra("text", context.getString(R.string.share_content_wifi));
+			// imagePath是本地的图片路径，所有平台都支持这个字段，不提供，则表示不分享图片
+			i.putExtra("imagePath", Constants.PIC_PRE_PATH_NAME);
+			// url仅在微信（包括好友和朋友圈）中使用，否则可以不提供
+			i.putExtra("url", "http://sharesdk.cn");
+			// thumbPath是缩略图的本地路径，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
+			i.putExtra("thumbPath", Constants.PIC_PRE_PATH_NAME);
+			// appPath是待分享应用程序的本地路劲，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
+			i.putExtra("appPath", Constants.PIC_PRE_PATH_NAME);
+			// comment是我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供
+			i.putExtra("comment", context.getString(R.string.share));
+			// site是分享此内容的网站名称，仅在QQ空间使用，否则可以不提供
+			i.putExtra("site", context.getString(R.string.app_name));
+			// siteUrl是分享此内容的网站地址，仅在QQ空间使用，否则可以不提供
+			i.putExtra("siteUrl", "http://sharesdk.cn");
+			
+			// 是否直接分享
+			i.putExtra("silent", silent);
+			context.startActivity(i);
+		}
 
 }

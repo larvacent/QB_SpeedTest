@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">网速测试</string>
-    <string name="app_version_name">版本：1.5.0</string>
+    <string name="app_version_name">版本：1.6.0</string>
     <string name="app_recommand">上网快鸟</string>
     <string name="company_name">晨风云（北京）信息技术有限公司</string>
     <string name="company_website">公司网址</string>
@@ -27,8 +27,8 @@
     <string name="tab_more">更多</string>
 
     <!-- 测速文字 -->
-    <string name="testspeed_ping">网络延迟 : </string>
-    <string name="testspeed_network">网络环境 : </string>
+    <string name="testspeed_ping">延迟 : </string>
+    <string name="testspeed_network">网络 : </string>
     <string name="testspeed_test_twice">重新测速</string>
     <string name="testspeed_no_network_prompt">设置中开启网络，当前未联网。</string>
     <string name="testspeed_connecting">正在连接服务器...</string>
@@ -41,7 +41,7 @@
     <string name="testspeed_prompt">提示</string>
     <string name="testspeed_networknotgood">当前网络不可用，请稍后再试</string>
     <string name="testspeed_stop">终止本次测速，测速即将结束。</string>
-    <string name="testspeed_network_state1">没有网络</string>
+    <string name="testspeed_network_state1">None</string>
     <string name="testspeed_network_state2">Wi-Fi</string>
     <string name="testspeed_network_state3">2G/3G</string>
     <string name="testspeed_over">测速完毕</string>
@@ -126,6 +126,7 @@
     <!-- 更多 -->
     <string name="more_network_set">设置网络</string>
     <string name="more_traffic_gift">流量礼品盒</string>
+    <string name="more_history">测速历史</string>
     <string name="more_account_tie">账号绑定</string>
     <string name="more_update_check">检查更新</string>
     <string name="more_feedback">意见反馈</string>
@@ -143,5 +144,34 @@
     <string name="website_social_str">社交</string>
     <string name="website_shopping_str">购物</string>
     <string name="website_video_str">视频</string>
+
+    <!-- 分享 -->
+    <string name="share">网速分享</string>
+    <string name="share_content_mobile">亲，你有你的概念，我有我的标准；你只看到标榜的“3G”，但是否真的体会到上网的快感？请用网速测试！猛击下载http://dl.quickbird.com/android/QB_Speed.apk</string>
+    <string name="share_content_wifi">您的带宽是2M,3M还是10M，用网速测试一目了然；猛击下载http://dl.quickbird.com/android/QB_Speed.apk</string>
+    <string name="cancel">取消</string>
+    <string name="sharing">分享操作正在后台进行…</string>
+    <string name="share_content">ShareSDK for Android不仅集成简单、支持如QQ好友、微信、新浪微博、腾讯微博等所有社交平台，而且还有强大的统计分析管理后台，实时了解用户、信息流、回流率、传播效应等数据，详情见官网http://sharesdk.cn @ShareSDK</string>
+    <string name="evenote_title">这是一个神奇的SDK</string>
+    <string name="sinaweibo">新浪微博</string>
+    <string name="tencentweibo">腾讯微博</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="renren">人人网</string>
+    <string name="qzone">QQ空间</string>
+    <string name="douban">豆瓣</string>
+    <string name="evernote">印象笔记</string>
+    <string name="neteasemicroblog">网易微博</string>
+    <string name="wechat">微信好友</string>
+    <string name="shortmessage">信息</string>
+    <string name="share_to">分享到</string>
+    <string name="multi_share">图文分享</string>
+    <string name="share_completed">分享成功</string>
+    <string name="share_failed">分享失败</string>
+    <string name="share_canceled">分享已取消</string>
+    <string name="wechat_client_inavailable">目前您的微信版本过低或未安装微信，需要安装微信才能使用</string>
+    <string name="wechatmoments">微信朋友圈</string>
+    <string name="sohumicroblog">搜狐微博</string>
+    <string name="not_yet_authorized">尚未授权</string>
 
 </resources>

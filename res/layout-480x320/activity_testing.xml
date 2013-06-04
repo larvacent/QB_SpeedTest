@@ -1,91 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/main_background"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/network_bar"
+    <ImageView
+        style="@style/imageview_normal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp" >
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bar_upside" />
+    
+    <LinearLayout
+        android:id="@+id/button_history_layout"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:gravity="right" >
 
-        <TextView
-            android:id="@+id/ping_txt"
-            style="@style/textview_normal"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/testspeed_ping" />
-
-        <TextView
-            android:id="@+id/ping_value"
-            style="@style/textview_normal"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/ping_txt"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/ping_rotate"
+        <ImageButton
+            android:id="@+id/button_history"
             style="@style/imagebutton_normal"
-            android:layout_marginTop="7dp"
-            android:layout_toRightOf="@id/ping_txt"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ping_rotate"
-            android:visibility="gone" />
+            android:src="@drawable/button_history" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/network_value"
-            style="@style/textview_normal"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/testspeed_network_state1" />
-
-        <TextView
-            android:id="@+id/network_txt"
-            style="@style/textview_normal"
-            android:layout_marginTop="10dp"
-            android:layout_toLeftOf="@id/network_value"
-            android:text="@string/testspeed_network" />
-    </RelativeLayout>
-
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/speed_meter"
         android:layout_width="fill_parent"
-        android:layout_height="295dp"
-        android:layout_gravity="center_horizontal" >
+        android:layout_height="315dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp" >
 
         <ImageView
-            android:layout_width="240dp"
-            android:layout_height="295dp"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/speedometer_bg"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/app_name"
             android:src="@drawable/bg_speedometer" />
 
         <ImageView
+            android:id="@+id/speedometer_low"
             style="@style/imageview_normal"
-            android:layout_width="fill_parent"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/bar_upside" />
-
-        <ImageView
-            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
             android:src="@drawable/speedometer_low" />
 
         <ImageView
-            style="@style/imageview_normal"
-            android:layout_width="fill_parent"
-            android:layout_gravity="bottom"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/bar_below" />
-
-        <ImageView
             android:id="@+id/breathe_led"
             style="@style/imagebutton_normal"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/app_name"
             android:src="@drawable/breathe_led"
             android:visibility="invisible" />
@@ -93,20 +61,20 @@
         <ImageView
             android:id="@+id/needle"
             style="@style/imageview_normal"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/app_name"
             android:src="@drawable/needle" />
 
         <ImageView
             style="@style/imageview_normal"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/app_name"
             android:src="@drawable/needle_center" />
 
         <ImageView
             android:id="@+id/breathe_led_above"
             style="@style/imageview_normal"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/app_name"
             android:src="@drawable/breathe_led_above"
             android:visibility="invisible" />
@@ -114,8 +82,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="45dp"
+            android:layout_alignBottom="@id/speedometer_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="76dp"
             android:background="@drawable/speed_pit"
             android:gravity="center_horizontal"
             android:orientation="horizontal" >
@@ -164,25 +133,83 @@
         <TextView
             android:id="@+id/speed_unit"
             style="@style/textview_normal"
+            android:layout_alignBottom="@id/speedometer_bg"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="63dp" />
-    </FrameLayout>
+            android:layout_marginBottom="64dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/network_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:visibility="visible" >
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/speedometer_low"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_index_split_bar_bottom" />
+
+        <TextView
+            android:id="@+id/ping_txt"
+            style="@style/textview_normal"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:text="@string/testspeed_ping" />
+
+        <TextView
+            android:id="@+id/ping_value"
+            style="@style/textview_normal"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ping_txt" />
+
+        <ImageView
+            android:id="@+id/ping_rotate"
+            style="@style/imagebutton_normal"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/ping_txt"
+            android:visibility="gone"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_index_ping_rotate" />
+
+        <TextView
+            android:id="@+id/network_value"
+            style="@style/textview_normal"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:text="@string/testspeed_network_state2" />
+
+        <TextView
+            android:id="@+id/network_txt"
+            style="@style/textview_normal"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/network_value"
+            android:text="@string/testspeed_network" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/speed_test_btn"
         style="@style/imagebutton_normal"
-        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/network_bar"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/button_speedtest_bg"
         android:text="@string/testspeed_test_twice"
         android:textColor="@drawable/button_font_style"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/pb"
         android:layout_width="200dp"
         android:layout_height="9dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/speed_test_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
         android:focusable="false"
         android:indeterminate="false"
         android:indeterminateOnly="false"
@@ -190,13 +217,14 @@
         android:maxHeight="25dip"
         android:minHeight="25dip"
         android:progressDrawable="@drawable/progress_horizontal" />
-
+    
     <TextView
+        android:layout_below="@id/pb"
         android:id="@+id/progress_txt"
         style="@style/textview_normal"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
         android:textColor="@color/text_gray"
+        android:layout_centerHorizontal="true"
         android:textSize="12sp" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import cn.sharesdk.framework.AbstractWeibo;
 
 import com.quickbird.speedtest.R;
 import com.quickbird.utils.UmengUtil;
@@ -138,7 +139,11 @@ public class MainActivity extends TabActivity {
 			}
 		});
 		Base.mTabHost.setCurrentTab(1);
-		setUmengSDK();
+		
+		setUmengSDK();// 设置友盟SDK
+
+		AbstractWeibo.initSDK(this);// 初始化分享SDK
+		
 		MobclickAgent.onEvent(this, "oa");
 	}
 
@@ -163,6 +168,12 @@ public class MainActivity extends TabActivity {
 				}
 			}
 		});
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AbstractWeibo.stopSDK(this); // 停止分享SDK
 	}
 
 }

@@ -4,5 +4,13 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-Core.jar"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-QZone.jar"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-SinaWeibo.jar"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-TencentWeibo.jar"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-Wechat-Core.jar"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-Wechat-Moments.jar"/>
+	<classpathentry kind="lib" path="libs/ShareSDK-Wechat.jar"/>
+	<classpathentry kind="lib" path="libs/umeng_sdk.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -22,7 +22,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -58,6 +60,8 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     private ImageView needle, breatheLed, breatheLedAbove;
     private ImageView[] speedNam = new ImageView[3];
     private ImageView speedPoint1,speedPoint2;
+    private LinearLayout buttonHistoryLayout;
+    private ImageButton buttonHistory;
     
     private int networkStatus;
     private float currentDegree = 0l;
@@ -171,15 +175,19 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
         speed_unit = (TextView) findViewById(R.id.speed_unit);
         progressBar = (ProgressBar) findViewById(R.id.pb);
         speedPic = getResources().obtainTypedArray(R.array.speedvalue_array);
+        
+        buttonHistoryLayout = (LinearLayout) findViewById(R.id.button_history_layout);
+        buttonHistory = (ImageButton) findViewById(R.id.button_history);
         clickListener = new ClickListener();
 
         refreshPingStr(speedValue.getPing());
         networkTxt.setText(speedValue.getNetworkType());
         
 //        speedTestBtn.setText("取消测速");
+        buttonHistoryLayout.setOnClickListener(clickListener);
+        buttonHistory.setOnClickListener(clickListener);
         speedTestBtn.setOnClickListener(clickListener);
 //        speedTestBtn.setTag("2");
-        
     }
     
     private void prepareNextTest() {
@@ -301,6 +309,10 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
                 }
                 MobclickAgent.onEvent(context, "cstop");
                 break;
+            case R.id.button_history_layout:
+            case R.id.button_history:
+                startActivity(new Intent(SpeedTestActivity.this, SpeedHistoryActivity.class));
+            	break;
             }
         }
     }
@@ -571,7 +583,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
         try {
             progressBar.setProgress(progress);
             progressBar.invalidate();
-            progressTxt.setText(progress + "%");
+            progressTxt.setText("测速已完成"+progress + "%");
             progressTxt.invalidate();
         } catch (Exception e) {
             DebugUtil.d("refreshProgress Exception:" + e.getMessage());
