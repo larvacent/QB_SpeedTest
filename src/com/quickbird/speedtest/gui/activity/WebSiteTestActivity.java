@@ -69,9 +69,9 @@ public class WebSiteTestActivity extends BaseActivity {
 
 	private Integer[] webSiteIcons1 = { R.drawable.baidu, R.drawable.weibo,
 			R.drawable.wangyi_news, R.drawable.youku_video,
-			R.drawable.tecent_weibo, R.drawable.taobao, };
+			R.drawable.tencent_weibo, R.drawable.taobao, };
 	private Integer[] webSiteIcons2 = { R.drawable.weibo,
-			R.drawable.tecent_weibo, R.drawable.zone, R.drawable.renren,
+			R.drawable.tencent_weibo, R.drawable.zone, R.drawable.renren,
 			R.drawable.kaixin, R.drawable.douban, };
 	private Integer[] webSiteIcons3 = { R.drawable.taobao, R.drawable.jingdong,
 			R.drawable.baidu_shopping, R.drawable.meilishuo, R.drawable.jumei,
@@ -85,10 +85,10 @@ public class WebSiteTestActivity extends BaseActivity {
 	private String[] webSites4 = { "优酷网", "土豆网", "搜狐视频", "腾讯视频", "新浪视频", };
 	
 	private String[] shareStr = {
-			"【浏览网站快不快，测试一下就出来】您手机上网经常访问的网站快不快？用网站测速一目了然！",
-			"【浏览网站快不快，测试一下就出来】刷微博，上人人，哪个社交网站更给力？用网站测速一目了然！",
-			"【浏览网站快不快，测试一下就出来】网络购物，不快不行，您要上的购物网站快吗？",
-			"【浏览网站快不快，测试一下就出来】看视频，上公开课，哪个视频网站更给力？用网站测速一目了然！"
+			"【浏览网页快不快，测试一下就出来】您手机经常访问的网站快不快？用网站测速一目了然！",
+			"【浏览网页快不快，测试一下就出来】刷微博，上人人，哪个社交网站更给力？用网站测速一目了然！",
+			"【浏览网页快不快，测试一下就出来】网络购物，不快不行，您要上的购物网站快吗？",
+			"【浏览网页快不快，测试一下就出来】看视频，上公开课，哪个视频网站更给力？用网站测速一目了然！"
 	};
 
 	private String[] websitesAddress1 = { "http://www.baidu.com",

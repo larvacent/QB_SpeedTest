@@ -163,7 +163,6 @@ public class SpeedResultActivity extends BaseActivity {
             break;
         case R.id.share_btn:
             shareSpeedResult();
-            avertShareButton(false);
             MobclickAgent.onEvent(context, "cshare");
             break;
         }

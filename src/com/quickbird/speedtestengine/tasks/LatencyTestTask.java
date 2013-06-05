@@ -20,7 +20,7 @@ public class LatencyTestTask extends TestTask {
 	private int mConnectTimeout = 10000;
 	private int mReadTimeout = 10000;
 	private TestParametersLatency mResult = null;
-	protected int mSampleCount = 5;
+	protected int mSampleCount = 3;
 
 	public LatencyTestTask(TestTaskCallbacks paramTestTaskCallbacks) {
 		super(paramTestTaskCallbacks);

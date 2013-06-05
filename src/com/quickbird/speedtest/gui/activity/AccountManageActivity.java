@@ -191,17 +191,17 @@ public class AccountManageActivity extends BaseActivity implements Callback,
 		switch (msg.arg1) {
 		case 1: { // 成功
 			text = weibo.getName() + " completed at " + text;
-			Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+//			Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
 		}
 			break;
 		case 2: { // 失败
 			text = weibo.getName() + " caught error at " + text;
-			Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+//			Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		case 3: { // 取消
 			text = weibo.getName() + " canceled at " + text;
-			Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+//			Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		}
