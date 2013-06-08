@@ -4,9 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-
 import android.os.SystemClock;
-
 import com.quickbird.enums.SpeedTestError;
 import com.quickbird.enums.SpeedTestType;
 import com.quickbird.speedtestengine.TestParameters;

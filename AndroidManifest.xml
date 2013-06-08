@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quickbird.speedtest"
-    android:versionCode="2891"
-    android:versionName="1.5.0" >
+    android:versionCode="2898"
+    android:versionName="1.6.0" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -113,8 +113,6 @@
             android:name=".gui.activity.GridActivity"
             android:screenOrientation="portrait" >
         </activity>
-
-
         <activity
             android:name="cn.sharesdk.framework.AuthorizeActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -123,7 +121,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
-            android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
+            android:name="com.quickbird.speedtest.gui.activity.wxapi.WXEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait" >
         </activity>
@@ -138,19 +136,6 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
-
-        <activity
-            android:name="com.tencent.weibo.webview.OAuthV1AuthorizeWebView"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.tencent.weibo.webview.OAuthV2AuthorizeWebView"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
-
         <activity
             android:name="com.umeng.fb.ui.SendFeedback"
             android:screenOrientation="portrait"
@@ -180,7 +165,6 @@
             android:name="UMENG_CHANNEL"
             android:value="test" >
         </meta-data>
-        
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="f1e4d9a7e67a8768e4b9cba8383a0d09" >

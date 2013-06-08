@@ -155,7 +155,7 @@
 
         <TextView
             android:id="@+id/ping_txt"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"
@@ -163,7 +163,7 @@
 
         <TextView
             android:id="@+id/ping_value"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/ping_txt" />
 
@@ -178,7 +178,7 @@
 
         <TextView
             android:id="@+id/network_value"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="4dp"
@@ -186,7 +186,7 @@
 
         <TextView
             android:id="@+id/network_txt"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/network_value"
             android:text="@string/testspeed_network" />

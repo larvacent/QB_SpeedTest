@@ -9,7 +9,6 @@ import android.os.Handler.Callback;
 import android.os.Message;
 import android.view.View;
 import android.widget.CheckedTextView;
-import android.widget.Toast;
 import cn.sharesdk.framework.AbstractWeibo;
 import cn.sharesdk.framework.WeiboActionListener;
 import cn.sharesdk.sina.weibo.SinaWeibo;
@@ -97,7 +96,10 @@ public class AccountManageActivity extends BaseActivity implements Callback,
 		}
 
 		if (name != null) {
-			return AbstractWeibo.getWeibo(mContext, name);
+			try {
+				return AbstractWeibo.getWeibo(mContext, name);
+			} catch (Exception e) {
+			}
 		}
 		return null;
 	}

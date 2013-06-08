@@ -53,13 +53,13 @@
             android:id="@+id/history_layout"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:background="@drawable/more_btn_mid"
+            android:background="@drawable/more_btn_bottom"
             android:visibility="visible" >
 
             <TextView
                 style="@style/textview"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="23dp"
+                android:layout_marginLeft="19dp"
                 android:text="@string/more_history"
                 android:textColor="@color/text_black"
                 android:textSize="17sp" />
@@ -68,7 +68,7 @@
                 style="@style/imagebutton_normal"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="26dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_arrow" />
         </RelativeLayout>
@@ -78,12 +78,13 @@
             android:layout_width="fill_parent"
             android:contentDescription="@string/app_name"
             android:src="@drawable/split_bar_more"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/account_layout"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
+            android:visibility="gone"
             android:background="@drawable/more_btn_bottom" >
 
             <TextView

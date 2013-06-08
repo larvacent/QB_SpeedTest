@@ -58,7 +58,7 @@ public class SpeedValueDetailActivity extends BaseActivity {
         pingDetail.setText(speedValue.getPing()+"ms");
         speedDetail.setText(SpeedValueUtil.getSpeed(speedValue.getDownloadSpeed()));
         locationDetail.setText(speedValue.getLocationDesc());
-        rankDetail.setText(String.format(getResources().getString(R.string.detail_rank_str), 1001-speedValue.getRank()));
+        rankDetail.setText(String.format(getResources().getString(R.string.detail_rank_str), 1000-speedValue.getRank()));
         medalDetail.setImageDrawable(speedMetalPic.getDrawable(SpeedValueUtil.getMetal(speedValue.getRank())));
     }
     

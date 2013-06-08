@@ -87,7 +87,6 @@ public class SpeedResultActivity extends BaseActivity {
                     };
                 }.start();
             }
-            
         }
     };
     
@@ -198,7 +197,7 @@ public class SpeedResultActivity extends BaseActivity {
         if (networkStatus == Constants.NETWORK_STATUS_MOBILE)
             return "亲，你有你的概念，我有我的标准；你只看到标榜的“3G”，但是否真的体会到上网的快感？请用网速测试！猛击下载http://dl.quickbird.com/android/QB_Speed.apk";
         if (networkStatus == Constants.NETWORK_STATUS_WIFI)
-            return "您的带宽是2M,3M还是10M，用网速测试一目了然；猛击下载http://dl.quickbird.com/android/QB_Speed.apk";
+            return "您的网速是2M、3M、还是10M？快用网速测试，一目了然；猛击下载http://dl.quickbird.com/android/QB_Speed.apk";
         return "";
     }
 
@@ -225,15 +224,16 @@ public class SpeedResultActivity extends BaseActivity {
 		// title标题，在印象笔记、邮箱、信息、微信（包括好友和朋友圈）、人人网和QQ空间使用，否则可以不提供
 		i.putExtra("title", context.getString(R.string.share));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用，否则可以不提供
-		i.putExtra("titleUrl", "www.quickbird.com");
+		i.putExtra("titleUrl", "www.testspeed.quickbird.com");
 		// text是分享文本，所有平台都需要这个字段
 		i.putExtra("text", prepareWeiboContent());
 		// imagePath是本地的图片路径，所有平台都支持这个字段，不提供，则表示不分享图片
 		i.putExtra("imagePath", Constants.PIC_PRE_PATH_NAME);
 		// url仅在微信（包括好友和朋友圈）中使用，否则可以不提供
-		i.putExtra("url", "www.quickbird.com");
+		// i.putExtra("url", "www.quickbird.com");
 		// thumbPath是缩略图的本地路径，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
-		i.putExtra("thumbPath", Constants.PIC_PRE_PATH_NAME);
+		
+		// i.putExtra("thumbPath", Constants.PIC_THUMB_PATH_NAME);
 		// appPath是待分享应用程序的本地路劲，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
 		i.putExtra("appPath", Constants.PIC_PRE_PATH_NAME);
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供
@@ -241,12 +241,9 @@ public class SpeedResultActivity extends BaseActivity {
 		// site是分享此内容的网站名称，仅在QQ空间使用，否则可以不提供
 		i.putExtra("site", context.getString(R.string.app_name));
 		// siteUrl是分享此内容的网站地址，仅在QQ空间使用，否则可以不提供
-		i.putExtra("siteUrl", "www.quickbird.com");
-
+		i.putExtra("siteUrl", "www.www.testspeed.quickbird.com");
 		// 是否直接分享
 		i.putExtra("silent", silent);
 		context.startActivity(i);
 	}
-
-
 }

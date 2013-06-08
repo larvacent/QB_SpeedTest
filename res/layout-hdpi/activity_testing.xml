@@ -33,7 +33,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" >
+        android:layout_marginTop="25dp" >
 
         <ImageView
             android:id="@+id/speedometer_bg"
@@ -142,8 +142,8 @@
     <RelativeLayout
         android:id="@+id/network_bar"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="340dp"
         android:visibility="visible" >
 
         <ImageView
@@ -155,7 +155,7 @@
 
         <TextView
             android:id="@+id/ping_txt"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"
@@ -163,7 +163,7 @@
 
         <TextView
             android:id="@+id/ping_value"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/ping_txt" />
 
@@ -178,7 +178,7 @@
 
         <TextView
             android:id="@+id/network_value"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="4dp"
@@ -186,7 +186,7 @@
 
         <TextView
             android:id="@+id/network_txt"
-            style="@style/textview_normal"
+            style="@style/textview_normal_ping"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/network_value"
             android:text="@string/testspeed_network" />
@@ -205,10 +205,10 @@
     <ProgressBar
         android:id="@+id/pb"
         android:layout_width="200dp"
-        android:layout_height="9dp"
+        android:layout_height="8dp"
         android:layout_below="@id/speed_test_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:focusable="false"
         android:indeterminate="false"
         android:indeterminateOnly="false"

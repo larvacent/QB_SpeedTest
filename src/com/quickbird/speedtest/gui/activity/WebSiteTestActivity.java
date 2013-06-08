@@ -85,10 +85,10 @@ public class WebSiteTestActivity extends BaseActivity {
 	private String[] webSites4 = { "优酷网", "土豆网", "搜狐视频", "腾讯视频", "新浪视频", };
 	
 	private String[] shareStr = {
-			"【浏览网页快不快，测试一下就出来】您手机经常访问的网站快不快？用网站测速一目了然！",
-			"【浏览网页快不快，测试一下就出来】刷微博，上人人，哪个社交网站更给力？用网站测速一目了然！",
-			"【浏览网页快不快，测试一下就出来】网络购物，不快不行，您要上的购物网站快吗？",
-			"【浏览网页快不快，测试一下就出来】看视频，上公开课，哪个视频网站更给力？用网站测速一目了然！"
+			"【浏览网页快不快，测试一下就出来】您手机经常访问的网站快不快？用网快鸟网速测试一目了然！",
+			"【浏览网页快不快，测试一下就出来】刷微博，上人人，哪个社交网站更给力？用快鸟网速测试一目了然！",
+			"【浏览网页快不快，测试一下就出来】上网购物，不快不行，瞧瞧我的购物网站速度怎么样，可以不？",
+			"【浏览网页快不快，测试一下就出来】看视频，上公开课，我的网速怎么样？用快鸟网速测试一目了然！"
 	};
 
 	private String[] websitesAddress1 = { "http://www.baidu.com",
@@ -159,6 +159,7 @@ public class WebSiteTestActivity extends BaseActivity {
 							testId = 0;
 							webSiteTestBtn.setVisibility(View.VISIBLE);
 							buttonShare.setVisibility(View.VISIBLE);
+							buttonShareLayout.setClickable(true);
 						}
 					}
 					
@@ -329,8 +330,7 @@ public class WebSiteTestActivity extends BaseActivity {
 		mPager.setCurrentItem(0);
 		mPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
-		textView[currIndex].setTextColor(getResources().getColor(
-				R.color.text_red));
+		textView[currIndex].setTextColor(getResources().getColor(R.color.text_red));
 		imageView[currIndex].setImageDrawable(websiteClassifyFocusArray
 				.getDrawable(currIndex));
 		setGridView(currIndex);
@@ -365,6 +365,7 @@ public class WebSiteTestActivity extends BaseActivity {
 		buttonShare.setOnClickListener(this);
 		buttonShareLayout.setOnClickListener(this);
 		buttonShare.setVisibility(View.GONE);
+		buttonShareLayout.setClickable(false);
 
 		websiteClassifyArray = getResources().obtainTypedArray(R.array.website_classify_array);
 		websiteClassifyFocusArray = getResources().obtainTypedArray(R.array.website_classify_focus_array);
@@ -445,6 +446,9 @@ public class WebSiteTestActivity extends BaseActivity {
 			animation.setFillAfter(true);// True:图片停在动画结束位置
 			animation.setDuration(100);
 			cursor.startAnimation(animation);
+			
+			buttonShare.setVisibility(View.GONE);
+			buttonShareLayout.setClickable(false);
 
 			setGridView(currIndex);
 		}
@@ -459,8 +463,7 @@ public class WebSiteTestActivity extends BaseActivity {
 	}
 
 	private void setGridView(final int index) {
-		GridView gridView = (GridView) listViews.get(index).findViewById(
-				R.id.gridview);
+		GridView gridView = (GridView) listViews.get(index).findViewById(R.id.gridview);
 		gridView.setAdapter(webSiteAdapters.get(index));
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -490,15 +493,15 @@ public class WebSiteTestActivity extends BaseActivity {
 			// title标题，在印象笔记、邮箱、信息、微信（包括好友和朋友圈）、人人网和QQ空间使用，否则可以不提供
 			i.putExtra("title", context.getString(R.string.share));
 			// titleUrl是标题的网络链接，仅在人人网和QQ空间使用，否则可以不提供
-			i.putExtra("titleUrl", "www.quickbird.com");
+			i.putExtra("titleUrl", "www.speedtest.quickbird.com");
 			// text是分享文本，所有平台都需要这个字段
 			i.putExtra("text", shareStr[currIndex]);
 			// imagePath是本地的图片路径，所有平台都支持这个字段，不提供，则表示不分享图片
 			i.putExtra("imagePath", Constants.PIC_PRE_PATH_NAME);
 			// url仅在微信（包括好友和朋友圈）中使用，否则可以不提供
-			i.putExtra("url", "www.quickbird.com");
+//			i.putExtra("url", "www.quickbird.com");
 			// thumbPath是缩略图的本地路径，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
-			i.putExtra("thumbPath", Constants.PIC_PRE_PATH_NAME);
+//			i.putExtra("thumbPath", Constants.PIC_PRE_PATH_NAME);
 			// appPath是待分享应用程序的本地路劲，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
 			i.putExtra("appPath", Constants.PIC_PRE_PATH_NAME);
 			// comment是我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供

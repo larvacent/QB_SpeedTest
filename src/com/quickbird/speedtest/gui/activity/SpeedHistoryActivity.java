@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,7 @@ public class SpeedHistoryActivity extends BaseActivity {
     private Button speedtestButton;
     private TextView historyNum;
     private ImageView deleteAll;
+    private int refreshTest = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,17 @@ public class SpeedHistoryActivity extends BaseActivity {
         netWorkPic = getResources().obtainTypedArray(R.array.network_pic_array);
         medalPic = getResources().obtainTypedArray(R.array.smallmetal_array);
         MobclickAgent.onEvent(this, "cht");
+        try {
+        	Bundle resultBundle = new Bundle();
+        	Intent getResult = getIntent();
+        	resultBundle = getResult.getExtras();
+        	if(resultBundle.getString(MoreActivity.formMore).equals(MoreActivity.formMore))
+        		refreshTest = 1;
+        	else 
+        		refreshTest = 0;
+		} catch (Exception e) {
+			refreshTest = 0;
+		}
     }
 
     @Override
@@ -52,24 +65,22 @@ public class SpeedHistoryActivity extends BaseActivity {
     private void populateFields() {
         speedValues = new ArrayList<SpeedValue>();
         speedValues = speedDBManager.getAllSpeedValues();
-        if (speedValues.size() <= 0) {
+        if (speedValues.size() <= 0 && refreshTest ==0) {
             setContentView(R.layout.activity_nospeedhistory);
             speedtestButton = (Button) findViewById(R.id.speed_test_btn);
             speedtestButton.setOnClickListener(new OnClickListener() {
                 
                 @Override
                 public void onClick(View v) {
-                    Base.mTabHost.setCurrentTab(1);
-                    Base.startTest = true;
+						Base.startTest = true;
+						finish();
                 }
             });
             return;
         }
         setContentView(R.layout.activity_history);
         historyNum = (TextView) findViewById(R.id.history_num);
-        historyNum.setText(String.format(
-                getResources().getString(R.string.history_num),
-                speedValues.size()));
+        historyNum.setText(String.format(getResources().getString(R.string.history_num), speedValues.size()));
         deleteAll = (ImageView) findViewById(R.id.delete_all);
         deleteAll.setOnClickListener(this);
         
@@ -91,30 +102,32 @@ public class SpeedHistoryActivity extends BaseActivity {
             try {
                 CustomDialog dialog = new CustomDialog.Builder(activity)
                         .setTitle("删除历史记录")
-                        .setPositiveButton("确定",
-                                new DialogInterface.OnClickListener() {
-
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialog,
-                                            int which) {
+                                    public void onClick(DialogInterface dialog, int which) {
                                         speedDBManager.deleteAllSpeedValues();
                                         speedValues = speedDBManager.getAllSpeedValues();
                                         historyNum.setText(String.format(getResources().getString( R.string.history_num), speedValues.size()));
-                                        speedListAdapter = new SpeedListAdapter(
-                                                mContext, speedValues,
-                                                netWorkPic, medalPic);
-                                        speedValuesListview
-                                                .setAdapter(speedListAdapter);
+                                        speedListAdapter = new SpeedListAdapter( mContext, speedValues, netWorkPic, medalPic);
+                                        speedValuesListview.setAdapter(speedListAdapter);
                                         speedListAdapter.notifyDataSetChanged();
                                         dialog.dismiss();
+										if (refreshTest == 0) {
+											setContentView(R.layout.activity_nospeedhistory);
+											speedtestButton = (Button) findViewById(R.id.speed_test_btn);
+											speedtestButton.setOnClickListener(new OnClickListener() {
+														@Override
+														public void onClick(View v) {
+															Base.startTest = true;
+															finish();
+														}
+													});
+										}
                                     }
                                 })
-                        .setNegativeButton("取消",
-                                new DialogInterface.OnClickListener() {
-
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialog,
-                                            int which) {
+                                    public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                     }
                                 }).create();

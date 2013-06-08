@@ -107,8 +107,14 @@ public class WebSiteAdapter extends BaseAdapter {
 		if (webSite.getStatus() == WiteSiteTestStatus.Finish) {
 			holder.speedTag.setVisibility(View.VISIBLE);
 			holder.mask.setVisibility(View.GONE);
-			holder.load.setVisibility(View.GONE);
 			holder.load.clearAnimation();
+			holder.load.setVisibility(View.GONE);
+			holder.check.setVisibility(View.VISIBLE);
+			if (webSite.isChecked())
+				holder.check.setImageResource(R.drawable.ic_selected_green);
+
+			if (!webSite.isChecked())
+				holder.check.setImageResource(R.drawable.ic_deselected);
 			switch (webSite.getDegree()) {
 			case -1:
 				holder.speedTag.setVisibility(View.INVISIBLE);
@@ -140,11 +146,16 @@ public class WebSiteAdapter extends BaseAdapter {
 			holder.mask.setVisibility(View.GONE);
 			holder.load.setVisibility(View.GONE);
 			holder.load.clearAnimation();
+			holder.check.setVisibility(View.VISIBLE);
+			if (webSite.isChecked())
+				holder.check.setImageResource(R.drawable.ic_selected_green);
+
+			if (!webSite.isChecked())
+				holder.check.setImageResource(R.drawable.ic_deselected);
 			holder.speedTag.setImageResource(R.drawable.ic_mark_fail);
 			return convertView;
 		}
 		return convertView;
-
 	}
 
 }

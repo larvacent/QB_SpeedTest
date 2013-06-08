@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -131,5 +132,9 @@ public class ScreenShotUtil {
 	// 截取指定View
 	public static void captureView(View view) {
 		ScreenShotUtil.savePic(ScreenShotUtil.takeViewShot(view), Constants.PIC_PRE_PATH_NAME);
+		Bitmap bmp = BitmapFactory.decodeFile(Constants.PIC_PRE_PATH_NAME);
+        Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 70, 70, true);
+        bmp.recycle();
+        ScreenShotUtil.savePic(thumbBmp, Constants.PIC_THUMB_PATH_NAME);
 	}
 }

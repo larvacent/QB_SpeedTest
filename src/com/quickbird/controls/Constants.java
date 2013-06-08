@@ -11,10 +11,11 @@ public class Constants {
     
     /**保存的截图的名称*/
     public static final String PIC_PRE_PATH_NAME  = FileUtil.getImagePath()+"/pic_shoot.png";
+    public static final String PIC_THUMB_PATH_NAME  = FileUtil.getImagePath()+"/pic_shoot_thumb.png";
     
     public static final String DOWNLOAD500KURL = "http://upyun.doodoobird.com/speedtest500k.tgz";
-    public static final String DOWNLOAD2MURL = "http://upyun.doodoobird.com/speedtest.zip";
-//    public static final String DOWNLOAD2MURL = "http://down.360safe.com/yunpan/360yunpan_setup.exe";
+//    public static final String DOWNLOAD2MURL = "http://upyun.doodoobird.com/speedtest.zip";
+    public static final String DOWNLOAD2MURL = "http://www.apk.anzhi.com/apk/201303/29/com.doodoobird.activity_39891000_0.apk";
     
     /** 用于控制用户导航提示的次数 */
     public static final int USER_GUIDE_SHOW_TIME = 1;

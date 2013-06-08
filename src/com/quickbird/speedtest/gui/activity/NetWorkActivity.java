@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.quickbird.speedtest.R;
 import com.quickbird.speedtestengine.utils.APNUtil;
 import com.quickbird.speedtestengine.utils.NetWorkUtil;
+import com.quickbird.speedtestengine.utils.StringUtil;
 
 public class NetWorkActivity extends BaseActivity {
     private Button wifiBtn, dataBtn;
@@ -31,8 +32,14 @@ public class NetWorkActivity extends BaseActivity {
     private BroadcastReceiver mNetworkStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            wifiTxt.setText(getWifiInfo(context));
-            dataTxt.setText(APNUtil.getNetworkTypeENNameByIMSI(APNUtil.getImsi(context)));
+        	if (setWifiState)
+    			wifiTxt.setText(getWifiInfo(context));
+    		else 
+    			wifiTxt.setText("");
+            if (setMobileState)
+            	dataTxt.setText(APNUtil.getNetworkTypeENNameByIMSI(APNUtil.getImsi(context)));
+    		else 
+    			dataTxt.setText("");
         }
     };
 
@@ -63,11 +70,19 @@ public class NetWorkActivity extends BaseActivity {
             setWifiState = !setWifiState;
             wifiManager.setWifiEnabled(setWifiState);
             changeButtonStatus(wifiBtn, setWifiState, setWifiState == true ? "已打开" : "已关闭");
+			if (setWifiState)
+				wifiTxt.setText(getWifiInfo(context));
+			else 
+				wifiTxt.setText("");
             break;
         case R.id.data_btn:
             setMobileState = !setMobileState;
             toggleMobileData(context, setMobileState);
             changeButtonStatus(dataBtn, setMobileState, setMobileState == true ? "已打开" : "已关闭");
+            if (setMobileState)
+            	dataTxt.setText(APNUtil.getNetworkTypeENNameByIMSI(APNUtil.getImsi(context)));
+			else 
+				dataTxt.setText("");
             break;
         }
     }
@@ -87,8 +102,14 @@ public class NetWorkActivity extends BaseActivity {
     private void refreshBtnStatus() {
         setWifiState = NetWorkUtil.getWifiState(context);
         setMobileState = NetWorkUtil.getMobileStatus(context);
-        wifiTxt.setText(getWifiInfo(context));
-        dataTxt.setText(APNUtil.getNetworkTypeENNameByIMSI(APNUtil.getImsi(context)));
+        if (setWifiState)
+			wifiTxt.setText(getWifiInfo(context));
+		else 
+			wifiTxt.setText("");
+        if (setMobileState)
+        	dataTxt.setText(APNUtil.getNetworkTypeENNameByIMSI(APNUtil.getImsi(context)));
+		else 
+			dataTxt.setText("");
         
         changeButtonStatus(wifiBtn, setWifiState, setWifiState == true ? "已打开" : "已关闭");
         changeButtonStatus(dataBtn, setMobileState, setMobileState == true ? "已打开" : "已关闭");
@@ -97,7 +118,10 @@ public class NetWorkActivity extends BaseActivity {
     private String getWifiInfo(Context context) {
         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        return wifiInfo.getSSID();
+        String ssid = wifiInfo.getSSID();
+        if(StringUtil.isNull(ssid)||ssid.equals("<unknow ssid>")||ssid.contains("0x"))
+        	ssid = "";
+        return ssid;
     }
 
     private void toggleMobileData(Context context, boolean enabled) {

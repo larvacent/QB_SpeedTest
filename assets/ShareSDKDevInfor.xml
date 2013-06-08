@@ -45,13 +45,13 @@
         AppKey="2348668880"
         AppSecret="41d3234e109295aa443931ca31a2fe23"
         Id="1"
-        RedirectUrl="http://www.quickbird.com" />
+        RedirectUrl="http://www.speedtest.quickbird.com" />
 
     <TencentWeibo
         SortId="2"
         AppKey="801332298"
         AppSecret="add1ec2b5f36470c2096ac8b14043bcd"
-        RedirectUri="http://www.quickbird.com"
+        RedirectUri="http://www.speedtest.quickbird.com"
         Id="2" />
 
     <QZone
@@ -59,7 +59,7 @@
         AppId="100458386"
         AppKey="6f76390fd18c733671363cc5f202c0b5"
         Id="3"
-        RedirectUrl="http://www.quickbird.com" />
+        RedirectUrl="http://www.speedtest.quickbird.com" />
     
     <Wechat
         SortId="4"

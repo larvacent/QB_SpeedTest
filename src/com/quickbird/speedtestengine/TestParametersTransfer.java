@@ -13,6 +13,7 @@ public class TestParametersTransfer extends TestParameters {
     private boolean mSpeedTestAlgorithmInitialized = false;
     private int[] mThreadBytes;
     private int mThreadCount;
+    private int readLength = 1;
 
     public TestParametersTransfer(SpeedTestType paramSpeedTestType) {
         this(paramSpeedTestType, 1);
@@ -60,6 +61,16 @@ public class TestParametersTransfer extends TestParameters {
         for (int i = 0; i < this.mThreadCount; i++)
             this.mThreadBytes[i] = 0;
     }
+    
+    public void setReadLength(int readLength)
+    {
+    	this.readLength = readLength;
+    }
+    
+    public int getReadLength()
+    {
+    	return this.readLength;
+    }
 
     public int getBytes() {
         int i = 0;
@@ -75,7 +86,7 @@ public class TestParametersTransfer extends TestParameters {
     public void setBytes(int paramInt) {
         if (this.mThreadCount > 0) {
             setBytes(this.mThreadCount - 1, paramInt);
-            calculateSpeed();
+//            calculateSpeed();
         }
     }
 
@@ -87,7 +98,7 @@ public class TestParametersTransfer extends TestParameters {
             int paramInt2) {
         setProgress(paramInt1, paramFloat);
         setBytes(paramInt1, paramInt2);
-        calculateSpeed();
+//        calculateSpeed();
     }
 
     private class SpeedTestAlgorithm {
@@ -97,7 +108,7 @@ public class TestParametersTransfer extends TestParameters {
         private TestParametersTransfer.SpeedTestReading[] mSpeeds = new TestParametersTransfer.SpeedTestReading[22];
 
         public SpeedTestAlgorithm() {
-
+        	
         }
         
 //        private int getFirstSpeed(float fProgress, int paramInt) {
@@ -105,14 +116,14 @@ public class TestParametersTransfer extends TestParameters {
 //            if (fProgress != 0.0F) {
 //                TestParametersTransfer.SpeedTestReading localSpeedTestReading1 = this.mSpeeds[0];
 //                long l = SystemClock.uptimeMillis();
-//                double d2 = 1000.0D * paramInt
+//                double d2 = 1024.0D * paramInt
 //                        / (1.0D + (l - localSpeedTestReading1.getTime()));
 //                int i = 0;
 //                if (this.mCurrentIndex < 4) {
 //                    i = (int) d2;
 //                } else {
 //                    TestParametersTransfer.SpeedTestReading localSpeedTestReading2 = this.mSpeeds[2];
-//                    double d1 = 1000.0D
+//                    double d1 = 1024.0D
 //                            * (paramInt - Integer.valueOf(
 //                                    localSpeedTestReading2.getRbytes())
 //                                    .intValue())
@@ -140,16 +151,16 @@ public class TestParametersTransfer extends TestParameters {
                 } else {
                     TestParametersTransfer.SpeedTestReading localSpeedTestReading2 = this.mSpeeds[2];
                     double d1 = 1024.0D* (rByte - Integer.valueOf(localSpeedTestReading2.getRbytes()).intValue()) / ((l - localSpeedTestReading2.getTime()));
-//                    DebugUtil.d("d1:"+d1);
-                    if (fProgress <= 0.3D){
+                    DebugUtil.d("d1:"+d1);
+//                    if (fProgress <= 0.3D){
                         firestSpeed = 2 * (int) (d2 * (0.5D - fProgress) + d1 * fProgress);
-                    }
-                    else
-                        firestSpeed = firestSpeed;
-                }
-            } else {
-                firestSpeed = 0;
-            }
+//                    }
+//                    else
+//                        firestSpeed = firestSpeed;
+				}
+			} else {
+				firestSpeed = 0;
+			}
 //            DebugUtil.d("firestSpeed:"+firestSpeed);
             return firestSpeed;
         }
@@ -180,7 +191,7 @@ public class TestParametersTransfer extends TestParameters {
             }
             return i;
         }
-
+        
         protected int getSpeed(float progress, int rBytes) {
             int speed = 0;
             float fProgress = Math.min(1.0F, progress);
@@ -209,14 +220,14 @@ public class TestParametersTransfer extends TestParameters {
             }
             int superSpeed = getSuperSpeed(); // 最大速度
             int firstSpeed = getFirstSpeed(fProgress, rBytes); // 最小速度
-            
+//            speed = firstSpeed;
             if ((superSpeed <= 0) || (superSpeed <= firstSpeed))
                 speed = firstSpeed;
             else
                 speed = (int) (fProgress * superSpeed + (1.0D - fProgress) * firstSpeed);
-//            DebugUtil.d("superSpeed:"+superSpeed);
-//            DebugUtil.d("firstSpeed:"+firstSpeed);
-//            DebugUtil.d("speed:"+speed);
+            DebugUtil.d("superSpeed:"+superSpeed);
+            DebugUtil.d("firstSpeed:"+firstSpeed);
+            DebugUtil.d("speed:"+speed);
             return speed;
         }
     }

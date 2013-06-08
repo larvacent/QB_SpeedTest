@@ -38,7 +38,7 @@ public abstract class TestTask {
         Task[] arrayOfTask = getTasks();
         int j = arrayOfTask.length;
         for (int i = 0; i < j; i++)
-            arrayOfTask[i].cancel(paramBoolean);
+            arrayOfTask[i].onCancelled();
     }
 
     protected abstract Task[] createTasks();

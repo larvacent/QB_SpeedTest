@@ -28,6 +28,7 @@ public class MoreActivity extends BaseActivity {
 	private Context mContext = this;
 	private RelativeLayout networksetLayout, historyLayout, accountLayout,
 			versionLayout, feedbackLayout, aboutLayout;
+	public final static String formMore = "formMore";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,11 @@ public class MoreActivity extends BaseActivity {
             startActivity(new Intent(MoreActivity.this, NetWorkActivity.class));
             break;
         case R.id.history_layout:
-        	startActivity(new Intent(MoreActivity.this, SpeedHistoryActivity.class));
+        	Intent intentToHistory = new Intent(MoreActivity.this, SpeedHistoryActivity.class);
+        	Bundle bundleToHistory = new Bundle();
+        	bundleToHistory.putString("formMore", formMore);
+        	intentToHistory.putExtras(bundleToHistory);
+        	startActivity(intentToHistory);
             break;
         case R.id.version_layout:
             // 如果想程序启动时自动检查是否需要更新， 把下面两行代码加在Activity 的onCreate()函数里。
@@ -167,8 +172,6 @@ public class MoreActivity extends BaseActivity {
                         Toast.LENGTH_SHORT).show();
                 break;
             }
-
         }
     };
-
 }

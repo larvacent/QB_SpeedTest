@@ -12,6 +12,11 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <style name="textview_normal_ping" parent="textview">
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 
     <style name="textview_about" parent="textview">
         <item name="android:textColor">@color/text_wihte</item>
