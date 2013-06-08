@@ -52,6 +52,11 @@ public class MainActivity extends TabActivity {
 			}
 		}
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AbstractWeibo.initSDK(this);// 初始化分享SDK
+	}
 
 	public void changeTab(int id) {
 		if (Base.mTabHost.getCurrentTab() != id) {

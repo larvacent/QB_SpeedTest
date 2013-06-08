@@ -169,7 +169,7 @@ public class ShareAllGird extends Activity implements OnClickListener {
 		initPageView();
 		initAnim();
 		setContentView(flPage);
-
+		AbstractWeibo.initSDK(this);// 初始化分享SDK
 		// 设置宫格列表数据
 		grid.setData(getIntent());
 		btnCancel.setOnClickListener(this);
@@ -207,9 +207,9 @@ public class ShareAllGird extends Activity implements OnClickListener {
 		// 取消按钮
 		btnCancel = new Button(this);
 		btnCancel.setTextColor(0xffffffff);
-		btnCancel.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		btnCancel.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 		btnCancel.setText(R.getString(this, "cancel"));
-		btnCancel.setPadding(0, 0, 0, R.dipToPx(this, 5));
+		btnCancel.setPadding(0, 0, 0, R.dipToPx(this, 7));
 		btnCancel.setBackgroundDrawable(R.getDrawable(this, "btn_cancel_back"));
 		LinearLayout.LayoutParams lpBtn = new LinearLayout.LayoutParams(
 				LayoutParams.FILL_PARENT, R.dipToPx(this, 45));
@@ -264,7 +264,5 @@ public class ShareAllGird extends Activity implements OnClickListener {
 		});
 		flPage.clearAnimation();
 		flPage.startAnimation(animHide);
-
 	}
-
 }

@@ -85,7 +85,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     private LocationManagerProxy mAMapLocManager = null;
     private SpeedValue speedValue;
     private boolean onPrepare;
-    private boolean onTesting;
+    public static boolean onTesting;
     private boolean inActivity;
     private boolean ifSetPing = false;
     private int viewSwitch = 0;
@@ -254,8 +254,8 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
                 prepareNextTest();
         }
 		if (Base.startTest && !onTesting) {
-			onTesting = true;
 			Base.startTest = false;
+			onTesting = true;
 			mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
 			MobclickAgent.onEvent(context, "cs");
 		}
@@ -397,7 +397,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
                 if (speedTestBtn.getTag().equals("0")) { // 开始测速
                     if (!onTesting) {
                         onTesting = true;
-                        DebugUtil.d("asfasfasfs");
                         mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
                         MobclickAgent.onEvent(context, "cs");
                     }

@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import cn.sharesdk.framework.AbstractWeibo;
+
 import com.quickbird.controls.Constants;
 import com.quickbird.enums.SpeedTestError;
 import com.quickbird.enums.WiteSiteTestStatus;
@@ -116,6 +118,8 @@ public class WebSiteTestActivity extends BaseActivity {
 			"http://v.qq.com/", "http://video.sina.cn/" };
 	
 	private final int WEBSITE_TEST = 0;
+	
+	private boolean[] shareControl = new boolean[4];
 	
 	private ArrayList<WebSite> testWebSite;
 	private int testId =  0;   // 正在测速中的页卡编号
@@ -206,6 +210,12 @@ public class WebSiteTestActivity extends BaseActivity {
 		InitCursorView();
 		InitViewPager();
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AbstractWeibo.initSDK(this);// 初始化分享SDK
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -222,6 +232,7 @@ public class WebSiteTestActivity extends BaseActivity {
 		}
 	}
 	
+	
 	private  void getCaptureBitmap() {
 		LinearLayout captureLayout = (LinearLayout) findViewById(R.id.capture_layout);
         ScreenShotUtil.captureView(captureLayout);
@@ -233,6 +244,7 @@ public class WebSiteTestActivity extends BaseActivity {
 		testWebSite.clear();
 		
 		testIndex = currIndex;
+		shareControl[currIndex] = true;
 		for (int i = 0; i < webSiteLists.get(testIndex).size(); i++) {
 			if (webSiteLists.get(testIndex).get(i).isChecked())
 				testWebSite.add(webSiteLists.get(testIndex).get(i));
@@ -364,6 +376,12 @@ public class WebSiteTestActivity extends BaseActivity {
 		buttonShare = (ImageButton) findViewById(R.id.button_share_website);
 		buttonShare.setOnClickListener(this);
 		buttonShareLayout.setOnClickListener(this);
+		
+		shareControl[0] = false;
+		shareControl[1] = false;
+		shareControl[2] = false;
+		shareControl[3] = false;
+		
 		buttonShare.setVisibility(View.GONE);
 		buttonShareLayout.setClickable(false);
 
@@ -447,8 +465,14 @@ public class WebSiteTestActivity extends BaseActivity {
 			animation.setDuration(100);
 			cursor.startAnimation(animation);
 			
-			buttonShare.setVisibility(View.GONE);
-			buttonShareLayout.setClickable(false);
+			if (shareControl[currIndex]) {
+				buttonShare.setVisibility(View.VISIBLE);
+				buttonShareLayout.setClickable(true);
+			} else {
+				buttonShare.setVisibility(View.GONE);
+				buttonShareLayout.setClickable(false);
+
+			}
 
 			setGridView(currIndex);
 		}
@@ -501,7 +525,7 @@ public class WebSiteTestActivity extends BaseActivity {
 			// url仅在微信（包括好友和朋友圈）中使用，否则可以不提供
 //			i.putExtra("url", "www.quickbird.com");
 			// thumbPath是缩略图的本地路径，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
-//			i.putExtra("thumbPath", Constants.PIC_PRE_PATH_NAME);
+			i.putExtra("thumbPath", Constants.PIC_PRE_PATH_NAME);
 			// appPath是待分享应用程序的本地路劲，仅在微信（包括好友和朋友圈）中使用，否则可以不提供
 			i.putExtra("appPath", Constants.PIC_PRE_PATH_NAME);
 			// comment是我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供
@@ -509,7 +533,7 @@ public class WebSiteTestActivity extends BaseActivity {
 			// site是分享此内容的网站名称，仅在QQ空间使用，否则可以不提供
 			i.putExtra("site", context.getString(R.string.app_name));
 			// siteUrl是分享此内容的网站地址，仅在QQ空间使用，否则可以不提供
-			i.putExtra("siteUrl", "www.quickbird.com");
+			i.putExtra("siteUrl", "www.speedtest.quickbird.com");
 			
 			// 是否直接分享
 			i.putExtra("silent", silent);

@@ -243,7 +243,7 @@ public class WeiboGridView extends LinearLayout implements Runnable,
 				sp.title = title;
 				sp.text = text;
 				sp.imagePath = imagePath;
-				sp.shareType = AbstractWeibo.SHARE_TEXT;
+				sp.shareType = AbstractWeibo.SHARE_IMAGE;
 				if (imagePath != null && (new File(imagePath)).exists()
 						&& url != null && url.length() > 0) {
 					sp.shareType = AbstractWeibo.SHARE_WEBPAGE;
@@ -262,7 +262,7 @@ public class WeiboGridView extends LinearLayout implements Runnable,
 				sp.title = title;
 				sp.text = text;
 				sp.imagePath = imagePath;
-				sp.shareType = AbstractWeibo.SHARE_TEXT;
+				sp.shareType = AbstractWeibo.SHARE_IMAGE;
 				if (imagePath != null && (new File(imagePath)).exists()
 						&& url != null && url.length() > 0) {
 					sp.shareType = AbstractWeibo.SHARE_WEBPAGE;

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.quickbird.speedtest.R;
 import com.quickbird.speedtestengine.utils.APNUtil;
+import com.quickbird.speedtestengine.utils.DebugUtil;
 import com.quickbird.speedtestengine.utils.NetWorkUtil;
 import com.quickbird.speedtestengine.utils.StringUtil;
 
@@ -29,19 +30,23 @@ public class NetWorkActivity extends BaseActivity {
     private String wifiInfoStr, dataInfoStr;
     private ConnectivityManager conMgr;
     private WifiManager wifiManager;
-    private BroadcastReceiver mNetworkStateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-        	if (setWifiState)
-    			wifiTxt.setText(getWifiInfo(context));
-    		else 
-    			wifiTxt.setText("");
-            if (setMobileState)
-            	dataTxt.setText(APNUtil.getNetworkTypeENNameByIMSI(APNUtil.getImsi(context)));
-    		else 
-    			dataTxt.setText("");
-        }
-    };
+	private BroadcastReceiver mNetworkStateReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			try {
+				if (setWifiState)
+					wifiTxt.setText(getWifiInfo(context));
+				else
+					wifiTxt.setText("");
+				if (setMobileState)
+					dataTxt.setText(APNUtil.getNetworkTypeENNameByIMSI(APNUtil.getImsi(context)));
+				else
+					dataTxt.setText("");
+			} catch (Exception e) {
+				DebugUtil.d("BroadcastReceiver:" + e.getMessage());
+			}
+		}
+	};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

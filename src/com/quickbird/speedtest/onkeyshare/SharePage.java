@@ -72,6 +72,8 @@ public class SharePage extends Activity implements Callback, Runnable,
 		notifTitle = notifTitle == null ? "" : notifTitle;
 		platform = getIntent().getStringExtra("platform");
 		
+		AbstractWeibo.initSDK(this);// 初始化分享SDK
+		
 		initPageView();
 		setContentView(llPage);
 		onTextChanged(etContent.getText(), 0, etContent.length(), 0);
@@ -349,7 +351,10 @@ public class SharePage extends Activity implements Callback, Runnable,
 			AbstractWeibo weibo = null;
 			for (int i = 0; i < views.length; i++) {
 				if (views[i].getVisibility() == View.INVISIBLE) {
-					weibo = AbstractWeibo.getWeibo(SharePage.this, names[i]);
+					try {
+						weibo = AbstractWeibo.getWeibo(SharePage.this, names[i]);
+					} catch (Exception e) {
+					}
 					break;
 				}
 				weibo = null;
@@ -365,13 +370,17 @@ public class SharePage extends Activity implements Callback, Runnable,
 		
 		// 执行分享
 		if (v.equals(llTitle.getBtnRight())) {
-			for (int i = 0; i < views.length; i++) {
-				if (views[i].getVisibility() != View.VISIBLE) {
-					AbstractWeibo weibo = AbstractWeibo.getWeibo(
-							SharePage.this, names[i]);
-					weibo.setWeiboActionListener(SharePage.this);
-					share(weibo);
+			try {
+				for (int i = 0; i < views.length; i++) {
+					if (views[i].getVisibility() != View.VISIBLE) {
+						AbstractWeibo weibo = AbstractWeibo.getWeibo(
+								SharePage.this, names[i]);
+						weibo.setWeiboActionListener(SharePage.this);
+						share(weibo);
+					}
 				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 			showNotification(5000, R.getString(this, "sharing"));
 			finish();
@@ -422,7 +431,10 @@ public class SharePage extends Activity implements Callback, Runnable,
 		}
 		
 		if (shareParams != null) {
-			weibo.share(shareParams);
+			try {
+				weibo.share(shareParams);
+			} catch (Exception e) {
+			}
 		}
 	}
 	

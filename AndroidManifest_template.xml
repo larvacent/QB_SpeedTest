@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".gui.activity.TestSpeedActivity"
+            android:name=".gui.activity.SpeedTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -54,18 +54,6 @@
         <activity
             android:name=".gui.activity.MoreActivity"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".gui.activity.ShareActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
-        <activity
-            android:name=".gui.activity.TecentShareActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
             android:name=".gui.activity.ShowLocationActivity"
@@ -79,10 +67,6 @@
         </activity>
         <activity
             android:name=".gui.activity.UploadActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".gui.activity.SpeedTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -102,15 +86,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".gui.activity.LoadingActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".gui.activity.WebSiteTestActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".gui.activity.GridActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

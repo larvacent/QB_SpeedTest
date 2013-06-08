@@ -72,8 +72,10 @@ public class SpeedHistoryActivity extends BaseActivity {
                 
                 @Override
                 public void onClick(View v) {
+					if (!SpeedTestActivity.onTesting) {
 						Base.startTest = true;
-						finish();
+					}
+					finish();
                 }
             });
             return;

@@ -15,7 +15,6 @@ public class BaseActivity extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        AbstractWeibo.initSDK(this);// 初始化分享SDK
     }
 
     @Override
@@ -25,6 +24,7 @@ public class BaseActivity extends Activity implements OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
+        AbstractWeibo.initSDK(this);// 初始化分享SDK
         MobclickAgent.onResume(this);
     }
 
