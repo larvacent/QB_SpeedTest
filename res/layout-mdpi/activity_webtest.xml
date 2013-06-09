@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/button_share_layout"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:gravity="right" >
+
+            <ImageButton
+                android:id="@+id/button_share_website"
+                style="@style/imagebutton_normal"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/button_share_website" />
+        </LinearLayout>
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="35dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/bar_upside" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/capture_layout"
+        style="@style/linearlayout_normal"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/classify"
+            style="@style/linearlayout_normal"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pic_split_bar_upside" >
+
+            <ImageView
+                android:id="@+id/cursor"
+                android:layout_width="81dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:contentDescription="@string/app_name"
+                android:scaleType="matrix"
+                android:src="@drawable/pic_tab_selected_effect" />
+
+            <LinearLayout
+                style="@style/linearlayout_normal"
+                android:layout_gravity="bottom"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp" >
+
+                <LinearLayout
+                    android:id="@+id/website_tab1"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/image_view1"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_common_normal" />
+
+                    <TextView
+                        android:id="@+id/text_view1"
+                        style="@style/textview"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/website_custom_str"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/website_tab2"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/image_view2"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_social_normal" />
+
+                    <TextView
+                        android:id="@+id/text_view2"
+                        style="@style/textview"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/website_social_str"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/website_tab3"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/image_view3"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_shopping_normal" />
+
+                    <TextView
+                        android:id="@+id/text_view3"
+                        style="@style/textview"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/website_shopping_str"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/website_tab4"
+                    style="@style/linearlayout_normal"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/image_view4"
+                        style="@style/imageview_normal"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/btn_video_normal" />
+
+                    <TextView
+                        android:id="@+id/text_view4"
+                        style="@style/textview"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/website_video_str"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:layout_width="fill_parent"
+            android:layout_height="16dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_split_bar_downside" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vPager"
+            android:layout_width="fill_parent"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linearlayout_normal"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/website_test"
+            style="@style/imagebutton_normal"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_speedtest_bg"
+            android:text="@string/history_start_test"
+            android:textColor="@drawable/button_font_style"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+</LinearLayout>

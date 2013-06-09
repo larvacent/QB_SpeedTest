@@ -49,8 +49,8 @@
 
     <TencentWeibo
         SortId="2"
-        AppKey="801332298"
-        AppSecret="add1ec2b5f36470c2096ac8b14043bcd"
+        AppKey="801369405"
+        AppSecret="a5cf04cf579529611e60873ff524bc56"
         RedirectUri="http://www.speedtest.quickbird.com"
         Id="2" />
 
@@ -64,12 +64,12 @@
     <Wechat
         SortId="4"
         Id="6"
-        AppId="wx4df2432b3a90e8d1"/>
+        AppId="wxf32ebc8cc12ecefb"/>
     
     <WechatMoments
         SortId="5"
         Id="7"
-        AppId="wx4df2432b3a90e8d1"/>
+        AppId="wxf32ebc8cc12ecefb"/>
     
     <Facebook
         SortId="6"

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="text_green">#009933</color>
+    <color name="text_black">#333333</color>
+    <color name="text_wihte">#FFFFFF</color>
+    <color name="text_gray">#666666</color>
+    <color name="text_gray_light">#999999</color>
+    <color name="text_gray_level">#777777</color>
+    <color name="text_normal">#8d8d8d</color>
+    <color name="text_red">#f00</color>
+    <color name="text_blue">#49bdf7</color>
+    <color name="text_yellow">#ff7000</color>
+    <color name="transparent_background">#00000000</color>
+    <color name="solid_red">#f00</color>
+    <color name="solid_blue">#0000ff</color>
+    <color name="solid_green">#f0f0</color>
+    <color name="solid_yellow">#ffffff00</color>
+    <color name="solid_orange">#FF7F00</color>
+    <color name="solid_light_gray">#b6c0c3</color>
+    <color name="solid_dark_gray">#9eadb2</color>
+    <color name="solid_white">#FFFFFF</color>
+    <color name="light_blue">#0099cd</color>
+    <color name="light_black">#F0F0F0</color>
+    <color name="light_white">#FF909090</color>
+    <color name="text_tab_focus">#891111</color>
+    <color name="text_testbutton">#d0d0d0</color>
+    <color name="loading_gray">#adadad</color>
+    <color name="loading_red">#d42323</color>
+
+    <drawable name="index_fuc_def">#33b5e5</drawable>
+    <drawable name="alert_button_normal">#E6E6E6</drawable>
+    <drawable name="alert_button_pressed">#D5D5D5</drawable>
+    <drawable name="alert_button_divider">#B6B6B6</drawable>
+    <drawable name="actionbar_click">#66ccff</drawable>
+    <drawable name="tab_bottom">#676767</drawable>
+    <drawable name="transparent_background">#00000000</drawable>
+
+</resources>
