@@ -64,12 +64,12 @@
     <Wechat
         SortId="4"
         Id="6"
-        AppId="wxf32ebc8cc12ecefb"/>
+        AppId="wx304b62aeceffadd5"/>
     
     <WechatMoments
         SortId="5"
         Id="7"
-        AppId="wxf32ebc8cc12ecefb"/>
+        AppId="wx304b62aeceffadd5"/>
     
     <Facebook
         SortId="6"
