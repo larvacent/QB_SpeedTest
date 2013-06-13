@@ -87,10 +87,10 @@ public class WebSiteTestActivity extends BaseActivity {
 	private String[] webSites4 = { "优酷网", "土豆网", "搜狐视频", "腾讯视频", "新浪视频", };
 	
 	private String[] shareStr = {
-			"【浏览网页快不快，测试一下就出来】您手机经常访问的网站快不快？用网快鸟网速测试一目了然！",
-			"【浏览网页快不快，测试一下就出来】刷微博，上人人，哪个社交网站更给力？用快鸟网速测试一目了然！",
-			"【浏览网页快不快，测试一下就出来】上网购物，不快不行，瞧瞧我的购物网站速度怎么样，可以不？",
-			"【浏览网页快不快，测试一下就出来】看视频，上公开课，我的网速怎么样？用快鸟网速测试一目了然！"
+			"【浏览网页快不快，测试一下就出来】您手机经常访问的网站快不快？用网快鸟网速测试一目了然！ 详情请看http://www.speedtest.quickbird.com/landing/",
+			"【浏览网页快不快，测试一下就出来】刷微博，上人人，哪个社交网站更给力？用快鸟网速测试一目了然 详情请看http://www.speedtest.quickbird.com/landing/！",
+			"【浏览网页快不快，测试一下就出来】上网购物，不快不行，瞧瞧我的购物网站速度怎么样，可以不？ 详情请看http://www.speedtest.quickbird.com/landing/",
+			"【浏览网页快不快，测试一下就出来】看视频，上公开课，我的网速怎么样？用快鸟网速测试一目了然 详情请看http://www.speedtest.quickbird.com/landing/！"
 	};
 
 	private String[] websitesAddress1 = { "http://www.baidu.com",

@@ -204,9 +204,9 @@ public class SpeedResultActivity extends BaseActivity {
 
     private String prepareWeiboContent() {
         if (networkStatus == Constants.NETWORK_STATUS_MOBILE)
-            return "亲，你有你的概念，我有我的标准；你只看到标榜的“3G”，但是否真的体会到上网的快感？请用网速测试！猛击下载http://dl.quickbird.com/android/QB_Speed.apk";
+            return "亲，你有你的概念，我有我的标准；你只看到标榜的“3G”，但是否真的体会到上网的快感？请用网速测试！详情请看http://www.speedtest.quickbird.com/landing/";
         if (networkStatus == Constants.NETWORK_STATUS_WIFI)
-            return "您的网速是2M、3M、还是10M？快用网速测试，一目了然；猛击下载http://dl.quickbird.com/android/QB_Speed.apk";
+            return "您的网速是2M、3M、还是10M？快用网速测试，一目了然；详情请看http://www.speedtest.quickbird.com/landing/";
         return "";
     }
 
