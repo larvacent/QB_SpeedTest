@@ -35,28 +35,6 @@ public class TestParametersTransfer extends TestParameters {
         this.mSpeed = this.mSpeedTestAlgorithm.getSpeed(getProgress(), getBytes());
     }
     
-    public float calculateAngle(float speed) {
-        float angle = 0;
-        if (speed <= 20) {
-            angle = speed * 30 / 20;
-        } else if (speed <= 50) {
-            angle = 30 + (speed - 20);
-        } else if (speed <= 100) {
-            angle = 60 + (speed - 50) * 30 / 50;
-        } else if (speed <= 200) {
-            angle = 90 + (speed - 100) * 30 / 100;
-        } else if (speed <= 500) {
-            angle = 120 + (speed - 200) * 30 / 300;
-        } else if (speed <= 1024) {
-            angle = 150 + (speed - 500) * 30 / 524;
-        } else if (speed <= 3072) {
-            angle = 180 + (speed - 1024) * 30 / 2048;
-        } else {
-            angle = 210 + (speed - 3072) * 30 / 10240;
-        }
-        return angle;
-    }
-
     public void clearBytes() {
         for (int i = 0; i < this.mThreadCount; i++)
             this.mThreadBytes[i] = 0;
@@ -116,14 +94,14 @@ public class TestParametersTransfer extends TestParameters {
 //            if (fProgress != 0.0F) {
 //                TestParametersTransfer.SpeedTestReading localSpeedTestReading1 = this.mSpeeds[0];
 //                long l = SystemClock.uptimeMillis();
-//                double d2 = 1024.0D * paramInt
+//                double d2 = 1000.0D * paramInt
 //                        / (1.0D + (l - localSpeedTestReading1.getTime()));
 //                int i = 0;
 //                if (this.mCurrentIndex < 4) {
 //                    i = (int) d2;
 //                } else {
 //                    TestParametersTransfer.SpeedTestReading localSpeedTestReading2 = this.mSpeeds[2];
-//                    double d1 = 1024.0D
+//                    double d1 = 1000.0D
 //                            * (paramInt - Integer.valueOf(
 //                                    localSpeedTestReading2.getRbytes())
 //                                    .intValue())
@@ -144,13 +122,13 @@ public class TestParametersTransfer extends TestParameters {
             if (fProgress != 0.0F) {
                 TestParametersTransfer.SpeedTestReading localSpeedTestReading1 = this.mSpeeds[0];
                 long l = SystemClock.uptimeMillis();
-                double d2 = 1024.0D * rByte/ ((l - localSpeedTestReading1.getTime()));
+                double d2 = 1000.0D * rByte/ ((l - localSpeedTestReading1.getTime()));
                 if (this.mCurrentIndex < 3) {
                     firestSpeed = (int) d2;
 //                    DebugUtil.d("d2:"+d2);
                 } else {
                     TestParametersTransfer.SpeedTestReading localSpeedTestReading2 = this.mSpeeds[2];
-                    double d1 = 1024.0D* (rByte - Integer.valueOf(localSpeedTestReading2.getRbytes()).intValue()) / ((l - localSpeedTestReading2.getTime()));
+                    double d1 = 1000.0D* (rByte - Integer.valueOf(localSpeedTestReading2.getRbytes()).intValue()) / ((l - localSpeedTestReading2.getTime()));
                     DebugUtil.d("d1:"+d1);
 //                    if (fProgress <= 0.3D){
                         firestSpeed = 2 * (int) (d2 * (0.5D - fProgress) + d1 * fProgress);
@@ -183,7 +161,7 @@ public class TestParametersTransfer extends TestParameters {
                             continue;
                         }
                         double d = Long.valueOf(localSpeedTestReading1.getTime()).longValue() - Long.valueOf(localSpeedTestReading2.getTime()) .longValue();
-                        int n = (int) Math.round(1024.0D *  (Integer.valueOf( localSpeedTestReading1.getRbytes()).intValue() - Integer.valueOf(localSpeedTestReading2.getRbytes()) .intValue()) / d);
+                        int n = (int) Math.round(1000.0D *  (Integer.valueOf( localSpeedTestReading1.getRbytes()).intValue() - Integer.valueOf(localSpeedTestReading2.getRbytes()) .intValue()) / d);
                         if (n <= i)
                             continue;
                         i = n;
@@ -211,10 +189,10 @@ public class TestParametersTransfer extends TestParameters {
                     if (l2 == 0L)
                         speed = 0;
                     else
-                        speed = Math.round(1024 * (rBytes - Integer.valueOf(localSpeedTestReading1.getRbytes()).intValue()) / l2);
+                        speed = Math.round(1000 * (rBytes - Integer.valueOf(localSpeedTestReading1.getRbytes()).intValue()) / l2);
                     this.mSamples[this.mCurrentIndex] = speed;
                     DebugUtil.d("mCurrentIndex:"+mCurrentIndex);
-                    DebugUtil.d("speed:"+speed/1024);
+                    DebugUtil.d("speed:"+speed/1000);
                     Arrays.sort(this.mSamples);
                 }
             }

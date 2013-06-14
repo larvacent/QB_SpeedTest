@@ -11,27 +11,26 @@ import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends Activity implements OnClickListener {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+	}
 
-    @Override
-    public void onClick(View v) {
-    }
+	@Override
+	public void onClick(View v) {
+	}
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        AbstractWeibo.initSDK(this);// 初始化分享SDK
-        MobclickAgent.onResume(this);
-    }
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AbstractWeibo.initSDK(this);// 初始化分享SDK
+		MobclickAgent.onResume(this);
+	}
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-    }
-
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 }

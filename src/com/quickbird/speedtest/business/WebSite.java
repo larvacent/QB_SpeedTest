@@ -12,9 +12,18 @@ public class WebSite {
 	private int ping = -1;
 	private int degree = -1;
 	private int classify;
+	private int speed = -1;
 	private WiteSiteTestStatus status = WiteSiteTestStatus.Error;
 
 	public WebSite() {
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public int getSpeed() {
+		return speed;
 	}
 
 	public void resetDegree() {

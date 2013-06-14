@@ -221,6 +221,21 @@ public class StringUtil {
         return df.format(data / (1024 * 1024 * 1024.0)) + "GB/s";
     }
 
+	public static String formatSpeed(int speed, String format) {
+		java.text.DecimalFormat df = new java.text.DecimalFormat(format);
+		if (speed < 0)
+			return "0B/s";
+
+		if (speed < 1000) {
+			return speed + "B/s";
+		}
+
+		if (speed < 1000f * 1024.0)
+			return df.format(speed / 1024) + "KB/s";
+
+		return df.format(speed / (1024 * 1024.0)) + "MB/s";
+	}
+
     /**
      * 格式化流量 不带单位
      * 

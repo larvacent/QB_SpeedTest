@@ -13,6 +13,7 @@ import com.quickbird.enums.SpeedTestType;
 import com.quickbird.speedtestengine.TestParameters;
 import com.quickbird.speedtestengine.TestParametersLatency;
 import com.quickbird.speedtestengine.TestTaskCallbacks;
+import com.quickbird.speedtestengine.TestWebSite;
 import com.quickbird.speedtestengine.utils.DebugUtil;
 
 public class LatencyTestTask extends TestTask {
@@ -25,8 +26,9 @@ public class LatencyTestTask extends TestTask {
 	public LatencyTestTask(TestTaskCallbacks paramTestTaskCallbacks) {
 		super(paramTestTaskCallbacks);
 	}
-
-	private static int processLatency(URL paramURL, int mConnectTimeout, int mReadTimeout) throws IOException, SocketTimeoutException {
+	
+	private static TestWebSite processLatency(URL paramURL, int mConnectTimeout, int mReadTimeout) throws IOException, SocketTimeoutException {
+		TestWebSite webSiteTest = new TestWebSite();
 		URLConnection localURLConnection = paramURL.openConnection();
 		localURLConnection.setUseCaches(false);
 		localURLConnection.setDoInput(true);
@@ -34,14 +36,28 @@ public class LatencyTestTask extends TestTask {
 		localURLConnection.setConnectTimeout(mConnectTimeout);
 		localURLConnection.setReadTimeout(mReadTimeout);
 		long l = SystemClock.uptimeMillis();
-		BufferedInputStream localBufferedInputStream = new BufferedInputStream(localURLConnection.getInputStream(), 1024);
-		int i = 0;
-		while (i < 32) {
-			i += localBufferedInputStream.read();
+		BufferedInputStream localBufferedInputStream = new BufferedInputStream(localURLConnection.getInputStream(), 262144);
+		int totalByte = 0;
+		int len = 0;
+		while (totalByte < 262144) {
+			len = localBufferedInputStream.read();
+//			DebugUtil.d("len:" + len);
+			if (len == -1)
+				break;
+			totalByte += len;
+			if (totalByte >= 32 && webSiteTest.getPing() == -1) {
+				webSiteTest.setPing((int) (SystemClock.uptimeMillis() - l));
+				DebugUtil.d("Ping:" + webSiteTest.getPing());
+			}
 		}
+		long tempTime = (SystemClock.uptimeMillis() - l);
+		if (tempTime <= 0)
+			tempTime = 1;
+		webSiteTest.setSpeed((int) (1000 * totalByte / tempTime)); // 单位为B/s
 		localBufferedInputStream.close();
-		return (int) (SystemClock.uptimeMillis() - l);
+		return webSiteTest;
 	}
+	
 
 	@Override
 	protected TestTask.Task[] createTasks() {
@@ -82,8 +98,8 @@ public class LatencyTestTask extends TestTask {
 	}
 
 	private class LatencyTask extends TestTask.Task {
-		private int mConnectTimeout = 100000;
-		private int mReadTimeout = 10000;
+		private int mConnectTimeout = 5000;
+		private int mReadTimeout = 5000;
 
 		public LatencyTask(int paramTestParametersLatency, TestParametersLatency arg3) {
 			super(paramTestParametersLatency, arg3);
@@ -92,51 +108,31 @@ public class LatencyTestTask extends TestTask {
 		@Override
 		protected TestParameters doInBackground(URL[] paramArrayOfURL) {
 			TestParametersLatency localTestParametersLatency = (TestParametersLatency) getResult();
-			int i = 0;
-			int j = 0;
 			setCompleted(false);
-			int n = 1;
-			int localPing;
 			setStartTime(SystemClock.elapsedRealtime());
-			for (int count = 0; count <= mSampleCount + 1; count++) {
-				try {
-					if (count >= LatencyTestTask.this.mSampleCount + 1) {
-						setCompleted(true);
-						DebugUtil.v(LOGTAG, "ping done");
-						if ((n != 0) && (j > 0)) {
-							LatencyTestTask.this.success();
-							localTestParametersLatency.setSuccess(true);
-							DebugUtil.v(LOGTAG, "ping result is :" + i / j);
-							localTestParametersLatency.setPing(i / j);
-							localTestParametersLatency.setProgress(1.0F);
-							return localTestParametersLatency;
-						}
-					} else {
-						localPing = LatencyTestTask.processLatency(paramArrayOfURL[0], this.mConnectTimeout, this.mReadTimeout);
-						if (i == 0) {
-							i = 1;
-						} else {
-							i += localPing;
-							j++;
-							DebugUtil.i(LOGTAG, "Ping: " + localPing);
-							localTestParametersLatency.setProgress(LatencyTestTask.this.getProgress(count + 1));
-							localTestParametersLatency.setPing(localPing);
-							publishProgress(new Void[0]);
-						}
-					}
-				} catch (SocketTimeoutException e) {
-					n = 0;
-					DebugUtil.e("LatencyTestTask" + e.getMessage());
-					LatencyTestTask.this.setError(SpeedTestError.DEVICE_NOT_ONLINE);
-					LatencyTestTask.this.failed(SpeedTestError.DEVICE_NOT_ONLINE);
-					setCompleted(true);
-				} catch (Exception localException1) {
-					n = 0;
-					DebugUtil.e("LatencyTestTask"+ localException1.getMessage());
-					LatencyTestTask.this.setError(SpeedTestError.TEST_RUN);
-					LatencyTestTask.this.failed(SpeedTestError.TEST_RUN);
-					setCompleted(true);
+			try {
+				TestWebSite webSiteTest = new TestWebSite();
+				webSiteTest = LatencyTestTask.processLatency(paramArrayOfURL[0],this.mConnectTimeout, this.mReadTimeout);
+				while (true) {
+					if (SystemClock.elapsedRealtime() - getStartTime() > 5000)
+						break;
 				}
+				setCompleted(true);
+				LatencyTestTask.this.success();
+				localTestParametersLatency.setSuccess(true);
+				localTestParametersLatency.setPing(webSiteTest.getPing());
+				localTestParametersLatency.setSpeed(webSiteTest.getSpeed());
+				localTestParametersLatency.setProgress(1.0F);
+			} catch (SocketTimeoutException e) {
+				DebugUtil.e("LatencyTestTask" + e.getMessage());
+				LatencyTestTask.this.setError(SpeedTestError.DEVICE_NOT_ONLINE);
+				LatencyTestTask.this.failed(SpeedTestError.DEVICE_NOT_ONLINE);
+				setCompleted(true);
+			} catch (Exception localException1) {
+				DebugUtil.e("LatencyTestTask" + localException1.getMessage());
+				LatencyTestTask.this.setError(SpeedTestError.TEST_RUN);
+				LatencyTestTask.this.failed(SpeedTestError.TEST_RUN);
+				setCompleted(true);
 			}
 			return localTestParametersLatency;
 		}
@@ -150,4 +146,5 @@ public class LatencyTestTask extends TestTask {
 		}
 
 	}
+	
 }

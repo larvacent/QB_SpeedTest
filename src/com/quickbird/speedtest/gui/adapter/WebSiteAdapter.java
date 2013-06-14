@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.quickbird.enums.WiteSiteTestStatus;
 import com.quickbird.speedtest.R;
 import com.quickbird.speedtest.business.WebSite;
+import com.quickbird.speedtestengine.utils.StringUtil;
 
 /**
  * @author liyang
@@ -46,6 +47,7 @@ public class WebSiteAdapter extends BaseAdapter {
 		private ImageView check;
 		private ImageView mask;
 		private ImageView load;
+		private TextView speed;
 	}
 
 	public WebSiteAdapter(Context c, ArrayList<WebSite> webSiteList) {
@@ -78,6 +80,7 @@ public class WebSiteAdapter extends BaseAdapter {
 			holder.check = (ImageView) convertView.findViewById(R.id.website_item_check);
 			holder.mask = (ImageView) convertView.findViewById(R.id.website_item_mask);
 			holder.load = (ImageView) convertView.findViewById(R.id.website_item_load);
+			holder.speed = (TextView) convertView.findViewById(R.id.website_item_speed);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -93,6 +96,7 @@ public class WebSiteAdapter extends BaseAdapter {
 			holder.speedTag.setVisibility(View.INVISIBLE);
 			holder.mask.setVisibility(View.GONE);
 			holder.load.setVisibility(View.GONE);
+			holder.speed.setVisibility(View.INVISIBLE);
 			return convertView;
 		}
 		if(webSite.getStatus() == WiteSiteTestStatus.Test)
@@ -102,6 +106,7 @@ public class WebSiteAdapter extends BaseAdapter {
 			holder.mask.setVisibility(View.VISIBLE);
 			holder.load.setVisibility(View.VISIBLE);
 			holder.load.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.data_loading_rotate));
+			holder.speed.setVisibility(View.INVISIBLE);
 			return convertView; 
 		}
 		if (webSite.getStatus() == WiteSiteTestStatus.Finish) {
@@ -138,8 +143,11 @@ public class WebSiteAdapter extends BaseAdapter {
 			default:
 				break;
 			}
+			holder.speed.setVisibility(View.VISIBLE);
+			holder.speed.setText(StringUtil.formatSpeed(webSite.getSpeed(), "#0"));
 			return convertView;
 		}
+		
 		if(webSite.getStatus() == WiteSiteTestStatus.Error)
 		{
 			holder.speedTag.setVisibility(View.VISIBLE);
@@ -153,6 +161,7 @@ public class WebSiteAdapter extends BaseAdapter {
 			if (!webSite.isChecked())
 				holder.check.setImageResource(R.drawable.ic_deselected);
 			holder.speedTag.setImageResource(R.drawable.ic_mark_fail);
+			holder.speed.setVisibility(View.INVISIBLE);
 			return convertView;
 		}
 		return convertView;

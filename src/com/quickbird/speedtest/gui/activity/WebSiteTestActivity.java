@@ -153,9 +153,14 @@ public class WebSiteTestActivity extends BaseActivity {
 					@Override
 					public void onTestComplete(TestParameters paramTestParameters) {
 						TestParametersLatency localTestParametersLatency = (TestParametersLatency) paramTestParameters;
-						testWebSite.get(testId).setPing(localTestParametersLatency.getPing());
-						testWebSite.get(testId).setDegree(getDegree(localTestParametersLatency.getPing()));
-						testWebSite.get(testId).setStatus(WiteSiteTestStatus.Finish);
+						if (localTestParametersLatency.getPing() == -1) {
+							testWebSite.get(testId).setStatus(WiteSiteTestStatus.Error);
+						}else{
+							testWebSite.get(testId).setPing(localTestParametersLatency.getPing());
+							testWebSite.get(testId).setDegree(getDegree(localTestParametersLatency.getPing()));
+							testWebSite.get(testId).setStatus(WiteSiteTestStatus.Finish);
+							testWebSite.get(testId).setSpeed(localTestParametersLatency.getSpeed());
+						}
 						webSiteAdapters.get(testIndex).notifyDataSetChanged();
 						if (testId++ < testWebSite.size() - 1) {
 							handler.sendEmptyMessage(WEBSITE_TEST);
@@ -164,7 +169,7 @@ public class WebSiteTestActivity extends BaseActivity {
 							webSiteTestBtn.setVisibility(View.VISIBLE);
 							buttonShare.setVisibility(View.VISIBLE);
 							buttonShareLayout.setClickable(true);
-						}
+					    }
 					}
 					
 					@Override
@@ -185,13 +190,13 @@ public class WebSiteTestActivity extends BaseActivity {
 	};
 	
 	private int getDegree(int ping) {
-		if (ping > 500)
+		if (ping > 1000)
 			return 1;
-		if (ping > 300)
+		if (ping > 800)
 			return 2;
-		if (ping > 200)
+		if (ping > 400)
 			return 3;
-		if (ping > 100)
+		if (ping > 200)
 			return 4;
 		if (ping > 0)
 			return 4;

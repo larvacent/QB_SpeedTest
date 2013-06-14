@@ -27,6 +27,7 @@
     <color name="text_testbutton">#d0d0d0</color>
     <color name="loading_gray">#adadad</color>
     <color name="loading_red">#d42323</color>
+    <color name="text_website_speed">#999999</color>
 
     <drawable name="index_fuc_def">#33b5e5</drawable>
     <drawable name="alert_button_normal">#E6E6E6</drawable>
