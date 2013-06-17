@@ -117,11 +117,12 @@
     <string name="detail_rank_str">排名%1$d位</string>
 
     <!-- 测速结果 -->
-    <string name="speedresult_speed">本次测速结果是%1$s</string>
+    <string name="speedresult_speed">您当前的网络速度是%1$s</string>
     <string name="speedresult_medal">在最近测速的1000人中，</string>
     <string name="speedresult_beat">您的网速击败了%1$d人，特授予你：</string>
     <string name="speedresult_return">返回</string>
     <string name="speedresult_share">分享</string>
+    <string name="speedresult_speed_widebroad">分享</string>
 
     <!-- 更多 -->
     <string name="more_network_set">设置网络</string>

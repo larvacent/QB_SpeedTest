@@ -14,6 +14,16 @@
         <item>@drawable/speed_number_9</item>
         <item>@drawable/speed_number_dot</item>
     </array>
+    <array name="speed_widebroad_array">
+        <item>@drawable/pic_seal_256k</item>
+        <item>@drawable/pic_seal_512k</item>
+        <item>@drawable/pic_seal_1m</item>
+        <item>@drawable/pic_seal_2m</item>
+        <item>@drawable/pic_seal_4m</item>
+        <item>@drawable/pic_seal_8m</item>
+        <item>@drawable/pic_seal_10m</item>
+        <item>@drawable/pic_seal_20m</item>
+    </array>
     <array name="smallmetal_array">
         <item>@drawable/small_medal_sauce</item>
         <item>@drawable/small_medal_iron</item>

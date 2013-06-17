@@ -97,6 +97,7 @@ public class NetWorkActivity extends BaseActivity {
         super.onResume();
         refreshBtnStatus();
     }
+    
     @Override
     public void onBackPressed() {
     	super.onBackPressed();

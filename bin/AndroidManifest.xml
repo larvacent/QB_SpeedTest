@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quickbird.speedtest"
-    android:versionCode="2904"
-    android:versionName="1.6.0" >
+    android:versionCode="2905"
+    android:versionName="1.6.1" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -70,7 +70,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".gui.activity.SpeedResultActivity"
+            android:name=".gui.activity.ShareResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -87,6 +87,10 @@
         </activity>
         <activity
             android:name=".gui.activity.WebSiteTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gui.activity.SpeedResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -139,7 +143,7 @@
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="10" >
+            android:value="10086" >
         </meta-data>
         <meta-data
             android:name="com.amap.api.v2.apikey"

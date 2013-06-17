@@ -1,12 +1,6 @@
 package com.quickbird.speedtest.gui.activity;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.SocketAddress;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,10 +12,10 @@ import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.location.Location;
 import android.net.ConnectivityManager;
-import android.net.Proxy;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -51,7 +45,6 @@ import com.quickbird.speedtestengine.tasks.LatencyTestTask;
 import com.quickbird.speedtestengine.tasks.TestTask;
 import com.quickbird.speedtestengine.utils.DebugUtil;
 import com.quickbird.speedtestengine.utils.NetWorkUtil;
-import com.quickbird.speedtestengine.utils.StringUtil;
 import com.quickbird.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
@@ -61,10 +54,14 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
 	private Button speedTestBtn;
 	private TextView pingTxt, networkTxt, progressTxt;
 	private TextView speed_unit;
-	private TextView issueInfo;
+//	private TextView issueInfo;
 	private ProgressBar progressBar;
 	private ImageView pingRotate;
-	private ImageView lightView, lightAbove, lightLow;
+	private ImageView lightBreatheView;
+	private ImageView lightRotateView;
+	private ImageView picTextView;
+	private LinearLayout promptView1,promptView2;
+	
 	private ImageView needle, breatheLed, breatheLedAbove;
 	private ImageView[] speedNam = new ImageView[3];
 	private ImageView speedPoint1, speedPoint2;
@@ -77,7 +74,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     private MainHandler mHandler = new MainHandler();
     private TestTask mCurrentTestTask = null;
     private Context context;
-    protected static final String LOGTAG = "LatencyTestTask";
     java.text.DecimalFormat kps = new java.text.DecimalFormat("#0");
     java.text.DecimalFormat mps = new java.text.DecimalFormat("#0.00");
     private TypedArray speedPic;
@@ -90,16 +86,14 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     private boolean ifSetPing = false;
     private int viewSwitch = 0;
     
-    public static final int TIME_INTERVAL = 200;
-    private static int COUNT = 500;
+    public  final int TIME_INTERVAL = 200;
+    private int DOWNLOAD_COUNT = 500;
     private long downloadByte;
     private long downloadTime;
     private int readLength;
-    private long testSpeedTime;
-    private long begainTime, lastTime;
-    private static float instantSpeed;
+    private long begainTime;
+    private float instantSpeed;
     private CalculateSpeedThread calculateSpeedThread;
-    private DownloadThread downloadThread;
     
     private class CalculateSpeedThread extends Thread {
         @Override
@@ -109,15 +103,15 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
             while (!Thread.currentThread().isInterrupted()&& onTesting && inActivity) {
                 try {
                     calaulateSpeed();
-                    DebugUtil.d("instantSpeed:"+instantSpeed);
-					updateText(instantSpeed, count,MainHandler.UPDATE_INSTANT_SPEED);
+					updateText(instantSpeed/1024, count,MainHandler.UPDATE_INSTANT_SPEED);
+					DebugUtil.d("instantSpeed:"+instantSpeed/1024);
 					if (count > 100)
 						Thread.interrupted();
 					if (count++ == 100) {
 					  onTesting = false;
-					  updateText(instantSpeed, 100,MainHandler.UPDATE_INSTANT_SPEED);
+					  updateText(instantSpeed/1024, 100,MainHandler.UPDATE_INSTANT_SPEED);
                       speedValue.setCostTime(System.currentTimeMillis() - speedValue.getTestTime());
-					  speedValue.setDownloadSpeed((int) instantSpeed * 1024);
+					  speedValue.setDownloadSpeed((int) instantSpeed);
 					  mHandler.sendEmptyMessageDelayed(MainHandler.SKIP_TO_RESULT, 1000);
 					  Thread.interrupted();
                     }
@@ -131,8 +125,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     };
     
     private void calaulateSpeed() {
-    	lastTime = System.currentTimeMillis();
-        downloadTime = lastTime - begainTime;
+        downloadTime = SystemClock.elapsedRealtime() - begainTime;
         if (readLength != -1 && readLength != 0) {
             instantSpeed = testSpeed(downloadTime,downloadByte);
         } else {
@@ -141,22 +134,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
         }
     };
     
-    private class DownloadThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-            try {
-                if (onTesting)
-                    download();
-            } catch (IOException e) {
-                onTesting = false;
-                Thread.currentThread().interrupt();
-                DebugUtil.e("downloadThread IOException:" + e.getMessage());
-            } catch (Exception e) {
-                DebugUtil.e("downloadThread Exception:" + e.getMessage());
-            }
-        }
-    };
     
     /***
      * @param time
@@ -165,12 +142,12 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
      *            资源量
      * @return 速度
      */
-    public float testSpeed(long time, long resource) {
-        if (time <= 0)
-            time = TIME_INTERVAL;
-        float testSpeed = resource / time;
-        return testSpeed;
-    }
+	public float testSpeed(long time, long resource) {
+		if (time <= 0)
+			time = TIME_INTERVAL;
+		float testSpeed = (float) (1000.0 * resource / time);
+		return testSpeed;
+	}
     
     /*
      * 获取随机数
@@ -244,7 +221,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
             if (networkStatus == Constants.NETWORK_STATUS_NULL) {
                 loadingFailed();
             } else {
-                issueInfo.setVisibility(View.GONE);
                 Message msg = mHandler.obtainMessage(MainHandler.FIND_FASTEST_SERVER_TASK_START);
                 msg.getData().putInt("TEST_STATUS", 0);
                 mHandler.sendMessage(msg);
@@ -262,17 +238,19 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     }
 
     private void prepareTest() {
-        setContentView(R.layout.activity_start);
-        viewSwitch = 0;
-        pressedView = (Button) findViewById(R.id.pressed_view);
-        pressedView.setOnClickListener(this);
-        lightView = (ImageView) findViewById(R.id.light_view);
-        lightView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.breathled_ani));
-        lightAbove = (ImageView) findViewById(R.id.light_above);
-        lightAbove.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.loading_ani_above));
-        lightLow = (ImageView) findViewById(R.id.light_low);
-        issueInfo = (TextView) findViewById(R.id.issue_info);
-        lightLow.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.loading_ani_low));
+		setContentView(R.layout.activity_loading);
+		viewSwitch = 0;
+		pressedView = (Button) findViewById(R.id.pressed_view);
+		pressedView.setOnClickListener(this);
+		lightBreatheView = (ImageView) findViewById(R.id.light_breathe_view);
+		lightRotateView = (ImageView) findViewById(R.id.light_rotate_view);
+		picTextView = (ImageView) findViewById(R.id.pic_text_view);
+		promptView1 = (LinearLayout) findViewById(R.id.prompt_view_1);
+		promptView2 = (LinearLayout) findViewById(R.id.prompt_view_2);
+		picTextView.setVisibility(View.GONE);
+        
+        lightRotateView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.data_loading_rotate));
+        lightBreatheView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.breathled_ani));
         speedValue = new SpeedValue();
     }
 
@@ -336,9 +314,9 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     }
     
     private void loadingFailed() {
-        pressedView.setText("请设置网络");
+    	promptView1.setVisibility(View.GONE);
+    	promptView2.setVisibility(View.VISIBLE);
         pressedView.setTag("1");
-        issueInfo.setText("网络连接有问题");
     }
     
     private void testFailed() {
@@ -352,12 +330,12 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
         if (networkStatus == Constants.NETWORK_STATUS_NULL) {
             loadingFailed();
         } else {
-            issueInfo.setText("");
-            pressedView.setText("开始测速");
-            pressedView.setTextSize(20);
+        	promptView1.setVisibility(View.GONE);
+        	promptView2.setVisibility(View.GONE);
+            pressedView.setText("");
             pressedView.setClickable(true);
             pressedView.setTag("0");
-            pressedView.setTextColor(getResources().getColor(R.color.loading_red));
+            picTextView.setVisibility(View.VISIBLE);
             pressedView.invalidate();
         }
     }
@@ -445,23 +423,22 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
             super.handleMessage(msg);
             switch (msg.what) {
             case FIND_FASTEST_SERVER_TASK_START:
-				pressedView.setText("正在寻找最近的服务器");
-				pressedView.setTextSize(18);
+            	promptView1.setVisibility(View.VISIBLE);
+            	promptView2.setVisibility(View.GONE);
+				pressedView.setTextSize(12);
 				pressedView.setTextColor(getResources().getColor(R.color.loading_gray));
 				pressedView.setClickable(false);
 				mHandler.sendEmptyMessageDelayed(MainHandler.FIND_FASTEST_SERVER_TASK_COMPLATE, 3000);
                 break;
             case FIND_FASTEST_SERVER_TASK_COMPLATE:
-				lightAbove.clearAnimation();
-				lightLow.clearAnimation();
-				lightAbove.setVisibility(View.GONE);
-				lightLow.setVisibility(View.GONE);
-				pressedView.setText("开始测速");
-				pressedView.setTextSize(20);
+            	promptView1.setVisibility(View.GONE);
+            	promptView2.setVisibility(View.GONE);
 				pressedView.setClickable(true);
 				pressedView.setTag("0");
-				pressedView.setTextColor(getResources().getColor(R.color.loading_red));
 				pressedView.invalidate();
+				picTextView.setVisibility(View.VISIBLE);
+				lightRotateView.clearAnimation();
+				lightRotateView.setImageResource(R.drawable.pic_light_final);
 				onPrepare = false;
             	break;
             case LATENCY_TEST_TASK_START:
@@ -526,7 +503,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
                                     pingRotate.setVisibility(View.GONE);
                                     progressBar.setVisibility(View.VISIBLE);
                                     progressTxt.setText("正在测试网速");
-                                    begainTime = System.currentTimeMillis();
+                                    begainTime = SystemClock.elapsedRealtime();
                                     mHandler.sendEmptyMessage(MainHandler.START_CALCULATE_THREAD);
                                 }
                                 onTesting = true;
@@ -593,7 +570,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
                 }
                 break;
             case SKIP_TO_RESULT:
-                Intent intent = new Intent(SpeedTestActivity.this, SpeedResultActivity.class);
+                Intent intent = new Intent(SpeedTestActivity.this, ShareResultActivity.class);
                 Bundle speedResult = new Bundle();
                 speedResult.putString("networkType", speedValue.getNetworkType());
                 speedResult.putInt("ping", speedValue.getPing());
@@ -628,14 +605,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
             	if (calculateSpeedThread != null && calculateSpeedThread.isAlive())
                     calculateSpeedThread.interrupt();
             	break;
-            case START_DOWNLOAD_THREAD:
-                downloadThread = new DownloadThread();
-                downloadThread.start();
-                break;
-            case SHUTDOWN_DOWNLOAD_THREAD:
-                if (downloadThread != null && downloadThread.isAlive())
-                    Thread.interrupted();
-                break;
             case START_TEST:
             	ifSetPing = false;
                 onTesting = true;
@@ -670,7 +639,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
 				pingRotate.setVisibility(View.GONE);
 				progressBar.setVisibility(View.VISIBLE);
 				progressTxt.setText("正在测试网速");
-				begainTime = System.currentTimeMillis();
+				begainTime = SystemClock.elapsedRealtime();
 				mHandler.sendEmptyMessage(MainHandler.START_CALCULATE_THREAD);
             	break;
             case TEST_FAILED:
@@ -951,61 +920,4 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
         return angle;
     }
     
-    
-    protected  void download() throws IOException {
-    	onTesting = true;
-        URL url = null;
-        HttpURLConnection urlConnection = null;
-        if (NetWorkUtil.isConnectionFast(context)) {
-            url = new URL(Constants.DOWNLOAD2MURL);
-            COUNT = 1800;
-        } else {
-            url = new URL(Constants.DOWNLOAD500KURL);
-            COUNT = 500;
-        }
-        String proxyHost = Proxy.getDefaultHost();
-        int proxyPort = Proxy.getDefaultPort();
-        if (Constants.GPRS.equalsIgnoreCase(NetWorkUtil.getNetworkStatusStr(context)) && !StringUtil.isNull(proxyHost)) {
-            SocketAddress sa = new InetSocketAddress(proxyHost, proxyPort);
-            java.net.Proxy proxy = new java.net.Proxy(java.net.Proxy.Type.HTTP, sa);
-            urlConnection = (HttpURLConnection) url.openConnection(proxy);
-        } else {
-            urlConnection = (HttpURLConnection) url.openConnection();
-        }
-        urlConnection.setConnectTimeout(Constants.TIMEOUT_4_CONN); // 设置连接主机超时
-        urlConnection.setReadTimeout(Constants.TIMEOUT_4_READ); // 设置读取数据超时
-        urlConnection.setDoInput(true);
-        urlConnection.connect();
-        try {
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            readStream(in);
-        } finally {
-            urlConnection.disconnect();
-        }
-    }
-
-    private void readStream(InputStream in) {
-        if (in.equals(null) || !onTesting)
-            return;
-        begainTime = System.currentTimeMillis();
-        downloadByte = 0;
-        readLength = 1;
-        mHandler.sendEmptyMessageDelayed(MainHandler.UPDATE_TEST, TIME_INTERVAL);
-        BufferedInputStream bis = new BufferedInputStream(in);
-        byte[] buffer = new byte[262144];
-        try {
-            while ((readLength = bis.read(buffer)) != -1) {
-                downloadByte += readLength;
-                if (downloadByte >= COUNT * 1024||!onTesting) {
-                    readLength = 0;
-                    break;
-                }
-            }
-            mHandler.sendEmptyMessage(MainHandler.SHUTDOWN_DOWNLOAD_THREAD);
-        } catch (IOException e) {
-            mHandler.sendEmptyMessage(MainHandler.TEST_FAILED);
-            onTesting = false;
-            DebugUtil.e("readStream:" + e.getMessage());
-        }
-    }
 }

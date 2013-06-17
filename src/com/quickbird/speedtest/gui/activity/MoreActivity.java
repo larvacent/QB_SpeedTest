@@ -121,8 +121,7 @@ public class MoreActivity extends BaseActivity {
             FeedBackListener listener = new FeedBackListener() {
                 @Override
                 public void onSubmitFB(Activity activity) {
-                    EditText qqText = (EditText) activity
-                            .findViewById(R.id.feedback_qq);
+                    EditText qqText = (EditText) activity.findViewById(R.id.feedback_qq);
                     Map<String, String> contactMap = new HashMap<String, String>();
                     contactMap.put("contact", qqText.getText().toString());
                     UMFeedbackService.setContactMap(contactMap);

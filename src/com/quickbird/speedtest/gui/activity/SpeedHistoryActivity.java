@@ -65,17 +65,20 @@ public class SpeedHistoryActivity extends BaseActivity {
     private void populateFields() {
         speedValues = new ArrayList<SpeedValue>();
         speedValues = speedDBManager.getAllSpeedValues();
-        if (speedValues.size() <= 0 && refreshTest ==0) {
+        if (speedValues.size() <= 0) {
             setContentView(R.layout.activity_nospeedhistory);
             speedtestButton = (Button) findViewById(R.id.speed_test_btn);
             speedtestButton.setOnClickListener(new OnClickListener() {
                 
                 @Override
                 public void onClick(View v) {
-					if (!SpeedTestActivity.onTesting) {
+                	if (!SpeedTestActivity.onTesting&&refreshTest == 0) {
 						Base.startTest = true;
+						finish();
+					} else if (refreshTest == 1) {
+						finish();
+						Base.mTabHost.setCurrentTab(1);
 					}
-					finish();
                 }
             });
             return;
@@ -114,17 +117,20 @@ public class SpeedHistoryActivity extends BaseActivity {
                                         speedValuesListview.setAdapter(speedListAdapter);
                                         speedListAdapter.notifyDataSetChanged();
                                         dialog.dismiss();
-										if (refreshTest == 0) {
 											setContentView(R.layout.activity_nospeedhistory);
 											speedtestButton = (Button) findViewById(R.id.speed_test_btn);
 											speedtestButton.setOnClickListener(new OnClickListener() {
 														@Override
-														public void onClick(View v) {
+													public void onClick(View v) {
+														if (!SpeedTestActivity.onTesting&&refreshTest == 0) {
 															Base.startTest = true;
 															finish();
+														} else if (refreshTest == 0) {
+															finish();
+															Base.mTabHost.setCurrentTab(1);
 														}
-													});
-										}
+													}
+												});
                                     }
                                 })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
