@@ -52,45 +52,53 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".gui.activity.MoreActivity"
+            android:name=".gui.activity.WebSiteTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".gui.activity.ShowLocationActivity"
+            android:name=".gui.activity.MoreActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gui.activity.LocationActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
             android:name=".gui.activity.AboutActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".gui.activity.UploadActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".gui.activity.ShareResultActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".gui.activity.AccountManageActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".gui.activity.NetWorkActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".gui.activity.SpeedValueDetailActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".gui.activity.WebSiteTestActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".gui.activity.SpeedResultActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity

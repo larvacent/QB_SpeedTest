@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,14 +20,22 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import cn.sharesdk.framework.AbstractWeibo;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.location.LocationManagerProxy;
+import com.amap.api.location.LocationProviderProxy;
+import com.amap.api.maps.model.LatLng;
 import com.quickbird.speedtest.R;
+import com.quickbird.speedtestengine.utils.SharedPreferenceUtil;
+import com.quickbird.utils.AMapUtil;
+import com.quickbird.utils.ToastUtil;
 import com.quickbird.utils.UmengUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
 
-public class MainActivity extends TabActivity {
+public class MainActivity extends TabActivity implements AMapLocationListener{
 
 	private TabWidget mTabWidget;
 	private Context context;
@@ -34,6 +45,7 @@ public class MainActivity extends TabActivity {
 	private TextView[] text = new TextView[3];
 	private TypedArray iconPic, iconFoucsPic;
 	private MyClickListener clickListener;
+	private LocationManagerProxy locationManager;
 	private int tabId;
 
 	private class MyClickListener implements OnClickListener {
@@ -52,6 +64,7 @@ public class MainActivity extends TabActivity {
 			}
 		}
 	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -134,7 +147,7 @@ public class MainActivity extends TabActivity {
 				.setContent(new Intent(this, SpeedTestActivity.class)));
 		Base.mTabHost.addTab(Base.mTabHost.newTabSpec("tab_3")
 				.setIndicator("更多")
-				.setContent(new Intent(this, MoreActivity.class)));
+				.setContent(new Intent(this, LocationActivity.class)));
 
 		/* 当点击Tab选项卡的时候，更改当前Tab标签的背景 */
 		Base.mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
@@ -150,6 +163,15 @@ public class MainActivity extends TabActivity {
 		AbstractWeibo.initSDK(this);// 初始化分享SDK
 		
 		MobclickAgent.onEvent(this, "oa");
+		
+		MapInit();
+	}
+
+	private void MapInit() {
+		locationManager = LocationManagerProxy.getInstance(this);
+		// Location API定位采用GPS和网络混合定位方式，时间最短是5000毫秒
+		locationManager.requestLocationUpdates(
+				LocationProviderProxy.AMapNetwork, 5000, 10, this);
 	}
 
 	private void setUmengSDK() {
@@ -176,9 +198,68 @@ public class MainActivity extends TabActivity {
 	}
 	
 	@Override
+	protected void onPause() {
+		super.onPause();
+		if (locationManager != null) {
+			locationManager.removeUpdates(this);
+		}
+	}
+	
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		AbstractWeibo.stopSDK(this); // 停止分享SDK
+		if (locationManager != null) {
+			locationManager.removeUpdates(this);
+			locationManager.destory();
+		}
+		locationManager = null;
 	}
+	
+	@Override
+	public void onLocationChanged(Location location) {
+
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+
+	}
+
+	/**
+	 * 过滤gps定位返回的数据
+	 */
+	@Override
+	public void onLocationChanged(AMapLocation location) {
+		if (location != null) {
+				Double geoLat = location.getLatitude();
+				Double geoLng = location.getLongitude();
+				String str = ("定位成功:(" + geoLng + "," + geoLat + ")"
+						+ "\n精    度    :" + location.getAccuracy() + "米"
+						+ "\n定位方式:" + location.getProvider() + "\n定位时间:" + AMapUtil.convertToTime(location.getTime()));
+				Message msg = new Message();
+				msg.obj = str;
+				handler.sendMessage(msg);
+				SharedPreferenceUtil.saveStringParam(context, SharedPreferenceUtil.LOCATION_LATITUDE, geoLat.toString());
+				SharedPreferenceUtil.saveStringParam(context, SharedPreferenceUtil.LOCATION_LONGTITUDE, geoLng.toString());
+				Base.latLng = new  LatLng(geoLat, geoLng);
+		}
+	}
+	
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			ToastUtil.showToast(MainActivity.this, (String) msg.obj);
+		}
+	};
 
 }

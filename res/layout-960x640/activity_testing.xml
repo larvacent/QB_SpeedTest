@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bar_upside" />
+    
+    <LinearLayout
+        android:id="@+id/button_map_layout"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="left" >
+
+        <ImageButton
+            android:id="@+id/button_map"
+            style="@style/imagebutton_normal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/button_history" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_history_layout"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:gravity="right" >
+
+        <ImageButton
+            android:id="@+id/button_history"
+            style="@style/imagebutton_normal"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/button_history" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/speed_meter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp" >
+
+        <ImageView
+            android:id="@+id/speedometer_bg"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/bg_speedometer" />
+
+        <ImageView
+            android:id="@+id/speedometer_low"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/speedometer_low" />
+
+        <ImageView
+            android:id="@+id/breathe_led"
+            style="@style/imagebutton_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/breathe_led"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/needle"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/needle" />
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/needle_center" />
+
+        <ImageView
+            android:id="@+id/breathe_led_above"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/breathe_led_above"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/speedometer_low"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="33dp"
+            android:background="@drawable/speed_pit"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/num1"
+                style="@style/imageview_normal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/speed_number_background"
+                android:contentDescription="@string/testspeed_0"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/point1"
+                style="@style/imagebutton_normal"
+                android:layout_marginTop="3dp"
+                android:contentDescription="@string/testspeed_3"
+                android:src="@drawable/speed_number_dot"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/num2"
+                style="@style/imageview_normal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/speed_number_background"
+                android:contentDescription="@string/testspeed_1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/point2"
+                style="@style/imagebutton_normal"
+                android:layout_marginTop="3dp"
+                android:contentDescription="@string/testspeed_3"
+                android:src="@drawable/speed_number_dot"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/num3"
+                style="@style/imageview_normal"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/speed_number_background"
+                android:contentDescription="@string/testspeed_4"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/speed_unit"
+            style="@style/textview_normal"
+            android:layout_alignBottom="@id/speedometer_low"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="25dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/network_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="315dp"
+        android:visibility="visible" >
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/speedometer_low"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_index_split_bar_bottom" />
+
+        <TextView
+            android:id="@+id/ping_txt"
+            style="@style/textview_normal_ping"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:text="@string/testspeed_ping" />
+
+        <TextView
+            android:id="@+id/ping_value"
+            style="@style/textview_normal_ping"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ping_txt" />
+
+        <ImageView
+            android:id="@+id/ping_rotate"
+            style="@style/imagebutton_normal"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ping_txt"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_index_ping_rotate"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/network_value"
+            style="@style/textview_normal_ping"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:text="@string/testspeed_network_state2" />
+
+        <TextView
+            android:id="@+id/network_txt"
+            style="@style/textview_normal_ping"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/network_value"
+            android:text="@string/testspeed_network" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/speed_test_btn"
+        style="@style/imagebutton_normal"
+        android:layout_below="@id/network_bar"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_speedtest_bg"
+        android:text="@string/testspeed_test_twice"
+        android:textColor="@drawable/button_font_style"
+        android:textSize="17sp" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="200dp"
+        android:layout_height="8dp"
+        android:layout_below="@id/speed_test_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:focusable="false"
+        android:indeterminate="false"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:maxHeight="25dip"
+        android:minHeight="25dip"
+        android:progressDrawable="@drawable/progress_horizontal" />
+
+    <TextView
+        android:id="@+id/progress_txt"
+        style="@style/textview_normal"
+        android:layout_below="@id/pb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_gray"
+        android:textSize="12sp" />
+
+</RelativeLayout>

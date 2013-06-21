@@ -46,8 +46,7 @@ public class AccountManageActivity extends BaseActivity implements Callback,
 			if (ctv != null) {
 				ctv.setChecked(true);
 				String userName = weibo.getDb().get("nickname"); // getAuthedUserName();
-				if (userName == null || userName.length() <= 0
-						|| "null".equals(userName)) {
+				if (userName == null || userName.length() <= 0 || "null".equals(userName)) {
 					// 如果平台已经授权却没有拿到帐号名称，则自动获取用户资料，以获取名称
 					userName = getWeiboName(weibo);
 					weibo.setWeiboActionListener(this);

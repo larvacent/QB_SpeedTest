@@ -16,9 +16,7 @@ import com.quickbird.speedtestengine.utils.DebugUtil;
 
 public class DownloadTestTask extends SpeedTestTask {
     protected static final String LOGTAG = "DownloadTestTask";
-//    protected static final double MAXSIZE = 2022400.0D;
     protected static final double MAXSIZE = 2513694.0D;
-//    protected static final double MAXSIZE = 7489472.0D;
 
     public DownloadTestTask(TestTaskCallbacks paramTestTaskCallbacks, int paramInt) {
         super(paramTestTaskCallbacks, paramInt);

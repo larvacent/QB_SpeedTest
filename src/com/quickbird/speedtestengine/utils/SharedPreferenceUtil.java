@@ -25,6 +25,9 @@ public class SharedPreferenceUtil {
 	/** 网络开关 */
     public static final String WIFI_ON = "WIFI_ON";
     public static final String DATA_ON = "DATA_ON";
+    /** 保存最新的地理位置信息 */
+    public static final String LOCATION_LATITUDE = "latitude";
+    public static final String LOCATION_LONGTITUDE = "longtitude";
 	
 	/**
 	 *  获取系统参数（值为字符串），没获取到返回“”

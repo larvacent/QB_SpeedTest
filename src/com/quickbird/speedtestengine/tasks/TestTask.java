@@ -15,7 +15,7 @@ public abstract class TestTask {
     private int mTaskStackCount = 0;
     protected Task[] mTasks = null;
     protected Runnable mTestCancelled = null;
-    private int mTestLength = 10000;
+    private int mTestLength = 15000;
     private URL mUrl = null;
 
     public TestTask(TestTaskCallbacks paramTestTaskCallbacks) {

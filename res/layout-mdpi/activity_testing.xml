@@ -11,6 +11,22 @@
         android:layout_marginTop="30dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/bar_upside" />
+    
+    <LinearLayout
+        android:id="@+id/button_map_layout"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="left" >
+
+        <ImageButton
+            android:id="@+id/button_map"
+            style="@style/imagebutton_normal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/button_history" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/button_history_layout"

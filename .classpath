@@ -14,6 +14,5 @@
 	<classpathentry kind="lib" path="libs/umeng_sdk.jar"/>
 	<classpathentry kind="lib" path="libs/libammsdk.jar"/>
 	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
-	<classpathentry kind="lib" path="libs/MapApiLocation.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

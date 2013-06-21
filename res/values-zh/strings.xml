@@ -174,5 +174,8 @@
     <string name="wechatmoments">微信朋友圈</string>
     <string name="sohumicroblog">搜狐微博</string>
     <string name="not_yet_authorized">尚未授权</string>
+    
+    <!-- 地图 -->
+    <string name="map_not_ready">初始化失败</string>
 
 </resources>

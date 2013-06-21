@@ -5,13 +5,9 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.TypedArray;
-import android.location.Location;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,10 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.location.LocationManagerProxy;
-import com.amap.api.location.LocationProviderProxy;
 import com.quickbird.controls.Constants;
 import com.quickbird.enums.SpeedTestError;
 import com.quickbird.speedtest.R;
@@ -48,17 +40,17 @@ import com.quickbird.speedtestengine.utils.NetWorkUtil;
 import com.quickbird.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
-public class SpeedTestActivity extends BaseActivity implements AMapLocationListener{
+public class SpeedTestActivity extends BaseActivity{
     
 	private Button pressedView;
 	private Button speedTestBtn;
 	private TextView pingTxt, networkTxt, progressTxt;
 	private TextView speed_unit;
-//	private TextView issueInfo;
 	private ProgressBar progressBar;
 	private ImageView pingRotate;
 	private ImageView lightBreatheView;
 	private ImageView lightRotateView;
+	private ImageView lightRotateFullView;
 	private ImageView picTextView;
 	private LinearLayout promptView1,promptView2;
 	
@@ -67,6 +59,9 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
 	private ImageView speedPoint1, speedPoint2;
 	private LinearLayout buttonHistoryLayout;
 	private ImageButton buttonHistory;
+	
+	private LinearLayout buttonMapLayout;
+	private ImageButton buttonMap;
 	
     private int networkStatus;
     private float currentDegree = 0l;
@@ -78,7 +73,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     java.text.DecimalFormat mps = new java.text.DecimalFormat("#0.00");
     private TypedArray speedPic;
 
-    private LocationManagerProxy mAMapLocManager = null;
     private SpeedValue speedValue;
     private boolean onPrepare;
     public static boolean onTesting;
@@ -87,7 +81,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
     private int viewSwitch = 0;
     
     public  final int TIME_INTERVAL = 200;
-    private int DOWNLOAD_COUNT = 500;
     private long downloadByte;
     private long downloadTime;
     private int readLength;
@@ -103,7 +96,7 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
             while (!Thread.currentThread().isInterrupted()&& onTesting && inActivity) {
                 try {
                     calaulateSpeed();
-					updateText(instantSpeed/1024, count,MainHandler.UPDATE_INSTANT_SPEED);
+					updateText(instantSpeed / 1024, count, MainHandler.UPDATE_INSTANT_SPEED);
 					DebugUtil.d("instantSpeed:"+instantSpeed/1024);
 					if (count > 100)
 						Thread.interrupted();
@@ -174,23 +167,23 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
 		mHandler.sendMessage(msg);
 	}
     
-    private BroadcastReceiver mNetworkStateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if(onTesting)
-                if(!NetWorkUtil.getWifiState(context)||!NetWorkUtil.getMobileStatus(context))
-                    if(mCurrentTestTask!=null){
-                        if (mCurrentTestTask != null)
-                            mCurrentTestTask.cancel(true);
-                        try {
-                            onTesting = false;
-                            prepareNextTest();
-                        } catch (Exception e) {
-                            DebugUtil.d("BroadcastReceiver Exception:" + e.getMessage());
-                        }
-                    }
-        }
-    };
+//    private BroadcastReceiver mNetworkStateReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            if(onTesting)
+//                if(!NetWorkUtil.getWifiState(context)||!NetWorkUtil.getMobileStatus(context))
+//                    if(mCurrentTestTask!=null){
+//                        if (mCurrentTestTask != null)
+//                            mCurrentTestTask.cancel(true);
+//                        try {
+//                            onTesting = false;
+//                            prepareNextTest();
+//                        } catch (Exception e) {
+//                            DebugUtil.d("BroadcastReceiver Exception:" + e.getMessage());
+//                        }
+//                    }
+//        }
+//    };
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,11 +194,9 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
             onPrepare = true;
             onTesting = false;
             prepareTest();
-            IntentFilter filter = new IntentFilter();        
-            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-            registerReceiver(mNetworkStateReceiver, filter);
-            mAMapLocManager = LocationManagerProxy.getInstance(this);
-            enableMyLocation();
+//            IntentFilter filter = new IntentFilter();        
+//            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+//            registerReceiver(mNetworkStateReceiver, filter);
         } catch (Exception e) {
             DebugUtil.d("onCreate:"+e.getMessage());
         }
@@ -244,10 +235,12 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
 		pressedView.setOnClickListener(this);
 		lightBreatheView = (ImageView) findViewById(R.id.light_breathe_view);
 		lightRotateView = (ImageView) findViewById(R.id.light_rotate_view);
+		lightRotateFullView = (ImageView) findViewById(R.id.light_rotate_full);
 		picTextView = (ImageView) findViewById(R.id.pic_text_view);
 		promptView1 = (LinearLayout) findViewById(R.id.prompt_view_1);
 		promptView2 = (LinearLayout) findViewById(R.id.prompt_view_2);
 		picTextView.setVisibility(View.GONE);
+		lightRotateFullView.setVisibility(View.GONE);
         
         lightRotateView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.data_loading_rotate));
         lightBreatheView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.breathled_ani));
@@ -277,9 +270,15 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
         buttonHistoryLayout = (LinearLayout) findViewById(R.id.button_history_layout);
         buttonHistory = (ImageButton) findViewById(R.id.button_history);
         clickListener = new ClickListener();
+        
+        buttonMapLayout = (LinearLayout) findViewById(R.id.button_map_layout);
+        buttonMap = (ImageButton) findViewById(R.id.button_map);
 
         refreshPingStr(speedValue.getPing());
         networkTxt.setText(speedValue.getNetworkType());
+        
+        buttonMapLayout.setOnClickListener(clickListener);
+        buttonMap.setOnClickListener(clickListener);
         
         buttonHistoryLayout.setOnClickListener(clickListener);
         buttonHistory.setOnClickListener(clickListener);
@@ -438,7 +437,8 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
 				pressedView.invalidate();
 				picTextView.setVisibility(View.VISIBLE);
 				lightRotateView.clearAnimation();
-				lightRotateView.setImageResource(R.drawable.pic_light_final);
+				lightRotateFullView.setVisibility(View.INVISIBLE);
+				lightRotateFullView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.data_loading_rotate));
 				onPrepare = false;
             	break;
             case LATENCY_TEST_TASK_START:
@@ -771,99 +771,6 @@ public class SpeedTestActivity extends BaseActivity implements AMapLocationListe
         }
     }
 
-    public boolean enableMyLocation() {
-        boolean result = false;
-        try {
-            if (mAMapLocManager != null && mAMapLocManager.isProviderEnabled(LocationProviderProxy.AMapNetwork)) {
-                mAMapLocManager.requestLocationUpdates( LocationProviderProxy.AMapNetwork, 2000, 10, this);
-                result = true;
-            }
-        } catch (Exception e) {
-            DebugUtil.d("enableMyLocation:" + e.getMessage());
-        }
-        return result;
-    }
-
-    public void disableMyLocation() {
-        try {
-            if (mAMapLocManager != null)
-                mAMapLocManager.removeUpdates(this);
-        } catch (Exception e) {
-            DebugUtil.d("disableMyLocation Exception:" + e.getMessage());
-        }
-    }
-    
-    @Override
-    protected void onPause() {
-//    	mHandler.sendEmptyMessage(MainHandler.SHUTDOWN_CALCULATE_THREAD);
-//        disableMyLocation();
-        super.onPause();
-    }
-    
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        try {
-        	DebugUtil.d("onDestroy");
-        	mHandler.sendEmptyMessage(MainHandler.SHUTDOWN_CALCULATE_THREAD);
-            if (mAMapLocManager != null) {
-                mAMapLocManager.removeUpdates(this);
-                mAMapLocManager.destory();
-            }
-            mAMapLocManager = null;
-        } catch (Exception e) {
-            DebugUtil.d("disableMyLocation Exception:" + e.getMessage());
-        }
-        unregisterReceiver(mNetworkStateReceiver);
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onLocationChanged(AMapLocation location) {
-        try {
-            if (location != null) {
-                Double geoLat = location.getLatitude();
-                Double geoLng = location.getLongitude();
-                String cityCode = "";
-                String desc = "";
-                Bundle locBundle = location.getExtras();
-                if (locBundle != null) {
-                    cityCode = locBundle.getString("citycode");
-                    desc = locBundle.getString("desc");
-                }
-                String str = ("定位成功:(" + geoLng + "," + geoLat + ")"
-                        + "\n精    度    :" + location.getAccuracy() + "米"
-                        + "\n城市编码:" + cityCode + "\n位置描述:" + desc);
-                Message msg = new Message();
-                msg.obj = str;
-                // 设置测速的地理位置信息
-                speedValue.setLatitude(geoLat);
-                speedValue.setLongitude(geoLng);
-                speedValue.setLocationDesc(desc);
-            }
-        } catch (Exception e) {
-			DebugUtil.d("Exception :" + e.getMessage());
-        }
-
-    }
     
     private void uploadAveSpeedLevel(float aveSpeed) {
 

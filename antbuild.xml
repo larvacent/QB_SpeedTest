@@ -115,7 +115,7 @@
             classpathref="android.antlibs" />
 
     <!-- Emma configuration -->
-    <property name="sdk.dir" value="/Users/Mac/Documents/android-sdk-macosx" />
+    <property name="sdk.dir" value="D:/SDK/android-sdk-windows" />
     
     <property name="emma.dir" value="${sdk.dir}/tools/lib" />
     <path id="emma.lib">

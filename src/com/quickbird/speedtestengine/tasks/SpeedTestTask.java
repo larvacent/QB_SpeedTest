@@ -8,7 +8,7 @@ import com.quickbird.speedtestengine.TestTaskCallbacks;
 public abstract class SpeedTestTask extends TestTask {
     protected static final String LOGTAG = "SpeedTestTask";
     private TestParametersTransfer mResult = null;
-    private int mThreads = 1;
+    private int mThreads = 4;
 
     public SpeedTestTask(TestTaskCallbacks paramTestTaskCallbacks, int paramInt) {
         super(paramTestTaskCallbacks);

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical" >
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="70dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bar_upside" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bg_outer_perimeter" >
+
+        <ImageView
+            android:id="@+id/light_rotate_view"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_light_rotate" />
+        <ImageView
+            android:id="@+id/light_rotate_full"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_light_final" />
+
+        <Button
+            android:id="@+id/pressed_view"
+            style="@style/imagebutton"
+            android:layout_centerInParent="true"
+            android:background="@drawable/button_start_test" />
+
+        <LinearLayout
+            android:id="@+id/prompt_view_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="正在寻找" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="最近服务器" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/prompt_view_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="开启网络"
+                android:textColor="@color/loading_red"
+                android:textSize="19sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/light_breathe_view"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_light_breathe" />
+
+        <ImageView
+            android:id="@+id/pic_text_view"
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_text"
+            android:visibility="gone" />
+
+        <ImageView
+            style="@style/imageview_normal"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pic_shadow_upon_light" />
+    </RelativeLayout>
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="25dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bar_below" />
+
+</LinearLayout>

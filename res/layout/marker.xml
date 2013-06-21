@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_info_bubble"
+    android:orientation="horizontal" >
+
+    <ImageView
+        style="@style/imageview_normal"
+        android:padding="3dp"
+        android:src="@drawable/badge_nsw" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/marker_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2013/06/20"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/marker_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="278KB/s" />
+    </LinearLayout>
+
+</LinearLayout>
