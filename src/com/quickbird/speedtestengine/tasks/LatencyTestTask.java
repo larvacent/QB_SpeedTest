@@ -10,10 +10,10 @@ import android.os.SystemClock;
 
 import com.quickbird.enums.SpeedTestError;
 import com.quickbird.enums.SpeedTestType;
+import com.quickbird.speedtest.business.WebSite;
 import com.quickbird.speedtestengine.TestParameters;
 import com.quickbird.speedtestengine.TestParametersLatency;
 import com.quickbird.speedtestengine.TestTaskCallbacks;
-import com.quickbird.speedtestengine.TestWebSite;
 import com.quickbird.speedtestengine.utils.DebugUtil;
 
 public class LatencyTestTask extends TestTask {
@@ -27,8 +27,8 @@ public class LatencyTestTask extends TestTask {
 		super(paramTestTaskCallbacks);
 	}
 	
-	private static TestWebSite processLatency(URL paramURL, int mConnectTimeout, int mReadTimeout) throws IOException, SocketTimeoutException {
-		TestWebSite webSiteTest = new TestWebSite();
+	private static WebSite processLatency(URL paramURL, int mConnectTimeout, int mReadTimeout) throws IOException, SocketTimeoutException {
+		WebSite webSiteTest = new WebSite();
 		URLConnection localURLConnection = paramURL.openConnection();
 		localURLConnection.setUseCaches(false);
 		localURLConnection.setDoInput(true);
@@ -111,7 +111,7 @@ public class LatencyTestTask extends TestTask {
 			setCompleted(false);
 			setStartTime(SystemClock.elapsedRealtime());
 			try {
-				TestWebSite webSiteTest = new TestWebSite();
+				WebSite webSiteTest = new WebSite();
 				webSiteTest = LatencyTestTask.processLatency(paramArrayOfURL[0],this.mConnectTimeout, this.mReadTimeout);
 				while (true) {
 					if (SystemClock.elapsedRealtime() - getStartTime() > 5000)
