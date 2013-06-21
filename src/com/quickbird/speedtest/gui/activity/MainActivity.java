@@ -247,19 +247,10 @@ public class MainActivity extends TabActivity implements AMapLocationListener{
 				String str = ("定位成功:(" + geoLng + "," + geoLat + ")"
 						+ "\n精    度    :" + location.getAccuracy() + "米"
 						+ "\n定位方式:" + location.getProvider() + "\n定位时间:" + AMapUtil.convertToTime(location.getTime()));
-				Message msg = new Message();
-				msg.obj = str;
-				handler.sendMessage(msg);
 				SharedPreferenceUtil.saveStringParam(context, SharedPreferenceUtil.LOCATION_LATITUDE, geoLat.toString());
 				SharedPreferenceUtil.saveStringParam(context, SharedPreferenceUtil.LOCATION_LONGTITUDE, geoLng.toString());
-				Base.latLng = new  LatLng(geoLat, geoLng);
+				SharedPreferenceUtil.saveStringParam(context, SharedPreferenceUtil.LOCATION_LONGTITUDE, geoLng.toString());
 		}
 	}
-	
-	private Handler handler = new Handler() {
-		public void handleMessage(Message msg) {
-			ToastUtil.showToast(MainActivity.this, (String) msg.obj);
-		}
-	};
 
 }

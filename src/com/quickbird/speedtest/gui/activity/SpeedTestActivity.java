@@ -37,6 +37,8 @@ import com.quickbird.speedtestengine.tasks.LatencyTestTask;
 import com.quickbird.speedtestengine.tasks.TestTask;
 import com.quickbird.speedtestengine.utils.DebugUtil;
 import com.quickbird.speedtestengine.utils.NetWorkUtil;
+import com.quickbird.speedtestengine.utils.SharedPreferenceUtil;
+import com.quickbird.speedtestengine.utils.StringUtil;
 import com.quickbird.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
@@ -539,10 +541,8 @@ public class SpeedTestActivity extends BaseActivity{
                                 	// 显示呼吸灯动画
                                 	breatheLed.setVisibility(View.VISIBLE);
                                 	breatheLedAbove.setVisibility(View.VISIBLE);
-                                	breatheLedAbove.startAnimation(AnimationUtils.loadAnimation(context,
-                                			R.anim.breathled_ani));
-                                	breatheLed.startAnimation(AnimationUtils.loadAnimation(context,
-                                			R.anim.breathled_ani));
+                                	breatheLedAbove.startAnimation(AnimationUtils.loadAnimation(context, R.anim.breathled_ani));
+                                	breatheLed.startAnimation(AnimationUtils.loadAnimation(context, R.anim.breathled_ani));
                                 	
                                 	pingTxt.setVisibility(View.GONE);
                                 	pingRotate.setVisibility(View.VISIBLE);
@@ -557,6 +557,16 @@ public class SpeedTestActivity extends BaseActivity{
                                 	speedValue.setTestTime(System.currentTimeMillis());
                                 	String ly_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
                                 	speedValue.setTestDateTime(ly_time);
+                                	// 设置测速地理位置
+                                	String latitude = SharedPreferenceUtil.getStringParam(context, SharedPreferenceUtil.LOCATION_LATITUDE);
+                                	String longitude = SharedPreferenceUtil.getStringParam(context, SharedPreferenceUtil.LOCATION_LONGTITUDE);
+                                	String locationDesc = SharedPreferenceUtil.getStringParam(context, SharedPreferenceUtil.LOCATION_DESCRIPTION);
+                                	if(!StringUtil.isNull(latitude)&&StringUtil.isNull(longitude)&&StringUtil.isNull(locationDesc))
+                                	{
+										speedValue.setLatitude(Double.parseDouble(latitude));
+										speedValue.setLongitude(Double.parseDouble(longitude));
+										speedValue.setLocationDesc(locationDesc);
+									}
 								} catch (Exception e) {
 									DebugUtil.d("onBeginTest:"+e.getMessage());
 								}

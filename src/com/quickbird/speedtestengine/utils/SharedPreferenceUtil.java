@@ -28,6 +28,7 @@ public class SharedPreferenceUtil {
     /** 保存最新的地理位置信息 */
     public static final String LOCATION_LATITUDE = "latitude";
     public static final String LOCATION_LONGTITUDE = "longtitude";
+    public static final String LOCATION_DESCRIPTION = "description";
 	
 	/**
 	 *  获取系统参数（值为字符串），没获取到返回“”

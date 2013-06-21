@@ -76,53 +76,53 @@ public class LocationActivity extends FragmentActivity implements
 		aMap.getUiSettings().setLogoPosition(AMapOptions.LOGO_POSITION_BOTTOM_RIGHT);
 		// 隐藏缩放按钮
 		aMap.getUiSettings().setZoomControlsEnabled(false);
-	    drawMarkers();//
+//	    drawMarkers();//
 	}
 	
 	/**
 	 * 绘制系统默认的10种marker背景图片
 	 */
-	public void drawMarkers() {
-		if (Base.latLng != null) {
-			getInValidMarkers(Base.latLng);
-			aMap.addMarker(new MarkerOptions()
-			.position(Base.latLng)
-			.title("Marker1 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/20", "241KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[0])
-			.title("Marker2 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[1])
-			.title("Marker3 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[2])
-			.title("Marker4 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[3])
-			.title("Marker5 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[4])
-			.title("Marker6 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[5])
-			.title("Marker6 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[6])
-			.title("Marker6 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-			aMap.addMarker(new MarkerOptions()
-			.position(markers[7])
-			.title("Marker6 ")
-			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
-		}
-	}
+//	public void drawMarkers() {
+//		if (Base.latLng != null) {
+//			getInValidMarkers(Base.latLng);
+//			aMap.addMarker(new MarkerOptions()
+//			.position(Base.latLng)
+//			.title("Marker1 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/20", "241KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[0])
+//			.title("Marker2 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[1])
+//			.title("Marker3 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[2])
+//			.title("Marker4 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[3])
+//			.title("Marker5 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[4])
+//			.title("Marker6 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[5])
+//			.title("Marker6 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[6])
+//			.title("Marker6 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//			aMap.addMarker(new MarkerOptions()
+//			.position(markers[7])
+//			.title("Marker6 ")
+//			.icon(BitmapDescriptorFactory.fromBitmap(getViewBitmap(getView("2013/06/21", "242KB/s")))));
+//		}
+//	}
 	
 	/**
 	 * 把一个xml布局文件转化成view
