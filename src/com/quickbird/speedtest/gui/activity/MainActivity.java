@@ -147,7 +147,7 @@ public class MainActivity extends TabActivity implements AMapLocationListener{
 				.setContent(new Intent(this, SpeedTestActivity.class)));
 		Base.mTabHost.addTab(Base.mTabHost.newTabSpec("tab_3")
 				.setIndicator("更多")
-				.setContent(new Intent(this, LocationActivity.class)));
+				.setContent(new Intent(this, MoreActivity.class)));
 
 		/* 当点击Tab选项卡的时候，更改当前Tab标签的背景 */
 		Base.mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
