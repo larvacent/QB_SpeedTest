@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quickbird.speedtest"
-    android:versionCode="2905"
+    android:versionCode="2915"
     android:versionName="1.6.1" >
 
     <uses-permission android:name="android.permission.INTERNET" />
