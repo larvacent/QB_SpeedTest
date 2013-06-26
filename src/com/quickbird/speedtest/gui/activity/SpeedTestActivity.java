@@ -54,7 +54,6 @@ public class SpeedTestActivity extends BaseActivity{
 	private ImageView lightRotateView;
 	private ImageView lightRotateFullView;
 	private ImageView picTextView;
-	private LinearLayout promptView1,promptView2;
 	
 	private ImageView needle, breatheLed, breatheLedAbove;
 	private ImageView[] speedNam = new ImageView[3];
@@ -239,9 +238,6 @@ public class SpeedTestActivity extends BaseActivity{
 		lightRotateView = (ImageView) findViewById(R.id.light_rotate_view);
 		lightRotateFullView = (ImageView) findViewById(R.id.light_rotate_full);
 		picTextView = (ImageView) findViewById(R.id.pic_text_view);
-		promptView1 = (LinearLayout) findViewById(R.id.prompt_view_1);
-		promptView2 = (LinearLayout) findViewById(R.id.prompt_view_2);
-		picTextView.setVisibility(View.GONE);
 		lightRotateFullView.setVisibility(View.GONE);
         
         lightRotateView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.data_loading_rotate));
@@ -315,8 +311,7 @@ public class SpeedTestActivity extends BaseActivity{
     }
     
     private void loadingFailed() {
-    	promptView1.setVisibility(View.GONE);
-    	promptView2.setVisibility(View.VISIBLE);
+    	picTextView.setImageResource(R.drawable.text_launch_network);
         pressedView.setTag("1");
     }
     
@@ -331,12 +326,10 @@ public class SpeedTestActivity extends BaseActivity{
         if (networkStatus == Constants.NETWORK_STATUS_NULL) {
             loadingFailed();
         } else {
-        	promptView1.setVisibility(View.GONE);
-        	promptView2.setVisibility(View.GONE);
+        	picTextView.setImageResource(R.drawable.pic_text);
             pressedView.setText("");
             pressedView.setClickable(true);
             pressedView.setTag("0");
-            picTextView.setVisibility(View.VISIBLE);
             pressedView.invalidate();
         }
     }
@@ -424,20 +417,17 @@ public class SpeedTestActivity extends BaseActivity{
             super.handleMessage(msg);
             switch (msg.what) {
             case FIND_FASTEST_SERVER_TASK_START:
-            	promptView1.setVisibility(View.VISIBLE);
-            	promptView2.setVisibility(View.GONE);
+            	picTextView.setImageResource(R.drawable.text_finding_server);
 				pressedView.setTextSize(12);
 				pressedView.setTextColor(getResources().getColor(R.color.loading_gray));
 				pressedView.setClickable(false);
 				mHandler.sendEmptyMessageDelayed(MainHandler.FIND_FASTEST_SERVER_TASK_COMPLATE, 3000);
                 break;
             case FIND_FASTEST_SERVER_TASK_COMPLATE:
-            	promptView1.setVisibility(View.GONE);
-            	promptView2.setVisibility(View.GONE);
+            	picTextView.setImageResource(R.drawable.pic_text);
 				pressedView.setClickable(true);
 				pressedView.setTag("0");
 				pressedView.invalidate();
-				picTextView.setVisibility(View.VISIBLE);
 				lightRotateView.clearAnimation();
 				lightRotateFullView.setVisibility(View.INVISIBLE);
 				lightRotateFullView.startAnimation(AnimationUtils.loadAnimation(SpeedTestActivity.this, R.anim.data_loading_rotate));
