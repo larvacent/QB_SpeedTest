@@ -130,11 +130,11 @@ public class TestParametersTransfer extends TestParameters {
                     TestParametersTransfer.SpeedTestReading localSpeedTestReading2 = this.mSpeeds[2];
                     double d1 = 1000.0D* (rByte - Integer.valueOf(localSpeedTestReading2.getRbytes()).intValue()) / ((l - localSpeedTestReading2.getTime()));
                     DebugUtil.d("d1:"+d1);
-//                    if (fProgress <= 0.3D){
+                    if (fProgress <= 0.5D){
                         firestSpeed = 2 * (int) (d2 * (0.5D - fProgress) + d1 * fProgress);
-//                    }
-//                    else
-//                        firestSpeed = firestSpeed;
+                    }
+                    else
+                        firestSpeed = firestSpeed;
 				}
 			} else {
 				firestSpeed = 0;

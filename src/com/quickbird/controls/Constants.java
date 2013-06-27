@@ -14,8 +14,8 @@ public class Constants {
     public static final String PIC_THUMB_PATH_NAME  = FileUtil.getImagePath()+"/pic_shoot_thumb.png";
     
     public static final String DOWNLOAD500KURL = "http://upyun.doodoobird.com/speedtest500k.tgz";
-//    public static final String DOWNLOAD2MURL = "http://upyun.doodoobird.com/speedtest.zip";
-    public static final String DOWNLOAD2MURL = "http://www.apk.anzhi.com/apk/201303/29/com.doodoobird.activity_39891000_0.apk";
+    public static final String DOWNLOAD2MURL = "http://upyun.doodoobird.com/speedtest.zip";
+//    public static final String DOWNLOAD2MURL = "http://www.apk.anzhi.com/apk/201303/29/com.doodoobird.activity_39891000_0.apk";
     
     /** 用于控制用户导航提示的次数 */
     public static final int USER_GUIDE_SHOW_TIME = 1;

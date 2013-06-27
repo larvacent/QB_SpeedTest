@@ -79,7 +79,7 @@ public class SpeedTestActivity extends BaseActivity{
     public static boolean onTesting;
     private boolean inActivity;
     private boolean ifSetPing = false;
-    private int viewSwitch = 0; //0代表Loading View，1代表Test View
+    private int viewSwitch = 0; // 0代表Loading View，1代表Test View
     
     public  final int TIME_INTERVAL = 200;
     private long downloadByte;
@@ -104,6 +104,7 @@ public class SpeedTestActivity extends BaseActivity{
 					if (count++ == 100) {
 					  onTesting = false;
 					  updateText(instantSpeed/1024, 100,MainHandler.UPDATE_INSTANT_SPEED);
+					  uploadAveSpeedLevel(instantSpeed/1024);
                       speedValue.setCostTime(System.currentTimeMillis() - speedValue.getTestTime());
 					  speedValue.setDownloadSpeed((int) instantSpeed);
 					  mHandler.sendEmptyMessageDelayed(MainHandler.SKIP_TO_RESULT, 1000);

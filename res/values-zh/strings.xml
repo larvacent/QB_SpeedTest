@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">网速测试</string>
-    <string name="app_version_name">版本：1.6.0</string>
+    <string name="app_version_name">版本：1.6.1</string>
     <string name="app_recommand">上网快鸟</string>
     <string name="company_name">晨风云（北京）信息技术有限公司</string>
     <string name="company_website">公司网址</string>
