@@ -201,6 +201,8 @@ public class ShareResultActivity extends BaseActivity {
             return Math.round(Math.random() * (500 - 200) + 200);
         if (speedValue > 50)
             return Math.round(Math.random() * (200 - 100) + 200);
+		if (speedValue < 10)
+			return 0;
         return Math.round(Math.random() * (100 - 0) + 0);
     }
     

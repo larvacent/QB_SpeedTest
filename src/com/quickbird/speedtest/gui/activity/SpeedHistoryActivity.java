@@ -72,10 +72,11 @@ public class SpeedHistoryActivity extends BaseActivity {
                 
                 @Override
                 public void onClick(View v) {
-                	if (!SpeedTestActivity.onTesting&&refreshTest == 0) {
+                	if (!SpeedTestActivity.onTesting) {
 						Base.startTest = true;
 						finish();
-					} else if (refreshTest == 1) {
+						Base.mTabHost.setCurrentTab(1);
+					} else {
 						finish();
 						Base.mTabHost.setCurrentTab(1);
 					}
@@ -122,13 +123,14 @@ public class SpeedHistoryActivity extends BaseActivity {
 											speedtestButton.setOnClickListener(new OnClickListener() {
 														@Override
 													public void onClick(View v) {
-														if (!SpeedTestActivity.onTesting&&refreshTest == 0) {
-															Base.startTest = true;
-															finish();
-														} else if (refreshTest == 0) {
-															finish();
-															Base.mTabHost.setCurrentTab(1);
-														}
+															if (!SpeedTestActivity.onTesting) {
+																Base.startTest = true;
+																finish();
+																Base.mTabHost.setCurrentTab(1);
+															} else {
+																finish();
+																Base.mTabHost.setCurrentTab(1);
+															}
 													}
 												});
                                     }

@@ -82,8 +82,8 @@ public class LatencyTestTaskbak extends TestTask {
 	}
 
 	private class LatencyTask extends TestTask.Task {
-		private int mConnectTimeout = 100000;
-		private int mReadTimeout = 10000;
+		private int mConnectTimeout = 5000;
+		private int mReadTimeout = 5000;
 
 		public LatencyTask(int paramTestParametersLatency, TestParametersLatency arg3) {
 			super(paramTestParametersLatency, arg3);

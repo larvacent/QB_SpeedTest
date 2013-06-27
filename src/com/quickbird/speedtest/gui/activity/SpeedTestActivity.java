@@ -79,7 +79,7 @@ public class SpeedTestActivity extends BaseActivity{
     public static boolean onTesting;
     private boolean inActivity;
     private boolean ifSetPing = false;
-    private int viewSwitch = 0;
+    private int viewSwitch = 0; //0代表Loading View，1代表Test View
     
     public  final int TIME_INTERVAL = 200;
     private long downloadByte;
@@ -118,15 +118,15 @@ public class SpeedTestActivity extends BaseActivity{
         }
     };
     
-    private void calaulateSpeed() {
-        downloadTime = SystemClock.elapsedRealtime() - begainTime;
-        if (readLength != -1 && readLength != 0) {
-            instantSpeed = testSpeed(downloadTime,downloadByte);
-        } else {
-            instantSpeed = getRandom(instantSpeed);
-            downloadByte += instantSpeed * TIME_INTERVAL;
-        }
-    };
+	private void calaulateSpeed() {
+		downloadTime = SystemClock.elapsedRealtime() - begainTime;
+		if (readLength != -1 && readLength != 0) {
+			instantSpeed = testSpeed(downloadTime, downloadByte);
+		} else {
+			instantSpeed = getRandom(instantSpeed);
+			downloadByte += instantSpeed * TIME_INTERVAL;
+		}
+	};
     
     
     /***
@@ -159,7 +159,6 @@ public class SpeedTestActivity extends BaseActivity{
         return temp_speed;
     }
     
-    
 	private void updateText(float speed, int progress, int what) {
 		Message msg = new Message();
 		msg.what = what;
@@ -167,25 +166,7 @@ public class SpeedTestActivity extends BaseActivity{
 		msg.getData().putInt("progress", progress);
 		mHandler.sendMessage(msg);
 	}
-    
-//    private BroadcastReceiver mNetworkStateReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            if(onTesting)
-//                if(!NetWorkUtil.getWifiState(context)||!NetWorkUtil.getMobileStatus(context))
-//                    if(mCurrentTestTask!=null){
-//                        if (mCurrentTestTask != null)
-//                            mCurrentTestTask.cancel(true);
-//                        try {
-//                            onTesting = false;
-//                            prepareNextTest();
-//                        } catch (Exception e) {
-//                            DebugUtil.d("BroadcastReceiver Exception:" + e.getMessage());
-//                        }
-//                    }
-//        }
-//    };
-    
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,39 +176,54 @@ public class SpeedTestActivity extends BaseActivity{
             onPrepare = true;
             onTesting = false;
             prepareTest();
-//            IntentFilter filter = new IntentFilter();        
-//            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-//            registerReceiver(mNetworkStateReceiver, filter);
         } catch (Exception e) {
             DebugUtil.d("onCreate:"+e.getMessage());
         }
     }
     
     @Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		mHandler.sendEmptyMessage(MainHandler.SHUTDOWN_CALCULATE_THREAD);
+	}
+
+    @Override
     protected void onResume() {
         super.onResume();
-        if (onPrepare) {
-            refreshNetworkType(
-                    NetWorkUtil.getNetworkStatus(SpeedTestActivity.this),
-                    NetWorkUtil.getNetworkStatusStr(SpeedTestActivity.this));
-            if (networkStatus == Constants.NETWORK_STATUS_NULL) {
-                loadingFailed();
-            } else {
-                Message msg = mHandler.obtainMessage(MainHandler.FIND_FASTEST_SERVER_TASK_START);
-                msg.getData().putInt("TEST_STATUS", 0);
-                mHandler.sendMessage(msg);
-            }
-        }else{
-            if (!onTesting&&viewSwitch==1)
-                prepareNextTest();
-        }
+		if (onPrepare) {
+			refreshNetworkType(
+					NetWorkUtil.getNetworkStatus(SpeedTestActivity.this),
+					NetWorkUtil.getNetworkStatusStr(SpeedTestActivity.this));
+			if (networkStatus == Constants.NETWORK_STATUS_NULL) {
+				loadingFailed();
+			} else {
+				Message msg = mHandler.obtainMessage(MainHandler.FIND_FASTEST_SERVER_TASK_START);
+				msg.getData().putInt("TEST_STATUS", 0);
+				mHandler.sendMessage(msg);
+			}
+		} else {
+			if (!onTesting && viewSwitch == 1)
+				prepareNextTest();
+		}
 		if (Base.startTest && !onTesting) {
-			Base.startTest = false;
-			onTesting = true;
-			mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
-			MobclickAgent.onEvent(context, "cs");
+			if (viewSwitch == 0)
+				initTestView();
+			startTest();
 		}
     }
+    
+    @Override
+    protected void onPause() {
+    	super.onPause();
+    	mHandler.removeMessages(MainHandler.SKIP_TO_RESULT);
+    }
+
+
+	private void startTest() {
+		Base.startTest = false;
+		mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
+		MobclickAgent.onEvent(context, "cs");
+	}
 
     private void prepareTest() {
 		setContentView(R.layout.activity_loading);
@@ -300,6 +296,7 @@ public class SpeedTestActivity extends BaseActivity{
                 || networkStatus == Constants.NETWORK_STATUS_WIFI) {
             speedTestBtn.setText("重新测速");
             speedTestBtn.setTag("0");
+            speedTestBtn.invalidate();
             progressTxt.setText("网络正常，开始测速吧！");
             return;
         }
@@ -367,11 +364,10 @@ public class SpeedTestActivity extends BaseActivity{
             switch (v.getId()) {
             case R.id.speed_test_btn:
                 if (speedTestBtn.getTag().equals("0")) { // 开始测速
-                    if (!onTesting) {
-                        onTesting = true;
-                        mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
-                        MobclickAgent.onEvent(context, "cs");
-                    }
+					if (!onTesting) {
+						mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
+						MobclickAgent.onEvent(context, "cs");
+					}
                     return;
                 }
                 if (speedTestBtn.getTag().equals("1")) { // 网络连接失败，无法测速
@@ -382,10 +378,11 @@ public class SpeedTestActivity extends BaseActivity{
                 if (speedTestBtn.getTag().equals("2")) { // 取消测速
 					if (mCurrentTestTask != null && onTesting == true) {
 						mCurrentTestTask.cancel(true);
+						mHandler.sendEmptyMessage(MainHandler.TEST_CANCEL);
 					}
+					MobclickAgent.onEvent(context, "cstop");
                     return;
                 }
-                MobclickAgent.onEvent(context, "cstop");
                 break;
             case R.id.button_history_layout:
             case R.id.button_history:
@@ -468,9 +465,7 @@ public class SpeedTestActivity extends BaseActivity{
                         pingTxt.setVisibility(View.GONE);
                         pingRotate.setVisibility(View.VISIBLE);
                         progressTxt.setText("正在测试网络延迟...");
-                        
                         progressBar.setVisibility(View.GONE);
-                        
                         pingRotate.startAnimation(AnimationUtils.loadAnimation(context, R.anim.data_loading_rotate));
                     }
                 });
@@ -669,6 +664,7 @@ public class SpeedTestActivity extends BaseActivity{
             inActivity = true;
         }
     }
+    
     
     private int getPing(long l) {
         ifSetPing = !ifSetPing;

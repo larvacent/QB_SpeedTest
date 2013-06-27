@@ -34,6 +34,8 @@ public class DownloadTestTask extends SpeedTestTask {
 
     protected class DownloadSpeedTask extends SpeedTestTask.SpeedTask {
         private int mTestLength = 20000;
+        private int mConnectTimeout = 5000;
+    	private int mReadTimeout = 5000;
 
         public DownloadSpeedTask(int paramTestParametersTransfer, TestParametersTransfer arg3) {
             super(paramTestParametersTransfer, arg3);
@@ -47,8 +49,8 @@ public class DownloadTestTask extends SpeedTestTask {
                 localURLConnection.setUseCaches(false);
                 localURLConnection.setDoInput(true);
                 localURLConnection.setDoOutput(false);
-                localURLConnection.setConnectTimeout(this.mTestLength);
-                localURLConnection.setReadTimeout(this.mTestLength);
+                localURLConnection.setConnectTimeout(this.mConnectTimeout);
+                localURLConnection.setReadTimeout(this.mReadTimeout);
                 paramTestParametersTransfer.clearBytes();
                 paramTestParametersTransfer.clearProgress();
                 publishProgress(new Void[0]);
