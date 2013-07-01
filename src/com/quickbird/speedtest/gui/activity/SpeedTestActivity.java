@@ -89,6 +89,11 @@ public class SpeedTestActivity extends BaseActivity{
     private float instantSpeed;
     private CalculateSpeedThread calculateSpeedThread;
     
+	public int getTestStatus() {
+		
+		return 0;
+	}
+    
     private class CalculateSpeedThread extends Thread {
         @Override
         public void run() {
@@ -264,20 +269,20 @@ public class SpeedTestActivity extends BaseActivity{
         
         buttonHistoryLayout = (LinearLayout) findViewById(R.id.button_history_layout);
         buttonHistory = (ImageButton) findViewById(R.id.button_history);
-        clickListener = new ClickListener();
         
         buttonMapLayout = (LinearLayout) findViewById(R.id.button_map_layout);
         buttonMap = (ImageButton) findViewById(R.id.button_map);
+        clickListener = new ClickListener();
 
         refreshPingStr(speedValue.getPing());
         networkTxt.setText(speedValue.getNetworkType());
+        speedTestBtn.setOnClickListener(clickListener);
         
         buttonMapLayout.setOnClickListener(clickListener);
         buttonMap.setOnClickListener(clickListener);
         
         buttonHistoryLayout.setOnClickListener(clickListener);
         buttonHistory.setOnClickListener(clickListener);
-        speedTestBtn.setOnClickListener(clickListener);
     }
     
     private void prepareNextTest() {
@@ -286,7 +291,6 @@ public class SpeedTestActivity extends BaseActivity{
                 NetWorkUtil.getNetworkStatusStr(SpeedTestActivity.this));
         networkTxt.setText(speedValue.getNetworkType());
         refreshProgress(0);
-        
         speedNam[0].setImageResource(R.drawable.speed_number_background);
         speedNam[1].setImageResource(R.drawable.speed_number_background);
         speedNam[2].setImageResource(R.drawable.speed_number_background);
@@ -364,11 +368,10 @@ public class SpeedTestActivity extends BaseActivity{
         public void onClick(View v) {
             switch (v.getId()) {
             case R.id.speed_test_btn:
+				DebugUtil.d("speedTestBtn:" + speedTestBtn.getTag());
                 if (speedTestBtn.getTag().equals("0")) { // 开始测速
-					if (!onTesting) {
-						mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
-						MobclickAgent.onEvent(context, "cs");
-					}
+					mHandler.sendEmptyMessage(MainHandler.DOWNLOAD_TEST_TASK_START);
+					MobclickAgent.onEvent(context, "cs");
                     return;
                 }
                 if (speedTestBtn.getTag().equals("1")) { // 网络连接失败，无法测速
@@ -494,7 +497,6 @@ public class SpeedTestActivity extends BaseActivity{
                                     begainTime = SystemClock.elapsedRealtime();
                                     mHandler.sendEmptyMessage(MainHandler.START_CALCULATE_THREAD);
                                 }
-                                onTesting = true;
                                 downloadByte = localTestParametersTransfer.getBytes();
                                 readLength = localTestParametersTransfer.getReadLength();
                             }
@@ -580,9 +582,7 @@ public class SpeedTestActivity extends BaseActivity{
                 speedResult.putInt("downloadSpeed", speedValue.getDownloadSpeed());
                 speedResult.putFloat("currentDegree", currentDegree);
                 intent.putExtras(speedResult);
-                
                 inActivity = false;
-                
                 startActivityForResult(intent, 10);
                 break;
             case UPDATE_INSTANT_SPEED:
@@ -643,7 +643,6 @@ public class SpeedTestActivity extends BaseActivity{
 				ToastUtil.showToast(SpeedTestActivity.this,"测速失败!");
             	break;
             case TEST_CANCEL:
-            	mHandler.sendEmptyMessage(MainHandler.SHUTDOWN_DOWNLOAD_THREAD);
             	mHandler.sendEmptyMessage(MainHandler.SHUTDOWN_CALCULATE_THREAD);
             	onTesting = false;
                 refreshNeedle(0, 500);

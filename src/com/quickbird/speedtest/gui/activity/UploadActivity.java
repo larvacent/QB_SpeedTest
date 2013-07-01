@@ -65,8 +65,8 @@
 //            params.put("fileName", imageFile.getName());
 //            //上传文件
 //            FormFile formfile = new FormFile(imageFile.getName(), imageFile, "image", "application/octet-stream");
-////            boolean ifsuccess = SocketHttpRequester.post(requestUrl, params, formfile);
-////            DebugUtil.i(TAG, "upload success:"+ifsuccess);
+//            boolean ifsuccess = SocketHttpRequester.post(requestUrl, params, formfile);
+//            DebugUtil.i(TAG, "upload success:"+ifsuccess);
 //        } catch (Exception e) {
 //            DebugUtil.i(TAG, "upload error");
 //            e.printStackTrace();

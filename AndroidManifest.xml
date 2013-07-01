@@ -1,20 +1,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quickbird.speedtest"
-    android:versionCode="2915"
+    android:versionCode="2937"
     android:versionName="1.6.1" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.READ_LOGS" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
 
     <supports-screens
@@ -33,74 +45,90 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".gui.activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
+
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".gui.activity.SpeedTestActivity"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.SpeedHistoryActivity"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.WebSiteTestActivity"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.MoreActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.LocationActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
+
         <activity
             android:name=".gui.activity.AboutActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.UploadActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.ShareResultActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.AccountManageActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.NetWorkActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.SpeedValueDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name=".gui.activity.SpeedResultActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name="cn.sharesdk.framework.AuthorizeActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -108,31 +136,37 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
+
         <activity
             android:name="com.quickbird.speedtest.gui.activity.wxapi.WXEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name="com.quickbird.speedtest.onkeyshare.ShareAllGird"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+
         <activity
             android:name="com.quickbird.speedtest.onkeyshare.SharePage"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <activity
             android:name="com.umeng.fb.ui.SendFeedback"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
         </activity>
+
         <activity
             android:name="com.umeng.fb.ui.FeedbackConversations"
             android:screenOrientation="portrait" >
         </activity>
+
         <activity
             android:name="com.umeng.fb.ui.FeedbackConversation"
             android:configChanges="keyboard"
@@ -149,10 +183,11 @@
             android:name="UMENG_APPKEY"
             android:value="512f23195270155cf4000037" >
         </meta-data>
+
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="10086" >
-        </meta-data>
+            android:value="10" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="f1e4d9a7e67a8768e4b9cba8383a0d09" >
